@@ -6,16 +6,22 @@
 import Foundation
 
 public class FSUtil {
-    static func getFilesOfDirectory(path: String) -> [String] {
+    static func getFilesOfDirectory(path: String) -> [File] {
         let fileManager = NSFileManager.defaultManager()
 
-        var files = [String]()
+        var files = [File]()
 
         var allFiles = fileManager.contentsOfDirectoryAtPath(path, error: nil)
         var allSuperFiles = allFiles as! [String]
         for element: String in allSuperFiles {
-            println(element)
-            files.append(element)
+            var size: UInt64 = 0
+            var attributes:NSDictionary? = fileManager.attributesOfItemAtPath(path + "/" + element, error: nil)
+            if let _attr = attributes {
+                size = _attr.fileSize()
+            }
+            var file = File(name: element, size: size, dateModified: NSDate())
+
+            files.append(file)
         }
 
         return files

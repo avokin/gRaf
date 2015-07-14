@@ -9,4 +9,14 @@ class PaneModel {
     var path: String = "/"
     var sortBy: SortBy = .Name
     var sortDirection: SortDirection = .Ascending
+
+    var cached: [File]? = nil
+
+    func getItems() -> [File] {
+        if (cached == nil) {
+            cached = FSUtil.getFilesOfDirectory(path)
+        }
+
+        return cached!
+    }
 }

@@ -14,6 +14,15 @@ class FSUtilTest : XCTestCase {
         var files = FSUtil.getFilesOfDirectory("/")
 
         XCTAssertGreaterThan(files.count, 0)
-        XCTAssertTrue(contains(files, "Users"))
+
+        var ok = false
+        for file: File in files {
+            if equal(file.name, "Users") {
+                ok = true;
+                break;
+            }
+        }
+
+        XCTAssertTrue(ok)
     }
 }
