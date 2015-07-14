@@ -41,16 +41,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTableViewDataSource, NSTab
     }
 
     func updateTable(path: String, table: NSTableView, inout files: [String]) {
-        let fileManager = NSFileManager.defaultManager()
-        files.removeAll(keepCapacity: false)
-
-        var allFiles = fileManager.contentsOfDirectoryAtPath(path, error: nil)
-        var allSuperFiles = allFiles as! [String]
-        for element: String in allSuperFiles {
-            println(element)
-            files.append(element)
-        }
-
+        files = FSUtil.getFilesOfDirectory(path);
         table.reloadData()
     }
 
