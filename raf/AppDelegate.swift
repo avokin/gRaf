@@ -5,8 +5,10 @@ import Cocoa
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     var window: NSWindow
-    var view1: NSTableView
-    var view2: NSTableView
+    var scrollView1: NSScrollView
+    var scrollView2: NSScrollView
+    var tableView1: NSTableView
+    var tableView2: NSTableView
     var splitView: NSSplitView
 
     var paneController1: PaneController = PaneController()
@@ -18,12 +20,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         window = NSWindow(contentRect: contentSize, styleMask: windowStyleMask, backing: NSBackingStoreType.Buffered, defer: true);
         window.title = "raf";
 
-        view1 = NSTableView(frame: CGRectMake(0, 0, 600, 400))
-        view2 = NSTableView(frame: CGRectMake(0, 0, 600, 400))
+        scrollView1 = NSScrollView(frame: CGRectMake(0, 0, 1, 1))
+        scrollView2 = NSScrollView(frame: CGRectMake(0, 0, 1, 1))
+
+        tableView1 = NSTableView(frame: CGRectMake(0, 0, 1, 1))
+        tableView2 = NSTableView(frame: CGRectMake(0, 0, 1, 1))
+
         splitView = NSSplitView(frame: window.frame)
         splitView.vertical = true
-        splitView.addSubview(view1)
-        splitView.addSubview(view2)
+        scrollView1.documentView = tableView1
+        scrollView2.documentView = tableView2
+
+        splitView.addSubview(scrollView1)
+        splitView.addSubview(scrollView2)
     }
 
     func applicationDidFinishLaunching(aNotification: NSNotification) {
@@ -39,8 +48,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func applicationWillFinishLaunching(notification: NSNotification) {
-        createTable(view1, paneController: paneController1)
-        createTable(view2, paneController: paneController2)
+        createTable(tableView1, paneController: paneController1)
+        createTable(tableView2, paneController: paneController2)
 
         window.contentView = splitView
     }
