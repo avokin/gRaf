@@ -39,10 +39,20 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         window.makeKeyAndOrderFront(self)
     }
 
+    func createColumn(name: String) -> NSTableColumn {
+        var column = NSTableColumn(identifier: name)
+        var headerCell = NSTableHeaderCell()
+        headerCell.objectValue = name
+        column.headerCell = headerCell
+        return column
+    }
+
+
     func createTable(tableView: NSTableView, paneController: PaneController) {
-        tableView.addTableColumn(NSTableColumn(identifier: "Name"))
-        tableView.addTableColumn(NSTableColumn(identifier: "Size"))
-        tableView.addTableColumn(NSTableColumn(identifier: "Date modified"))
+        tableView.addTableColumn(createColumn("Name"))
+        tableView.addTableColumn(createColumn("Size"))
+        tableView.addTableColumn(createColumn("Date Modified"))
+
         tableView.setDataSource(paneController);
         tableView.setDelegate(paneController)
     }
