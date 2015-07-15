@@ -24,10 +24,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         scrollView2 = NSScrollView(frame: CGRectMake(0, 0, 1, 1))
 
         tableView1 = NSTableView(frame: CGRectMake(0, 0, 1, 1))
+        paneController1.view = tableView1
+
         tableView2 = NSTableView(frame: CGRectMake(0, 0, 1, 1))
+        paneController2.view = tableView2
 
         splitView = NSSplitView(frame: window.frame)
         splitView.vertical = true
+
         scrollView1.documentView = tableView1
         scrollView2.documentView = tableView2
 
@@ -47,7 +51,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return column
     }
 
-
     func createTable(tableView: NSTableView, paneController: PaneController) {
         tableView.addTableColumn(createColumn("Name"))
         tableView.addTableColumn(createColumn("Size"))
@@ -61,7 +64,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         createTable(tableView1, paneController: paneController1)
         createTable(tableView2, paneController: paneController2)
 
-        window.contentView = splitView
+        var controller = NSViewController(nibName: nil, bundle: nil)
+        controller!.view = splitView
+
+        controller!.addChildViewController(paneController1)
+        controller!.addChildViewController(paneController2)
+
+        window.contentViewController = controller
     }
 
     func applicationShouldTerminateAfterLastWindowClosed(sender: NSApplication) -> Bool {

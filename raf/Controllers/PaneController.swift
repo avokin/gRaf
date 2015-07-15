@@ -6,7 +6,7 @@
 import Cocoa
 import Foundation
 
-class PaneController: NSObject, NSTableViewDataSource, NSTableViewDelegate {
+class PaneController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
     var model: PaneModel = PaneModel()
 
     func numberOfRowsInTableView(tableView: NSTableView) -> Int {
@@ -22,5 +22,21 @@ class PaneController: NSObject, NSTableViewDataSource, NSTableViewDelegate {
         } else {
             return file.dateModified
         }
+    }
+
+    func tableView(tableView: NSTableView, shouldEditTableColumn tableColumn: NSTableColumn?, row: Int) -> Bool {
+        return false
+    }
+
+    override init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+
+    override func keyDown(theEvent: NSEvent) {
+        println(theEvent.keyCode)
     }
 }
