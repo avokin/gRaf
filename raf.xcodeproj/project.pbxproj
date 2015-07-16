@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		AC38F0C23D515E7AD96E9143 /* FSUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FCDA9BE999CFA76CF01C /* FSUtil.swift */; };
+		AC38F4684A364CDB044F089A /* folder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AC38F24E7B251D064C97A8D3 /* folder@2x.png */; };
 		AC38F4A58C4AE4B20D2CA83A /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC38FE1BD3E955C2DA64D84C /* MainMenu.xib */; };
 		AC38F4F18AA53FD552144035 /* FSUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FCDA9BE999CFA76CF01C /* FSUtil.swift */; };
 		AC38F67915517DE943BDBE5A /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FEE0D27728E97CECD076 /* File.swift */; };
@@ -15,6 +16,7 @@
 		AC38F9616FACFC7BFD3B1CF3 /* rafTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FF3B68277D075BFFB29B /* rafTests.swift */; };
 		AC38FA33B7603F17B9EA95A3 /* Sorting.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F446EA402CB6C7976448 /* Sorting.swift */; };
 		AC38FA3D0B7A696D85FC37F9 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FEE0D27728E97CECD076 /* File.swift */; };
+		AC38FA467122DC4E11725C21 /* folder.png in Resources */ = {isa = PBXBuildFile; fileRef = AC38F6BF180DAFC910AD27B3 /* folder.png */; };
 		AC38FB3D93F013E49F110D55 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC38FA8264F6F362133278A6 /* Images.xcassets */; };
 		AC38FBAA9B3C258296261712 /* PaneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F26A9C916249546ACFCB /* PaneController.swift */; };
 		AC38FC66EFC0CC136204D20C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F53351AD918D798D6B70 /* AppDelegate.swift */; };
@@ -36,11 +38,13 @@
 
 /* Begin PBXFileReference section */
 		AC38F154536A0F26957D2B3F /* raf.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = raf.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC38F24E7B251D064C97A8D3 /* folder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "folder@2x.png"; sourceTree = "<group>"; };
 		AC38F26A9C916249546ACFCB /* PaneController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaneController.swift; sourceTree = "<group>"; };
 		AC38F446EA402CB6C7976448 /* Sorting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sorting.swift; sourceTree = "<group>"; };
 		AC38F4F1C016BA3DDBB30F83 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		AC38F5323401723385811EFE /* FSUtilTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FSUtilTest.swift; sourceTree = "<group>"; };
 		AC38F53351AD918D798D6B70 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		AC38F6BF180DAFC910AD27B3 /* folder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = folder.png; sourceTree = "<group>"; };
 		AC38F77927A4E2E15AD07808 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
 		AC38F87BAA8557C9439751F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
 		AC38F8955443631852ECF0AA /* rafTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = rafTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -102,6 +106,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		AC38F9210EEAECEE88B9952E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				AC38FE787716BB32DC9E0789 /* Images */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		AC38F9B05FD12E448DD506D9 /* raf */ = {
 			isa = PBXGroup;
 			children = (
@@ -112,6 +124,7 @@
 				AC38FFB08D926FBBB2CB03DE /* Models */,
 				AC38F42062C6786F5D56AE5B /* FS */,
 				AC38F368B3AAF898AAC7B480 /* Controllers */,
+				AC38F9210EEAECEE88B9952E /* Resources */,
 			);
 			path = raf;
 			sourceTree = "<group>";
@@ -141,6 +154,15 @@
 				AC38F77927A4E2E15AD07808 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		AC38FE787716BB32DC9E0789 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				AC38F24E7B251D064C97A8D3 /* folder@2x.png */,
+				AC38F6BF180DAFC910AD27B3 /* folder.png */,
+			);
+			path = Images;
 			sourceTree = "<group>";
 		};
 		AC38FFB08D926FBBB2CB03DE /* Models */ = {
@@ -224,6 +246,8 @@
 			files = (
 				AC38FB3D93F013E49F110D55 /* Images.xcassets in Resources */,
 				AC38F4A58C4AE4B20D2CA83A /* MainMenu.xib in Resources */,
+				AC38F4684A364CDB044F089A /* folder@2x.png in Resources */,
+				AC38FA467122DC4E11725C21 /* folder.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

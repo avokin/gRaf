@@ -12,6 +12,7 @@ class PaneController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     var window: NSWindow? = nil
     var tableView: NSTableView!
 
+    let COLUMN_TYPE_ID = "Type"
     let COLUMN_NAME_ID = "Name"
     let COLUMN_SIZE_ID = "Size"
     let COLUMN_DATE_MODIFIED_ID = "Date modified"
@@ -27,12 +28,23 @@ class PaneController: NSViewController, NSTableViewDataSource, NSTableViewDelega
 
     func tableView(tableView: NSTableView!, objectValueForTableColumn tableColumn: NSTableColumn!, row: Int) -> AnyObject! {
         var file: File = model.getItems()[row]
-        if (equal(tableColumn.identifier, COLUMN_NAME_ID)) {
+        if (equal(tableColumn.identifier, COLUMN_TYPE_ID)) {
+            return nil
+        } else if (equal(tableColumn.identifier, COLUMN_NAME_ID)) {
             return file.name
         } else if (equal(tableColumn.identifier, COLUMN_SIZE_ID)) {
             return String(file.size)
         } else {
             return file.dateModified
+        }
+    }
+
+    func tableView(tableView: NSTableView, dataCellForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSCell? {
+        if (tableColumn != nil && equal(tableColumn!.identifier, COLUMN_TYPE_ID)) {
+            var image = NSImage(named: "folder")
+            return NSCell(imageCell: image)
+        } else {
+            return nil
         }
     }
 
@@ -92,6 +104,9 @@ class PaneController: NSViewController, NSTableViewDataSource, NSTableViewDelega
 
     func createTable() {
         tableView = NSTableView(frame: CGRectMake(0, 0, 1, 1))
+        var typeColumn = createColumn(COLUMN_TYPE_ID)
+        typeColumn.width = 30
+        tableView.addTableColumn(typeColumn)
         tableView.addTableColumn(createColumn(COLUMN_NAME_ID))
         tableView.addTableColumn(createColumn(COLUMN_SIZE_ID))
         tableView.addTableColumn(createColumn(COLUMN_DATE_MODIFIED_ID))
