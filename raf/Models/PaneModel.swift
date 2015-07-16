@@ -6,11 +6,20 @@
 import Foundation
 
 class PaneModel {
-    var path: String = "/"
-    var sortBy: SortBy = .Name
-    var sortDirection: SortDirection = .Ascending
+    private var path: String = "/"
+    private var sortBy: SortBy = .Name
+    private var sortDirection: SortDirection = .Ascending
 
-    var cached: [File]? = nil
+    private var cached: [File]? = nil
+
+    func getPath() -> String {
+        return path;
+    }
+
+    func setPath(path: String) {
+        self.path = path;
+        cached = nil
+    }
 
     func getItems() -> [File] {
         if (cached == nil) {

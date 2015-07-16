@@ -7,7 +7,7 @@ import Cocoa
 import Foundation
 
 class PaneController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
-    var model: PaneModel = PaneModel()
+    var model = PaneModel()
 
     func numberOfRowsInTableView(tableView: NSTableView) -> Int {
         return model.getItems().count
@@ -37,6 +37,11 @@ class PaneController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     }
 
     override func keyDown(theEvent: NSEvent) {
-        println(theEvent.keyCode)
+        if theEvent.keyCode == 36 {
+            let tableView: NSTableView = view as! NSTableView
+            var file : File = model.getItems()[tableView.selectedRow]
+            model.setPath(model.getPath() + "/" + file.name)
+            tableView.reloadData()
+        }
     }
 }
