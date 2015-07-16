@@ -18,16 +18,18 @@ public class FSUtil {
             files.append(linkToParent)
         }
 
-        var allSuperFiles = allFiles as! [String]
-        for element: String in allSuperFiles {
-            var size: UInt64 = 0
-            var attributes:NSDictionary? = fileManager.attributesOfItemAtPath(path + "/" + element, error: nil)
-            if let _attr = attributes {
-                size = _attr.fileSize()
-            }
-            var file = File(name: element, size: size, dateModified: NSDate())
+        if allFiles is [String] {
+            var allSuperFiles = allFiles as! [String]
+            for element: String in allSuperFiles {
+                var size: UInt64 = 0
+                var attributes:NSDictionary? = fileManager.attributesOfItemAtPath(path + "/" + element, error: nil)
+                if let _attr = attributes {
+                    size = _attr.fileSize()
+                }
+                var file = File(name: element, size: size, dateModified: NSDate())
 
-            files.append(file)
+                files.append(file)
+            }
         }
 
         return files
