@@ -8,8 +8,13 @@ import Foundation
 
 class PaneController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
     var model = PaneModel()
-    var otherPaneController: PaneController? = nil
+    var otherPaneController: PaneController!
     var window: NSWindow? = nil
+    var tableView: NSTableView!
+
+    let COLUMN_NAME_ID = "Name"
+    let COLUMN_SIZE_ID = "Size"
+    let COLUMN_DATE_MODIFIED_ID = "Date modified"
 
     func focus() {
         let tableView: NSTableView = view as! NSTableView
@@ -22,9 +27,9 @@ class PaneController: NSViewController, NSTableViewDataSource, NSTableViewDelega
 
     func tableView(tableView: NSTableView!, objectValueForTableColumn tableColumn: NSTableColumn!, row: Int) -> AnyObject! {
         var file: File = model.getItems()[row]
-        if (equal(tableColumn.identifier, "Name")) {
+        if (equal(tableColumn.identifier, COLUMN_NAME_ID)) {
             return file.name
-        } else if (equal(tableColumn.identifier, "Size")) {
+        } else if (equal(tableColumn.identifier, COLUMN_SIZE_ID)) {
             return String(file.size)
         } else {
             return file.dateModified
@@ -37,6 +42,9 @@ class PaneController: NSViewController, NSTableViewDataSource, NSTableViewDelega
 
     override init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+
+        createTable()
+        view = tableView
     }
 
     required init?(coder: NSCoder) {
@@ -50,7 +58,25 @@ class PaneController: NSViewController, NSTableViewDataSource, NSTableViewDelega
             model.setPath(model.getPath() + "/" + file.name)
             tableView.reloadData()
         } else if theEvent.keyCode == 48 {
-            otherPaneController!.focus()
+            otherPaneController.focus()
         }
+    }
+
+    func createColumn(name: String) -> NSTableColumn {
+        var column = NSTableColumn(identifier: name)
+        var headerCell = NSTableHeaderCell()
+        headerCell.objectValue = name
+        column.headerCell = headerCell
+        return column
+    }
+
+    func createTable() {
+        tableView = NSTableView(frame: CGRectMake(0, 0, 1, 1))
+        tableView.addTableColumn(createColumn(COLUMN_NAME_ID))
+        tableView.addTableColumn(createColumn(COLUMN_SIZE_ID))
+        tableView.addTableColumn(createColumn(COLUMN_DATE_MODIFIED_ID))
+
+        tableView.setDataSource(self);
+        tableView.setDelegate(self)
     }
 }
