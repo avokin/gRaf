@@ -55,7 +55,13 @@ class PaneController: NSViewController, NSTableViewDataSource, NSTableViewDelega
         if theEvent.keyCode == 36 {
             let tableView: NSTableView = view as! NSTableView
             var file : File = model.getItems()[tableView.selectedRow]
-            model.setPath(model.getPath() + "/" + file.name)
+
+            if (equal("..", file.name)) {
+                model.setPath(model.getPath().stringByDeletingLastPathComponent)
+            } else {
+                model.setPath(model.getPath() + "/" + file.name)
+            }
+
             tableView.reloadData()
         } else if theEvent.keyCode == 48 {
             otherPaneController.focus()

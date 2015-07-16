@@ -12,6 +12,12 @@ public class FSUtil {
         var files = [File]()
 
         var allFiles = fileManager.contentsOfDirectoryAtPath(path, error: nil)
+
+        if !equal("/", path) {
+            var linkToParent = File(name: "..", size: UInt64.max, dateModified: NSDate())
+            files.append(linkToParent)
+        }
+
         var allSuperFiles = allFiles as! [String]
         for element: String in allSuperFiles {
             var size: UInt64 = 0
