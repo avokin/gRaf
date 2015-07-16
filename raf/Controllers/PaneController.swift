@@ -57,12 +57,26 @@ class PaneController: NSViewController, NSTableViewDataSource, NSTableViewDelega
             var file : File = model.getItems()[tableView.selectedRow]
 
             if (equal("..", file.name)) {
+                var previousName = model.getPath().lastPathComponent
                 model.setPath(model.getPath().stringByDeletingLastPathComponent)
+                var index = 0
+                for file: File in model.getItems() {
+                    if equal(previousName, file.name) {
+                        break
+                    }
+                    index++
+                }
+                if (index >= model.getItems().count) {
+                    index = 0
+                }
+                model.selectedIndex = index
             } else {
+                model.selectedIndex = 0
                 model.setPath(model.getPath() + "/" + file.name)
             }
 
             tableView.reloadData()
+            tableView.selectRowIndexes(NSIndexSet(index: model.selectedIndex), byExtendingSelection: false)
         } else if theEvent.keyCode == 48 {
             otherPaneController.focus()
         }

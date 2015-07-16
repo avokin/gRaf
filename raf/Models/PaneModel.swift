@@ -9,6 +9,7 @@ class PaneModel {
     private var path: String = "/"
     private var sortBy: SortBy = .Name
     private var sortDirection: SortDirection = .Ascending
+    var selectedIndex = 0
 
     private var cached: [File]? = nil
 
