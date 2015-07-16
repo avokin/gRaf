@@ -25,9 +25,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         tableView1 = NSTableView(frame: CGRectMake(0, 0, 1, 1))
         paneController1.view = tableView1
+        paneController1.otherPaneController = paneController2
 
         tableView2 = NSTableView(frame: CGRectMake(0, 0, 1, 1))
         paneController2.view = tableView2
+        paneController2.otherPaneController = paneController1
 
         splitView = NSSplitView(frame: window.frame)
         splitView.vertical = true
@@ -61,6 +63,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func applicationWillFinishLaunching(notification: NSNotification) {
+        paneController1.window = window
+        paneController2.window = window
+
         createTable(tableView1, paneController: paneController1)
         createTable(tableView2, paneController: paneController2)
 
@@ -71,6 +76,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         controller!.addChildViewController(paneController2)
 
         window.contentViewController = controller
+        window.makeFirstResponder(tableView2)
     }
 
     func applicationShouldTerminateAfterLastWindowClosed(sender: NSApplication) -> Bool {

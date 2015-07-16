@@ -8,6 +8,13 @@ import Foundation
 
 class PaneController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
     var model = PaneModel()
+    var otherPaneController: PaneController? = nil
+    var window: NSWindow? = nil
+
+    func focus() {
+        let tableView: NSTableView = view as! NSTableView
+        window!.makeFirstResponder(tableView)
+    }
 
     func numberOfRowsInTableView(tableView: NSTableView) -> Int {
         return model.getItems().count
@@ -42,6 +49,8 @@ class PaneController: NSViewController, NSTableViewDataSource, NSTableViewDelega
             var file : File = model.getItems()[tableView.selectedRow]
             model.setPath(model.getPath() + "/" + file.name)
             tableView.reloadData()
+        } else if theEvent.keyCode == 48 {
+            otherPaneController!.focus()
         }
     }
 }
