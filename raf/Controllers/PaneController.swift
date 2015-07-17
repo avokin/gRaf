@@ -33,6 +33,9 @@ class PaneController: NSViewController, NSTableViewDataSource, NSTableViewDelega
         } else if (equal(tableColumn.identifier, COLUMN_NAME_ID)) {
             return file.name
         } else if (equal(tableColumn.identifier, COLUMN_SIZE_ID)) {
+            if file.isDirectory {
+                return ""
+            }
             return String(file.size)
         } else {
             return file.dateModified
@@ -41,7 +44,11 @@ class PaneController: NSViewController, NSTableViewDataSource, NSTableViewDelega
 
     func tableView(tableView: NSTableView, dataCellForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSCell? {
         if (tableColumn != nil && equal(tableColumn!.identifier, COLUMN_TYPE_ID)) {
-            var image = NSImage(named: "folder")
+            var file: File = model.getItems()[row]
+            var image = NSImage(named: "file")
+            if file.isDirectory {
+                image = NSImage(named: "folder")
+            }
             return NSCell(imageCell: image)
         } else {
             return nil
@@ -107,8 +114,15 @@ class PaneController: NSViewController, NSTableViewDataSource, NSTableViewDelega
         var typeColumn = createColumn(COLUMN_TYPE_ID)
         typeColumn.width = 30
         tableView.addTableColumn(typeColumn)
-        tableView.addTableColumn(createColumn(COLUMN_NAME_ID))
-        tableView.addTableColumn(createColumn(COLUMN_SIZE_ID))
+
+        var nameColumn = createColumn(COLUMN_NAME_ID)
+        nameColumn.width = 300
+        tableView.addTableColumn(nameColumn)
+
+        var sizeColumn = createColumn(COLUMN_SIZE_ID)
+        sizeColumn.width = 40
+        tableView.addTableColumn(sizeColumn)
+
         tableView.addTableColumn(createColumn(COLUMN_DATE_MODIFIED_ID))
 
         tableView.setDataSource(self);
