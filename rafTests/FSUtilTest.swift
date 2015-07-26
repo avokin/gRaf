@@ -11,18 +11,30 @@ import raf
 
 class FSUtilTest : XCTestCase {
     func testExample() {
+        var users = findFileInRoot("Users")
+
+        XCTAssertNotNil(users)
+    }
+
+    func testDirectoryCheck() {
+        var v  = findFileInRoot("var")
+        XCTAssertNotNil(v)
+        XCTAssert(v!.isDirectory)
+    }
+
+    private
+
+    func findFileInRoot(name: String) -> File? {
         var files = FSUtil.getFilesOfDirectory("/")
 
-        XCTAssertGreaterThan(files.count, 0)
-
-        var ok = false
+        var result: File? = nil
         for file: File in files {
-            if equal(file.name, "Users") {
-                ok = true;
+            if equal(file.name, name) {
+                result = file
                 break;
             }
         }
 
-        XCTAssertTrue(ok)
+        return result
     }
 }

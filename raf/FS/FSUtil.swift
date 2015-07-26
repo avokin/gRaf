@@ -23,15 +23,36 @@ public class FSUtil {
             for element: String in allSuperFiles {
                 var size: UInt64 = 0
                 var isDirectory = false
-                var attributes:NSDictionary? = fileManager.attributesOfItemAtPath(path + "/" + element, error: nil)
-                if let _attr = attributes {
-                    size = _attr.fileSize()
-                    if let fileType1 = _attr.fileType() {
-                        if equal("NSFileTypeDirectory", fileType1) {
-                            isDirectory = true
+                var elementPath = path + "/" + element
+
+                var i = 0
+                while i < 3 {
+                    i++
+                    var attributes:NSDictionary? = fileManager.attributesOfItemAtPath(elementPath, error: nil)
+                    if let _attr = attributes {
+                        if let fileType1 = _attr.fileType() {
+                            if (equal("NSFileTypeSymbolicLink", fileType1)) {
+                                var newPathElement = fileManager.destinationOfSymbolicLinkAtPath(elementPath, error: nil)
+
+                                if newPathElement != nil {
+                                    elementPath = path + "/" + newPathElement!
+                                } else {
+                                    println("for: " + elementPath + ", found: nil")
+                                    break;
+                                }
+                            } else {
+                                if equal("NSFileTypeDirectory", fileType1) {
+                                    isDirectory = true
+                                    break;
+                                }
+                            }
                         }
+                        size = _attr.fileSize()
+                    } else {
+                        break
                     }
                 }
+
                 var file = File(name: element, size: size, dateModified: NSDate(), isDirectory: isDirectory)
 
                 files.append(file)
