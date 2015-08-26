@@ -26,13 +26,13 @@ class PaneController: NSViewController, NSTableViewDataSource, NSTableViewDelega
         return model.getItems().count
     }
 
-    func tableView(tableView: NSTableView!, objectValueForTableColumn tableColumn: NSTableColumn!, row: Int) -> AnyObject! {
+    func tableView(tableView: NSTableView, objectValueForTableColumn tableColumn: NSTableColumn?, row: Int) -> AnyObject? {
         var file: File = model.getItems()[row]
-        if (equal(tableColumn.identifier, COLUMN_TYPE_ID)) {
+        if (equal(tableColumn!.identifier, COLUMN_TYPE_ID)) {
             return nil
-        } else if (equal(tableColumn.identifier, COLUMN_NAME_ID)) {
+        } else if (equal(tableColumn!.identifier, COLUMN_NAME_ID)) {
             return file.name
-        } else if (equal(tableColumn.identifier, COLUMN_SIZE_ID)) {
+        } else if (equal(tableColumn!.identifier, COLUMN_SIZE_ID)) {
             if file.isDirectory {
                 return ""
             }
