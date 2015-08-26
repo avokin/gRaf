@@ -15,7 +15,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         var contentSize = NSMakeRect(0.0, 0.0, 600.0, 400.0);
         var windowStyleMask = NSTitledWindowMask | NSResizableWindowMask | NSClosableWindowMask | NSMiniaturizableWindowMask;
         window = NSWindow(contentRect: contentSize, styleMask: windowStyleMask, backing: NSBackingStoreType.Buffered, defer: true);
-        window.title = "raf";
+        window.title = "gRaf";
 
         paneController1 = PaneController()
         paneController2 = PaneController()

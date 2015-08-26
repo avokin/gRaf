@@ -1,6 +1,6 @@
 //
-//  rafTests.swift
-//  rafTests
+//  gRafTests.swift
+//  gRafTests
 //
 //  Created by Andrey Vokin on 12/06/15.
 //  Copyright (c) 2015 Andrey Vokin. All rights reserved.
@@ -9,7 +9,7 @@
 import Cocoa
 import XCTest
 
-class rafTests: XCTestCase {
+class gRafTests: XCTestCase {
     
     override func setUp() {
         super.setUp()

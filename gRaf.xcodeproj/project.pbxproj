@@ -16,7 +16,7 @@
 		AC38F4F18AA53FD552144035 /* FSUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FCDA9BE999CFA76CF01C /* FSUtil.swift */; };
 		AC38F67915517DE943BDBE5A /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FEE0D27728E97CECD076 /* File.swift */; };
 		AC38F6FAEA57A49F76DDB8D2 /* PaneModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FF4CC5D3FAFF1FEBA357 /* PaneModel.swift */; };
-		AC38F9616FACFC7BFD3B1CF3 /* rafTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FF3B68277D075BFFB29B /* rafTests.swift */; };
+		AC38F9616FACFC7BFD3B1CF3 /* gRafTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FF3B68277D075BFFB29B /* gRafTests.swift */; };
 		AC38FA33B7603F17B9EA95A3 /* Sorting.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F446EA402CB6C7976448 /* Sorting.swift */; };
 		AC38FA3D0B7A696D85FC37F9 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FEE0D27728E97CECD076 /* File.swift */; };
 		AC38FA467122DC4E11725C21 /* folder.png in Resources */ = {isa = PBXBuildFile; fileRef = AC38F6BF180DAFC910AD27B3 /* folder.png */; };
@@ -41,7 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		AC38F154536A0F26957D2B3F /* raf.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = raf.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC38F154536A0F26957D2B3F /* gRaf.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gRaf.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC38F24E7B251D064C97A8D3 /* folder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "folder@2x.png"; sourceTree = "<group>"; };
 		AC38F2553110E11DBAB8A0F4 /* ProgressWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressWindow.swift; sourceTree = "<group>"; };
 		AC38F26A9C916249546ACFCB /* PaneController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaneController.swift; sourceTree = "<group>"; };
@@ -53,12 +53,12 @@
 		AC38F6BF180DAFC910AD27B3 /* folder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = folder.png; sourceTree = "<group>"; };
 		AC38F77927A4E2E15AD07808 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
 		AC38F87BAA8557C9439751F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
-		AC38F8955443631852ECF0AA /* rafTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = rafTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC38F8955443631852ECF0AA /* gRafTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = gRafTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC38FA8264F6F362133278A6 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		AC38FCDA9BE999CFA76CF01C /* FSUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FSUtil.swift; sourceTree = "<group>"; };
 		AC38FDC484CEA78A41982E6B /* file@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "file@2x.png"; sourceTree = "<group>"; };
 		AC38FEE0D27728E97CECD076 /* File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
-		AC38FF3B68277D075BFFB29B /* rafTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = rafTests.swift; sourceTree = "<group>"; };
+		AC38FF3B68277D075BFFB29B /* gRafTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gRafTests.swift; sourceTree = "<group>"; };
 		AC38FF4CC5D3FAFF1FEBA357 /* PaneModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaneModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -99,8 +99,8 @@
 		AC38F608F8ABB0DE57663C1C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				AC38F154536A0F26957D2B3F /* raf.app */,
-				AC38F8955443631852ECF0AA /* rafTests.xctest */,
+				AC38F154536A0F26957D2B3F /* gRaf.app */,
+				AC38F8955443631852ECF0AA /* gRafTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -121,7 +121,7 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		AC38F9B05FD12E448DD506D9 /* raf */ = {
+		AC38F9B05FD12E448DD506D9 /* gRaf */ = {
 			isa = PBXGroup;
 			children = (
 				AC38FCC011230328CA47FE8B /* Supporting Files */,
@@ -134,7 +134,7 @@
 				AC38F9210EEAECEE88B9952E /* Resources */,
 				AC38FA96369ACF74F8EF995D /* Views */,
 			);
-			path = raf;
+			path = gRaf;
 			sourceTree = "<group>";
 		};
 		AC38FA96369ACF74F8EF995D /* Views */ = {
@@ -149,19 +149,19 @@
 			isa = PBXGroup;
 			children = (
 				AC38F608F8ABB0DE57663C1C /* Products */,
-				AC38F9B05FD12E448DD506D9 /* raf */,
-				AC38FBC3CACF3C9E3B872363 /* rafTests */,
+				AC38F9B05FD12E448DD506D9 /* gRaf */,
+				AC38FBC3CACF3C9E3B872363 /* gRafTests */,
 			);
 			sourceTree = "<group>";
 		};
-		AC38FBC3CACF3C9E3B872363 /* rafTests */ = {
+		AC38FBC3CACF3C9E3B872363 /* gRafTests */ = {
 			isa = PBXGroup;
 			children = (
 				AC38F8D3DC782359797D051B /* Supporting Files */,
-				AC38FF3B68277D075BFFB29B /* rafTests.swift */,
+				AC38FF3B68277D075BFFB29B /* gRafTests.swift */,
 				AC38F5323401723385811EFE /* FSUtilTest.swift */,
 			);
-			path = rafTests;
+			path = gRafTests;
 			sourceTree = "<group>";
 		};
 		AC38FCC011230328CA47FE8B /* Supporting Files */ = {
@@ -196,9 +196,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		AC38F49DE5A7735F1E9FB249 /* rafTests */ = {
+		AC38F49DE5A7735F1E9FB249 /* gRafTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AC38F9F32034760D3B7CEE9E /* Build configuration list for PBXNativeTarget "rafTests" */;
+			buildConfigurationList = AC38F9F32034760D3B7CEE9E /* Build configuration list for PBXNativeTarget "gRafTests" */;
 			buildPhases = (
 				AC38F3D9D9A2C1F38399703C /* Sources */,
 				AC38F8BBBB29416BED19AC12 /* Frameworks */,
@@ -209,14 +209,14 @@
 			dependencies = (
 				AC38FC1E98AEB4FE062DB575 /* PBXTargetDependency */,
 			);
-			name = rafTests;
-			productName = rafTests;
-			productReference = AC38F8955443631852ECF0AA /* rafTests.xctest */;
+			name = gRafTests;
+			productName = gRafTests;
+			productReference = AC38F8955443631852ECF0AA /* gRafTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		AC38F9299127AF9BE27868B7 /* raf */ = {
+		AC38F9299127AF9BE27868B7 /* gRaf */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AC38FC8183DB7BF807F82819 /* Build configuration list for PBXNativeTarget "raf" */;
+			buildConfigurationList = AC38FC8183DB7BF807F82819 /* Build configuration list for PBXNativeTarget "gRaf" */;
 			buildPhases = (
 				AC38F63B949A5AE2F7295B76 /* Sources */,
 				AC38F8B246B37757C7DC25E9 /* Frameworks */,
@@ -226,9 +226,9 @@
 			);
 			dependencies = (
 			);
-			name = raf;
-			productName = raf;
-			productReference = AC38F154536A0F26957D2B3F /* raf.app */;
+			name = gRaf;
+			productName = gRaf;
+			productReference = AC38F154536A0F26957D2B3F /* gRaf.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -239,7 +239,7 @@
 			attributes = {
 				ORGANIZATIONNAME = "Andrey Vokin";
 			};
-			buildConfigurationList = AC38F4802E3A6F95F65FEAAC /* Build configuration list for PBXProject "raf" */;
+			buildConfigurationList = AC38F4802E3A6F95F65FEAAC /* Build configuration list for PBXProject "gRaf" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -251,8 +251,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				AC38F9299127AF9BE27868B7 /* raf */,
-				AC38F49DE5A7735F1E9FB249 /* rafTests */,
+				AC38F9299127AF9BE27868B7 /* gRaf */,
+				AC38F49DE5A7735F1E9FB249 /* gRafTests */,
 			);
 		};
 /* End PBXProject section */
@@ -285,7 +285,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AC38F9616FACFC7BFD3B1CF3 /* rafTests.swift in Sources */,
+				AC38F9616FACFC7BFD3B1CF3 /* gRafTests.swift in Sources */,
 				AC38FEBD7250862D353DD41F /* FSUtilTest.swift in Sources */,
 				AC38F0C23D515E7AD96E9143 /* FSUtil.swift in Sources */,
 				AC38F6FAEA57A49F76DDB8D2 /* PaneModel.swift in Sources */,
@@ -315,7 +315,7 @@
 /* Begin PBXTargetDependency section */
 		AC38FC1E98AEB4FE062DB575 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = AC38F9299127AF9BE27868B7 /* raf */;
+			target = AC38F9299127AF9BE27868B7 /* gRaf */;
 			targetProxy = AC38FBF1C7C7A15C2C30DA17 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -337,24 +337,24 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = raf/Info.plist;
+				INFOPLIST_FILE = gRaf/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = gRaf;
 			};
 			name = Debug;
 		};
 		AC38F6B9A11535E00319FDCE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/raf.app/Contents/MacOS/raf";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/gRaf.app/Contents/MacOS/gRaf";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = rafTests/Info.plist;
+				INFOPLIST_FILE = gRafTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = gRafTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 			};
 			name = Release;
@@ -408,9 +408,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = raf/Info.plist;
+				INFOPLIST_FILE = gRaf/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = gRaf;
 			};
 			name = Release;
 		};
@@ -453,15 +453,15 @@
 		AC38FDFED94F64F28338CE8C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/raf.app/Contents/MacOS/raf";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/gRaf.app/Contents/MacOS/gRaf";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = rafTests/Info.plist;
+				INFOPLIST_FILE = gRafTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = gRafTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 			};
 			name = Debug;
@@ -469,7 +469,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		AC38F4802E3A6F95F65FEAAC /* Build configuration list for PBXProject "raf" */ = {
+		AC38F4802E3A6F95F65FEAAC /* Build configuration list for PBXProject "gRaf" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AC38F8649E7BB727FB51BEB5 /* Debug */,
@@ -478,21 +478,23 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AC38F9F32034760D3B7CEE9E /* Build configuration list for PBXNativeTarget "rafTests" */ = {
+		AC38F9F32034760D3B7CEE9E /* Build configuration list for PBXNativeTarget "gRafTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AC38FDFED94F64F28338CE8C /* Debug */,
 				AC38F6B9A11535E00319FDCE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
-		AC38FC8183DB7BF807F82819 /* Build configuration list for PBXNativeTarget "raf" */ = {
+		AC38FC8183DB7BF807F82819 /* Build configuration list for PBXNativeTarget "gRaf" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AC38F63F096EE14B2E1BE95F /* Debug */,
 				AC38FB44137E2372F981E8DC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

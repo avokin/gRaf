@@ -3,11 +3,10 @@
 // Copyright (c) 2015 Andrey Vokin. All rights reserved.
 //
 
-import raf
+import gRaf
 import Foundation
 import Cocoa
 import XCTest
-import raf
 
 class FSUtilTest : XCTestCase {
     func testExample() {
