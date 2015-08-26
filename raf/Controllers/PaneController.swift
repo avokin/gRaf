@@ -98,6 +98,9 @@ class PaneController: NSViewController, NSTableViewDataSource, NSTableViewDelega
             tableView.selectRowIndexes(NSIndexSet(index: model.selectedIndex), byExtendingSelection: false)
         } else if theEvent.keyCode == 48 {
             otherPaneController.focus()
+        } else if (theEvent.keyCode == 96) {
+            var window = ProgressWindow();
+            window.start()
         }
     }
 
