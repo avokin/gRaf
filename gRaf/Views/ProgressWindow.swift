@@ -8,6 +8,7 @@ import Foundation
 
 class ProgressWindow : NSWindow {
     var progressIndicator: NSProgressIndicator
+    var cancelled: Bool = false
 
     required init?(coder aDecoder: NSCoder) {
         progressIndicator = NSProgressIndicator(frame: CGRectMake(0.0, 0, 0, 0))
@@ -38,12 +39,24 @@ class ProgressWindow : NSWindow {
         contentView.addSubview(buttonCancel)
     }
 
-    func start() {
-        NSApplication.sharedApplication().runModalForWindow(self)
+    override func keyDown(theEvent: NSEvent) {
+        if theEvent.keyCode == 53 {
+            cancelled = true
+            NSApplication.sharedApplication().stopModal()
+            close()
+        } else {
+            super.keyDown(theEvent)
+        }
+    }
 
+    func start() {
         let priority = Int(QOS_CLASS_USER_INITIATED.value)
         dispatch_async(dispatch_get_global_queue(priority, 0)) {
             while true {
+                if self.cancelled {
+                    break;
+                }
+
                 println(self.progressIndicator.doubleValue)
                 sleep(1)
                 dispatch_async(dispatch_get_main_queue()) {
@@ -51,5 +64,6 @@ class ProgressWindow : NSWindow {
                 }
             }
         }
+        NSApplication.sharedApplication().runModalForWindow(self)
     }
 }
