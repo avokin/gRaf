@@ -14,7 +14,7 @@ public class FSUtil {
         var allFiles = fileManager.contentsOfDirectoryAtPath(path, error: nil)
 
         if !equal("/", path) {
-            var linkToParent = File(name: "..", size: UInt64.max, dateModified: NSDate(), isDirectory: true)
+            var linkToParent = File(name: "..", path: path, size: UInt64.max, dateModified: NSDate(), isDirectory: true)
             files.append(linkToParent)
         }
 
@@ -53,7 +53,7 @@ public class FSUtil {
                     }
                 }
 
-                var file = File(name: element, size: size, dateModified: NSDate(), isDirectory: isDirectory)
+                var file = File(name: element, path: path + "/" + element, size: size, dateModified: NSDate(), isDirectory: isDirectory)
 
                 files.append(file)
             }
@@ -61,4 +61,10 @@ public class FSUtil {
 
         return files
     }
+
+    static func copyFile(from: String, to: String) {
+        let fileManager = NSFileManager.defaultManager()
+        fileManager.copyItemAtPath(from, toPath: to, error: nil)
+    }
+
 }
