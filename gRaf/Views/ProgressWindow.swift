@@ -28,6 +28,7 @@ class ProgressWindow : NSWindow {
         var buttonCancel: NSButton = NSButton(frame: NSMakeRect(20, 20, 100, 30))
         buttonCancel.title = "Cancel"
         buttonCancel.bezelStyle = NSBezelStyle.RoundedBezelStyle
+        buttonCancel.action = "cancelAction:"
 
         progressIndicator.style = NSProgressIndicatorStyle.BarStyle
         progressIndicator.indeterminate = false
@@ -39,10 +40,14 @@ class ProgressWindow : NSWindow {
         contentView.addSubview(buttonCancel)
     }
 
+    func cancelAction(obj:AnyObject?) {
+        cancelled = true
+        NSApplication.sharedApplication().abortModal()
+    }
+
     override func keyDown(theEvent: NSEvent) {
         if theEvent.keyCode == 53 {
-            cancelled = true
-            NSApplication.sharedApplication().abortModal()
+            cancelAction(nil)
         } else {
             super.keyDown(theEvent)
         }
