@@ -8,9 +8,11 @@ import Foundation
 
 class ProgressWindow : NSWindow {
     var progressIndicator: NSProgressIndicator
+    var progress: NSProgress
     var cancelled: Bool = false
 
     required init?(coder aDecoder: NSCoder) {
+        progress = NSProgress(totalUnitCount: 1)
         progressIndicator = NSProgressIndicator(frame: CGRectMake(0.0, 0, 0, 0))
         super.init(coder: aDecoder)
     }
@@ -21,6 +23,7 @@ class ProgressWindow : NSWindow {
         var pbHeight: CGFloat = 20.0
         var contentSize = NSMakeRect(0.0, 0.0, width, height);
         var windowStyleMask = NSTitledWindowMask
+        progress = NSProgress(totalUnitCount: 1)
         progressIndicator = NSProgressIndicator(frame: CGRectMake(0.0, (height - pbHeight) / 2, width, pbHeight))
 
         super.init(contentRect: contentSize, styleMask: windowStyleMask, backing: NSBackingStoreType.Buffered, defer: true)
@@ -41,7 +44,7 @@ class ProgressWindow : NSWindow {
     }
 
     func cancelAction(obj:AnyObject?) {
-        cancelled = true
+        progress.cancel()
         NSApplication.sharedApplication().abortModal()
     }
 
@@ -57,13 +60,13 @@ class ProgressWindow : NSWindow {
         let priority = Int(QOS_CLASS_USER_INITIATED.value)
         dispatch_async(dispatch_get_global_queue(priority, 0)) {
             while true {
-                if self.cancelled {
+                if self.progress.cancelled {
                     break;
                 }
                 usleep(100)
 
                 dispatch_async(dispatch_get_main_queue()) {
-                    if !self.cancelled {
+                    if !self.progress.cancelled {
                         self.progressIndicator.doubleValue += 1
                     }
                 }
