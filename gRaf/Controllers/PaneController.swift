@@ -18,6 +18,7 @@ class PaneController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     let COLUMN_DATE_MODIFIED_ID = "Date modified"
 
     func focus() {
+        window!.makeKeyWindow()
         let tableView: NSTableView = view as! NSTableView
         window!.makeFirstResponder(tableView)
     }
@@ -99,8 +100,9 @@ class PaneController: NSViewController, NSTableViewDataSource, NSTableViewDelega
         } else if theEvent.keyCode == 48 {
             otherPaneController.focus()
         } else if (theEvent.keyCode == 96) {
-            var window = ProgressWindow();
-            window.start()
+            var window2 = ProgressWindow();
+            window2.start()
+            focus()
         }
     }
 

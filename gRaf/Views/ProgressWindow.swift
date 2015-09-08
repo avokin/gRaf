@@ -42,8 +42,7 @@ class ProgressWindow : NSWindow {
     override func keyDown(theEvent: NSEvent) {
         if theEvent.keyCode == 53 {
             cancelled = true
-            NSApplication.sharedApplication().stopModal()
-            close()
+            NSApplication.sharedApplication().abortModal()
         } else {
             super.keyDown(theEvent)
         }
@@ -56,11 +55,12 @@ class ProgressWindow : NSWindow {
                 if self.cancelled {
                     break;
                 }
+                usleep(100)
 
-                println(self.progressIndicator.doubleValue)
-                sleep(1)
                 dispatch_async(dispatch_get_main_queue()) {
-                    self.progressIndicator.doubleValue += 1
+                    if !self.cancelled {
+                        self.progressIndicator.doubleValue += 1
+                    }
                 }
             }
         }
