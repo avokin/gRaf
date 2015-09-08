@@ -6,7 +6,7 @@
 import Foundation
 
 class PaneModel {
-    private var path: String = "/"
+    private var root: File = File(name: "/", path: "/", size: UInt64.max, dateModified: NSDate(), isDirectory: true)
     private var sortBy: SortBy = .Name
     private var sortDirection: SortDirection = .Ascending
     var selectedIndex = 0
@@ -14,17 +14,21 @@ class PaneModel {
     private var cached: [File]? = nil
 
     func getPath() -> String {
-        return path;
+        return root.path;
     }
 
-    func setPath(path: String) {
-        self.path = path;
+    func getRoot() -> File {
+        return root
+    }
+
+    func setRoot(root: File) {
+        self.root = root;
         cached = nil
     }
 
     func getItems() -> [File] {
         if (cached == nil) {
-            cached = FSUtil.getFilesOfDirectory(path)
+            cached = FSUtil.getFilesOfDirectory(root.path)
         }
 
         return cached!

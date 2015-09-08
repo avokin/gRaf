@@ -78,7 +78,12 @@ class PaneController: NSViewController, NSTableViewDataSource, NSTableViewDelega
 
             if (equal("..", file.name)) {
                 var previousName = model.getPath().lastPathComponent
-                model.setPath(model.getPath().stringByDeletingLastPathComponent)
+
+                // ToDo: get parent from current root
+                var newPath = model.getPath().stringByDeletingLastPathComponent
+                var newRoot = File(name: newPath.lastPathComponent, path: newPath, size: UInt64.max, dateModified: NSDate(), isDirectory: true)
+                model.setRoot(newRoot)
+
                 var index = 0
                 for file: File in model.getItems() {
                     if equal(previousName, file.name) {
@@ -91,8 +96,10 @@ class PaneController: NSViewController, NSTableViewDataSource, NSTableViewDelega
                 }
                 model.selectedIndex = index
             } else {
+                // ToDo: use model.selectedIndex
+                var selectedFile = model.getItems()[tableView.selectedRow]
                 model.selectedIndex = 0
-                model.setPath(model.getPath() + "/" + file.name)
+                model.setRoot(selectedFile)
             }
 
             tableView.reloadData()
@@ -100,6 +107,11 @@ class PaneController: NSViewController, NSTableViewDataSource, NSTableViewDelega
         } else if theEvent.keyCode == 48 {
             otherPaneController.focus()
         } else if (theEvent.keyCode == 96) {
+            // ToDo: use model.selectedIndex
+            var from = model.getItems()[tableView.selectedRow]
+            var to = otherPaneController.model.getRoot();
+
+            CopyFileAction.perform(from, to: to)
             var window2 = ProgressWindow();
             window2.start()
             focus()
