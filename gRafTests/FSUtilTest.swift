@@ -10,30 +10,14 @@ import XCTest
 
 class FSUtilTest : XCTestCase {
     func testExample() {
-        var users = findFileInRoot("Users")
+        var users = TestUtil.findFileInRoot("Users")
 
         XCTAssertNotNil(users)
     }
 
     func testDirectoryCheck() {
-        var v  = findFileInRoot("var")
+        var v  = TestUtil.findFileInRoot("var")
         XCTAssertNotNil(v)
         XCTAssert(v!.isDirectory)
-    }
-
-    private
-
-    func findFileInRoot(name: String) -> File? {
-        var files = FSUtil.getFilesOfDirectory("/")
-
-        var result: File? = nil
-        for file: File in files {
-            if equal(file.name, name) {
-                result = file
-                break;
-            }
-        }
-
-        return result
     }
 }

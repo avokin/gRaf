@@ -36,11 +36,6 @@
                BlueprintName = "gRafTests"
                ReferencedContainer = "container:gRaf.xcodeproj">
             </BuildableReference>
-            <SkippedTests>
-               <Test
-                  Identifier = "FSUtilTest">
-               </Test>
-            </SkippedTests>
          </TestableReference>
       </Testables>
       <MacroExpansion>
