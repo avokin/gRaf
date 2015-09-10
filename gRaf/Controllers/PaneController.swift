@@ -111,9 +111,14 @@ class PaneController: NSViewController, NSTableViewDataSource, NSTableViewDelega
             var from = model.getItems()[tableView.selectedRow]
             var to = otherPaneController.model.getRoot();
 
-            CopyFileAction.perform(from, to: to)
-            var window2 = ProgressWindow();
-            window2.start()
+            var currentProgress = 0;
+            var progressWindow = ProgressWindow();
+            progressWindow.start({
+                CopyFileAction.perform(from, to: to)
+            }, progressUpdater: {
+                currentProgress++
+                return currentProgress
+            })
             focus()
         }
     }

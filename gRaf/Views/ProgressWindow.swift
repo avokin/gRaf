@@ -12,7 +12,7 @@ class ProgressWindow : NSWindow {
     var cancelled: Bool = false
 
     required init?(coder aDecoder: NSCoder) {
-        progress = NSProgress(totalUnitCount: 1)
+        progress = NSProgress(totalUnitCount: 100)
         progressIndicator = NSProgressIndicator(frame: CGRectMake(0.0, 0, 0, 0))
         super.init(coder: aDecoder)
     }
@@ -23,7 +23,8 @@ class ProgressWindow : NSWindow {
         var pbHeight: CGFloat = 20.0
         var contentSize = NSMakeRect(0.0, 0.0, width, height);
         var windowStyleMask = NSTitledWindowMask
-        progress = NSProgress(totalUnitCount: 1)
+        progress = NSProgress(totalUnitCount: 100)
+        progress.completedUnitCount = 0
         progressIndicator = NSProgressIndicator(frame: CGRectMake(0.0, (height - pbHeight) / 2, width, pbHeight))
 
         super.init(contentRect: contentSize, styleMask: windowStyleMask, backing: NSBackingStoreType.Buffered, defer: true)
@@ -56,18 +57,25 @@ class ProgressWindow : NSWindow {
         }
     }
 
-    func start() {
+    func start(mainAction: () -> (), progressUpdater: () -> Int) {
+        self.progressIndicator.doubleValue = 0
+
         let priority = Int(QOS_CLASS_USER_INITIATED.value)
+        dispatch_async(dispatch_get_global_queue(priority, 0)) {
+            mainAction()
+        }
+
         dispatch_async(dispatch_get_global_queue(priority, 0)) {
             while true {
                 if self.progress.cancelled {
                     break;
                 }
-                usleep(100)
+                usleep(1000000)
 
+                self.progress.completedUnitCount = Int64(progressUpdater())
                 dispatch_async(dispatch_get_main_queue()) {
                     if !self.progress.cancelled {
-                        self.progressIndicator.doubleValue += 1
+                        self.progressIndicator.doubleValue = Double(self.progress.completedUnitCount)
                     }
                 }
             }
