@@ -23,7 +23,7 @@ class PaneModel {
 
     func setRoot(root: File) {
         self.root = root;
-        cached = nil
+        clearCaches()
     }
 
     func getItems() -> [File] {
@@ -32,5 +32,9 @@ class PaneModel {
         }
 
         return cached!
+    }
+
+    func clearCaches() {
+        cached = nil
     }
 }

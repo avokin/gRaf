@@ -123,11 +123,13 @@ class PaneController: NSViewController, NSTableViewDataSource, NSTableViewDelega
                 }
                 var destSize = FSUtil.fileSize(destPath)
                 currentProgress++
-                var a = 100 * destSize
+                var a = 10000 * destSize
                 var b = a / sourceSize
-                return Int(b + 2)
+                return Int(b + 1)
             })
             focus()
+            otherPaneController.model.clearCaches()
+            otherPaneController.tableView.reloadData()
         }
     }
 

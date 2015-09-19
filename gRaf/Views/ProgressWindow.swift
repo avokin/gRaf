@@ -18,12 +18,12 @@ class ProgressWindow : NSWindow {
     }
 
     init() {
-        var width: CGFloat = 600.0
-        var height: CGFloat = 400.0
+        var width: CGFloat = 400.0
+        var height: CGFloat = 200.0
         var pbHeight: CGFloat = 20.0
         var contentSize = NSMakeRect(0.0, 0.0, width, height);
         var windowStyleMask = NSTitledWindowMask
-        progress = NSProgress(totalUnitCount: 100)
+        progress = NSProgress(totalUnitCount: 10000)
         progress.completedUnitCount = 0
         progressIndicator = NSProgressIndicator(frame: CGRectMake(0.0, (height - pbHeight) / 2, width, pbHeight))
 
@@ -37,7 +37,7 @@ class ProgressWindow : NSWindow {
         progressIndicator.style = NSProgressIndicatorStyle.BarStyle
         progressIndicator.indeterminate = false
         progressIndicator.minValue = 0.0
-        progressIndicator.maxValue = 100.0
+        progressIndicator.maxValue = 10000.0
         progressIndicator.doubleValue = 20.0
 
         contentView.addSubview(progressIndicator)
