@@ -110,14 +110,22 @@ class PaneController: NSViewController, NSTableViewDataSource, NSTableViewDelega
             // ToDo: use model.selectedIndex
             var from = model.getItems()[tableView.selectedRow]
             var to = otherPaneController.model.getRoot();
+            var destPath = FSUtil.getDestinationFileName(from, to: to)
 
             var currentProgress = 0;
             var progressWindow = ProgressWindow();
+            var sourceSize = FSUtil.fileSize(from)
             progressWindow.start({
                 CopyFileAction.perform(from, to: to)
             }, progressUpdater: {
+                if sourceSize <= 0 {
+                    return 0
+                }
+                var destSize = FSUtil.fileSize(destPath)
                 currentProgress++
-                return currentProgress
+                var a = 100 * destSize
+                var b = a / sourceSize
+                return Int(b + 2)
             })
             focus()
         }

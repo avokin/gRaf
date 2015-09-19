@@ -63,6 +63,8 @@ class ProgressWindow : NSWindow {
         let priority = Int(QOS_CLASS_USER_INITIATED.value)
         dispatch_async(dispatch_get_global_queue(priority, 0)) {
             mainAction()
+
+            self.cancelAction(nil)
         }
 
         dispatch_async(dispatch_get_global_queue(priority, 0)) {
@@ -70,7 +72,7 @@ class ProgressWindow : NSWindow {
                 if self.progress.cancelled {
                     break;
                 }
-                usleep(1000000)
+                usleep(100000)
 
                 self.progress.completedUnitCount = Int64(progressUpdater())
                 dispatch_async(dispatch_get_main_queue()) {

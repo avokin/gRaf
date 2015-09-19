@@ -67,4 +67,24 @@ public class FSUtil {
         fileManager.copyItemAtPath(from, toPath: to, error: nil)
     }
 
+    static func fileSize(file: File) -> UInt64 {
+        return fileSize(file.path)
+    }
+
+    static func fileSize(path: String) -> UInt64 {
+        var attributes:NSDictionary? = NSFileManager.defaultManager().attributesOfItemAtPath(path, error: nil)
+
+        if let _attr = attributes {
+            return _attr.fileSize()
+        }
+        return 0
+    }
+
+    static func getDestinationFileName(from: File, to: File) -> String {
+        var destPath = to.path
+        if to.isDirectory {
+            destPath = to.path + "/" + from.name
+        }
+        return destPath
+    }
 }

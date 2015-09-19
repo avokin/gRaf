@@ -7,20 +7,12 @@ import Foundation
 
 class CopyFileAction {
     class func perform(from: File, to: File) {
-        var destPath = to.path
-        if to.isDirectory {
-            destPath = to.path + "/" + from.name
-        }
+        var destPath = FSUtil.getDestinationFileName(from, to: to)
 
         var err: NSError?
-
-        if NSProcessInfo.processInfo().environment["XCInjectBundle"] != nil {
-            NSFileManager.defaultManager().copyItemAtPath(from.path, toPath: destPath, error: &err)
-        } else {
-            let priority = Int(QOS_CLASS_USER_INITIATED.value)
-            dispatch_async(dispatch_get_global_queue(priority, 0)) {
-                NSFileManager.defaultManager().copyItemAtPath(from.path, toPath: destPath, error: &err)
-            }
+        NSFileManager.defaultManager().copyItemAtPath(from.path, toPath: destPath, error: &err)
+        if err != nil {
+            println("err \(err)")
         }
     }
 }
