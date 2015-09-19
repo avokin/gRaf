@@ -7,19 +7,18 @@ import Foundation
 
 class CopyFileAction {
     class func copyFileAction(from: File, to: File) {
-        createFileFromSource(from, to: to, action: { (fromPath: String, destPath: String) -> Void in
+        createFileFromSource(from, to: to) { (fromPath: String, destPath: String) -> Void in
             FSUtil.copyFile(fromPath, to: destPath)
-        })
+        }
     }
 
     class func moveFileAction(from: File, to: File) {
-        // ToDo: create closure like dispatch_async
-        createFileFromSource(from, to: to, action: { (fromPath: String, destPath: String) -> Void in
+        createFileFromSource(from, to: to) { (fromPath: String, destPath: String) -> Void in
             FSUtil.moveFile(fromPath, to: destPath)
-        })
+        }
     }
 
-    private class func createFileFromSource(from: File, to: File, action: (fromPath: String, destPath: String) -> ()) {
+    private class func createFileFromSource(from: File, to: File, action: (fromPath: String, destPath: String) -> Void) {
         var currentProgress = 0;
         var progressWindow = ProgressWindow();
         var sourceSize = FSUtil.fileSize(from)
