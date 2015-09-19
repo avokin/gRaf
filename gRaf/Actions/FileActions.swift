@@ -5,7 +5,7 @@
 
 import Foundation
 
-class CopyFileAction {
+class FileActions {
     class func copyFileAction(from: File, to: File) {
         createFileFromSource(from, to: to) { (fromPath: String, destPath: String) -> Void in
             FSUtil.copyFile(fromPath, to: destPath)
@@ -18,8 +18,17 @@ class CopyFileAction {
         }
     }
 
+    class func deleteFileAction(file: File) {
+        var progressWindow = ProgressWindow();
+
+        progressWindow.start({
+            FSUtil.deleteFile(file.path)
+        }, progressUpdater: {
+            return -1
+        })
+    }
+
     private class func createFileFromSource(from: File, to: File, action: (fromPath: String, destPath: String) -> Void) {
-        var currentProgress = 0;
         var progressWindow = ProgressWindow();
         var sourceSize = FSUtil.fileSize(from)
 
@@ -32,7 +41,6 @@ class CopyFileAction {
                 return 0
             }
             var destSize = FSUtil.fileSize(destPath)
-            currentProgress++
             var a = 10000 * destSize
             var b = a / sourceSize
             return Int(b + 1)

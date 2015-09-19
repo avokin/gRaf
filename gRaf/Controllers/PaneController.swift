@@ -119,24 +119,30 @@ class PaneController: NSViewController, NSTableViewDataSource, NSTableViewDelega
             tableView.selectRowIndexes(NSIndexSet(index: model.selectedIndex), byExtendingSelection: false)
         } else if theEvent.keyCode == 48 {
             otherPaneController.focus()
-        } else if (theEvent.keyCode == 96) {
+        } else if theEvent.keyCode == 96 {
             // ToDo: use model.selectedIndex
             var from = model.getItems()[tableView.selectedRow]
             var to = otherPaneController.model.getRoot();
 
-            CopyFileAction.copyFileAction(from, to: to)
+            FileActions.copyFileAction(from, to: to)
             refresh()
-        } else if (theEvent.keyCode == 97) {
+        } else if theEvent.keyCode == 97 {
             var from = model.getItems()[tableView.selectedRow]
             var to = otherPaneController.model.getRoot();
 
-            CopyFileAction.moveFileAction(from, to: to)
+            FileActions.moveFileAction(from, to: to)
+            refresh()
+        } else if theEvent.keyCode == 100 {
+            var file = model.getItems()[tableView.selectedRow]
+            FileActions.deleteFileAction(file)
             refresh()
         }
     }
 
     func refresh() {
         focus()
+        model.clearCaches()
+        tableView.reloadData()
         otherPaneController.model.clearCaches()
         otherPaneController.tableView.reloadData()
     }
