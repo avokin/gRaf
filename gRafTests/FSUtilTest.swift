@@ -20,4 +20,21 @@ class FSUtilTest : XCTestCase {
         XCTAssertNotNil(v)
         XCTAssert(v!.isDirectory)
     }
+
+    func testCopyFile() {
+        var from = TestUtil.findFileInRoot(".DS_Store")
+        XCTAssertNotNil(from)
+
+        var to = TestUtil.findFileInRoot("tmp")
+        XCTAssertNotNil(to)
+
+        var newFilePath = FSUtil.getDestinationFileName(from!, to: to!)
+        var err: NSError?
+        NSFileManager.defaultManager().removeItemAtPath(newFilePath, error: &err);
+
+        XCTAssertFalse(NSFileManager.defaultManager().fileExistsAtPath(newFilePath))
+
+        FSUtil.copyFile(from!.path, to: newFilePath)
+        XCTAssert(NSFileManager.defaultManager().fileExistsAtPath(newFilePath))
+    }
 }

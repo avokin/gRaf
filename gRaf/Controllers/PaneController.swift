@@ -123,27 +123,22 @@ class PaneController: NSViewController, NSTableViewDataSource, NSTableViewDelega
             // ToDo: use model.selectedIndex
             var from = model.getItems()[tableView.selectedRow]
             var to = otherPaneController.model.getRoot();
-            var destPath = FSUtil.getDestinationFileName(from, to: to)
 
-            var currentProgress = 0;
-            var progressWindow = ProgressWindow();
-            var sourceSize = FSUtil.fileSize(from)
-            progressWindow.start({
-                CopyFileAction.perform(from, to: to)
-            }, progressUpdater: {
-                if sourceSize <= 0 {
-                    return 0
-                }
-                var destSize = FSUtil.fileSize(destPath)
-                currentProgress++
-                var a = 10000 * destSize
-                var b = a / sourceSize
-                return Int(b + 1)
-            })
-            focus()
-            otherPaneController.model.clearCaches()
-            otherPaneController.tableView.reloadData()
+            CopyFileAction.copyFileAction(from, to: to)
+            refresh()
+        } else if (theEvent.keyCode == 97) {
+            var from = model.getItems()[tableView.selectedRow]
+            var to = otherPaneController.model.getRoot();
+
+            CopyFileAction.moveFileAction(from, to: to)
+            refresh()
         }
+    }
+
+    func refresh() {
+        focus()
+        otherPaneController.model.clearCaches()
+        otherPaneController.tableView.reloadData()
     }
 
     func createColumn(name: String) -> NSTableColumn {

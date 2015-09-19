@@ -67,6 +67,11 @@ public class FSUtil {
         fileManager.copyItemAtPath(from, toPath: to, error: nil)
     }
 
+    static func moveFile(from: String, to: String) {
+        let fileManager = NSFileManager.defaultManager()
+        fileManager.moveItemAtPath(from, toPath: to, error: nil)
+    }
+
     static func fileSize(file: File) -> UInt64 {
         return fileSize(file.path)
     }

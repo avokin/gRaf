@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scheme
+   version = "1.3">
+   <BuildAction>
+      <BuildActionEntries>
+         <BuildActionEntry
+            buildForRunning = "YES"
+            buildForTesting = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "AC38F49DE5A7735F1E9FB249"
+               BuildableName = "gRafTests.xctest"
+               BlueprintName = "gRafTests"
+               ReferencedContainer = "container:gRaf.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+      </BuildActionEntries>
+   </BuildAction>
+   <TestAction
+      buildConfiguration = "Debug">
+      <Testables>
+         <TestableReference>
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "AC38F49DE5A7735F1E9FB249"
+               BuildableName = "gRafTests.xctest"
+               BlueprintName = "gRafTests"
+               ReferencedContainer = "container:gRaf.xcodeproj">
+            </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "CopyFileTest">
+               </Test>
+               <Test
+                  Identifier = "gRafTests">
+               </Test>
+            </SkippedTests>
+         </TestableReference>
+      </Testables>
+   </TestAction>
+   <LaunchAction
+      useCustomWorkingDirectory = "NO">
+   </LaunchAction>
+</Scheme>
