@@ -76,6 +76,19 @@ class PaneController: NSViewController, NSTableViewDataSource, NSTableViewDelega
             let tableView: NSTableView = view as! NSTableView
             var file : File = model.getItems()[tableView.selectedRow]
 
+            if theEvent.modifierFlags & NSEventModifierFlags.ShiftKeyMask != nil {
+                let showFolder = NSTask()
+                if file.isDirectory {
+                    showFolder.launchPath = "/usr/bin/open"
+                    showFolder.arguments = [file.path]
+                    showFolder.launch()
+                } else {
+                    NSWorkspace.sharedWorkspace().openFile(file.path)
+                }
+
+                return
+            }
+
             if (equal("..", file.name)) {
                 var previousName = model.getPath().lastPathComponent
 
