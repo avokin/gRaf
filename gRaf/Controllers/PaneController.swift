@@ -117,6 +117,7 @@ class PaneController: NSViewController, NSTableViewDataSource, NSTableViewDelega
 
             tableView.reloadData()
             tableView.selectRowIndexes(NSIndexSet(index: model.selectedIndex), byExtendingSelection: false)
+            tableView.scrollRowToVisible(model.selectedIndex)
         } else if theEvent.keyCode == 48 {
             otherPaneController.focus()
         } else if theEvent.keyCode == 96 {
@@ -136,6 +137,12 @@ class PaneController: NSViewController, NSTableViewDataSource, NSTableViewDelega
             var file = model.getItems()[tableView.selectedRow]
             FileActions.deleteFileAction(file)
             refresh()
+        } else if theEvent.keyCode == 116 {
+            if theEvent.modifierFlags & NSEventModifierFlags.FunctionKeyMask != nil {
+                model.selectedIndex = 0
+                tableView.selectRowIndexes(NSIndexSet(index: model.selectedIndex), byExtendingSelection: false)
+                tableView.scrollRowToVisible(model.selectedIndex)
+            }
         }
     }
 
