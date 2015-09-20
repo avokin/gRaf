@@ -159,6 +159,8 @@ class PaneController: NSViewController, NSTableViewDataSource, NSTableViewDelega
         var headerCell = NSTableHeaderCell()
         headerCell.objectValue = name
         column.headerCell = headerCell
+
+        column.sortDescriptorPrototype = NSSortDescriptor(key: name, ascending: true)
         return column
     }
 
@@ -183,4 +185,12 @@ class PaneController: NSViewController, NSTableViewDataSource, NSTableViewDelega
         tableView.setDataSource(self);
         tableView.setDelegate(self)
     }
+
+    func tableView(tableView: NSTableView, sortDescriptorsDidChange oldDescriptors: [AnyObject]) {
+        var descriptors = tableView.sortDescriptors
+        var first = descriptors[0]
+        model.setSortDescriptor(first as! NSSortDescriptor)
+        tableView.reloadData()
+    }
+
 }

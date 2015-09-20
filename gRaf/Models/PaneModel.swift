@@ -7,8 +7,7 @@ import Foundation
 
 class PaneModel {
     private var root: File = File(name: "/", path: "/", size: UInt64.max, dateModified: NSDate(), isDirectory: true)
-    private var sortBy: SortBy = .Name
-    private var sortDirection: SortDirection = .Ascending
+    private var sortDescriptor: NSSortDescriptor = NSSortDescriptor(key: "Name", ascending: true)
     var selectedIndex = 0
 
     private var cached: [File]? = nil
@@ -29,6 +28,26 @@ class PaneModel {
     func getItems() -> [File] {
         if (cached == nil) {
             cached = FSUtil.getFilesOfDirectory(root.path)
+            cached!.sort({
+                var first: File
+                var second: File
+                if self.sortDescriptor.ascending {
+                    first = $0
+                    second = $1
+                } else {
+                    first = $1
+                    second = $0
+                }
+
+                var left : String = $0.name
+                var right : String = $1.name
+
+                var key: String? = self.sortDescriptor.key()
+                if key! == "Size" {
+                    return first.size > second.size
+                }
+                return first.name.localizedCompare(second.name) == NSComparisonResult.OrderedAscending
+            })
         }
 
         return cached!
@@ -36,5 +55,10 @@ class PaneModel {
 
     func clearCaches() {
         cached = nil
+    }
+
+    func setSortDescriptor(value: NSSortDescriptor) {
+        sortDescriptor = value
+        clearCaches()
     }
 }
