@@ -37,7 +37,7 @@ class PaneController: NSViewController, NSTableViewDataSource, NSTableViewDelega
             if file.isDirectory {
                 return ""
             }
-            return String(file.size)
+            return TextUtil.getSizeText(file.size)
         } else {
             return file.dateModified
         }
