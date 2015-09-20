@@ -178,6 +178,8 @@ class PaneController: NSViewController, NSTableViewDataSource, NSTableViewDelega
 
         tableView.addTableColumn(createColumn(COLUMN_DATE_MODIFIED_ID))
 
+        tableView.focusRingType = NSFocusRingType.None
+
         tableView.setDataSource(self);
         tableView.setDelegate(self)
     }

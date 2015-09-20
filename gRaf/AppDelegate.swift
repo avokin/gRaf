@@ -7,6 +7,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var scrollView1: NSScrollView
     var scrollView2: NSScrollView
     var splitView: NSSplitView
+    var mainView: NSView
 
     var paneController1: PaneController
     var paneController2: PaneController
@@ -23,7 +24,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         scrollView1 = NSScrollView(frame: CGRectMake(0, 0, 1, 1))
         scrollView2 = NSScrollView(frame: CGRectMake(0, 0, 1, 1))
 
-        splitView = NSSplitView(frame: window.frame)
+        var statusBarHeight: CGFloat = 20
+        var topBarHeight: CGFloat = 20
+        var splitViewHeight = window.frame.size.height - statusBarHeight - topBarHeight
+        splitView = NSSplitView(frame: CGRectMake(0, statusBarHeight, window.frame.size.width, splitViewHeight))
+
+        mainView = NSView(frame: window.frame)
     }
 
     func initPaneControllers() {
@@ -42,11 +48,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         splitView.addSubview(scrollView1)
         splitView.addSubview(scrollView2)
+
+        mainView.addSubview(splitView)
+        splitView.autoresizingMask = NSAutoresizingMaskOptions.ViewWidthSizable | NSAutoresizingMaskOptions.ViewHeightSizable
     }
 
     func initWindowController() {
         var controller = NSViewController(nibName: nil, bundle: nil)
-        controller!.view = splitView
+        controller!.view = mainView
 
         controller!.addChildViewController(paneController1)
         controller!.addChildViewController(paneController2)
