@@ -29,6 +29,7 @@
 		AC38FBC3682377F9E1BC4464 /* TestUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FB040D8F538045B8573A /* TestUtil.swift */; };
 		AC38FC66EFC0CC136204D20C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F53351AD918D798D6B70 /* AppDelegate.swift */; };
 		AC38FD4109C9C5E3CCC74131 /* PaneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F26A9C916249546ACFCB /* PaneController.swift */; };
+		AC38FD43745AB5FE90FC161B /* PaneModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FE9C679F34E260399A17 /* PaneModelTest.swift */; };
 		AC38FD67C502C6CA0F34F1F0 /* file.png in Resources */ = {isa = PBXBuildFile; fileRef = AC38F67418DA8BDC0143F990 /* file.png */; };
 		AC38FDA576ABCC50839B3D24 /* FileActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FDC61BCF91E3AB9EB05B /* FileActions.swift */; };
 		AC38FDDFCAD6274725E3729A /* TextUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F397DBDB690C0C1E0940 /* TextUtil.swift */; };
@@ -68,6 +69,7 @@
 		AC38FCDA9BE999CFA76CF01C /* FSUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FSUtil.swift; sourceTree = "<group>"; };
 		AC38FDC484CEA78A41982E6B /* file@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "file@2x.png"; sourceTree = "<group>"; };
 		AC38FDC61BCF91E3AB9EB05B /* FileActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileActions.swift; sourceTree = "<group>"; };
+		AC38FE9C679F34E260399A17 /* PaneModelTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaneModelTest.swift; sourceTree = "<group>"; };
 		AC38FEE0D27728E97CECD076 /* File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		AC38FF3B68277D075BFFB29B /* gRafTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gRafTests.swift; sourceTree = "<group>"; };
 		AC38FF4CC5D3FAFF1FEBA357 /* PaneModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaneModel.swift; sourceTree = "<group>"; };
@@ -122,6 +124,14 @@
 				AC38F8955443631852ECF0AA /* gRafTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		AC38F8533B39978FD8E7921B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				AC38FE9C679F34E260399A17 /* PaneModelTest.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		AC38F8D3DC782359797D051B /* Supporting Files */ = {
@@ -199,6 +209,7 @@
 				AC38F5323401723385811EFE /* FSUtilTest.swift */,
 				AC38FB040D8F538045B8573A /* TestUtil.swift */,
 				AC38FAB0DD93EE191E92CB09 /* Util */,
+				AC38F8533B39978FD8E7921B /* Model */,
 			);
 			path = gRafTests;
 			sourceTree = "<group>";
@@ -336,6 +347,7 @@
 				AC38F6BF5C5FB79C5638C689 /* TestUtil.swift in Sources */,
 				AC38FB3C8572104EC52BDDB1 /* TextUtil.swift in Sources */,
 				AC38FB30B1BCE80EE0B6C54F /* TextUtilTest.swift in Sources */,
+				AC38FD43745AB5FE90FC161B /* PaneModelTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

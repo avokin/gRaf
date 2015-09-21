@@ -29,6 +29,13 @@ class PaneModel {
         if (cached == nil) {
             cached = FSUtil.getFilesOfDirectory(root.path)
             cached!.sort({
+                if equal("..", $0.name) {
+                    return true
+                }
+                if equal("..", $1.name) {
+                    return false
+                }
+
                 var first: File
                 var second: File
                 if self.sortDescriptor.ascending {
@@ -44,6 +51,13 @@ class PaneModel {
 
                 var key: String? = self.sortDescriptor.key()
                 if key! == "Size" {
+                    if first.size == UInt64.max {
+                        return false
+                    }
+                    if second.size == UInt64.max {
+                        return true
+                    }
+
                     return first.size > second.size
                 }
                 return first.name.localizedCompare(second.name) == NSComparisonResult.OrderedAscending

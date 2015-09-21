@@ -21,7 +21,7 @@ public class FSUtil {
         if allFiles is [String] {
             var allSuperFiles = allFiles as! [String]
             for element: String in allSuperFiles {
-                var size: UInt64 = 0
+                var size: UInt64 = UInt64.max
                 var isDirectory = false
                 var elementPath = path + "/" + element
 

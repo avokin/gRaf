@@ -5,7 +5,7 @@
 
 import Foundation
 
-class File: NSObject {
+class File: NSObject{
     var name: String
     var path: String
     var size: UInt64
@@ -19,4 +19,7 @@ class File: NSObject {
         self.dateModified = dateModified
         self.isDirectory = isDirectory
     }
+
+    override var debugDescription: String { get {return self.path} }
+    override var description: String { get {return self.path} }
 }
