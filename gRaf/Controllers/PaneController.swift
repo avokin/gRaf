@@ -175,7 +175,7 @@ class PaneController: NSViewController, NSTableViewDataSource, NSTableViewDelega
         tableView.addTableColumn(nameColumn)
 
         var sizeColumn = createColumn(COLUMN_SIZE_ID)
-        sizeColumn.width = 40
+        sizeColumn.width = 80
         tableView.addTableColumn(sizeColumn)
 
         tableView.addTableColumn(createColumn(COLUMN_DATE_MODIFIED_ID))
