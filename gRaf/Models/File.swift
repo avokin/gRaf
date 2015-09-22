@@ -9,10 +9,10 @@ class File: NSObject{
     var name: String
     var path: String
     var size: UInt64
-    var dateModified: NSDate
+    var dateModified: NSDate?
     var isDirectory: Bool
 
-    init(name: String, path: String, size: UInt64, dateModified: NSDate, isDirectory: Bool) {
+    init(name: String, path: String, size: UInt64, dateModified: NSDate?, isDirectory: Bool) {
         self.name = name
         self.path = path
         self.size = size

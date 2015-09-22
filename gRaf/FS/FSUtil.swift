@@ -22,6 +22,7 @@ public class FSUtil {
             var allSuperFiles = allFiles as! [String]
             for element: String in allSuperFiles {
                 var size: UInt64 = UInt64.max
+                var modificationDate: NSDate? = nil
                 var isDirectory = false
                 var elementPath = path + "/" + element
 
@@ -30,6 +31,9 @@ public class FSUtil {
                     i++
                     var attributes:NSDictionary? = fileManager.attributesOfItemAtPath(elementPath, error: nil)
                     if let _attr = attributes {
+                        size = _attr.fileSize()
+                        modificationDate = _attr.fileModificationDate()
+
                         if let fileType1 = _attr.fileType() {
                             if (equal("NSFileTypeSymbolicLink", fileType1)) {
                                 var newPathElement = fileManager.destinationOfSymbolicLinkAtPath(elementPath, error: nil)
@@ -37,23 +41,22 @@ public class FSUtil {
                                 if newPathElement != nil {
                                     elementPath = path + "/" + newPathElement!
                                 } else {
-                                    println("for: " + elementPath + ", found: nil")
                                     break;
                                 }
                             } else {
                                 if equal("NSFileTypeDirectory", fileType1) {
                                     isDirectory = true
+                                    size = UInt64.max
                                     break;
                                 }
                             }
                         }
-                        size = _attr.fileSize()
                     } else {
                         break
                     }
                 }
 
-                var file = File(name: element, path: path + "/" + element, size: size, dateModified: NSDate(), isDirectory: isDirectory)
+                var file = File(name: element, path: path + "/" + element, size: size, dateModified: modificationDate, isDirectory: isDirectory)
 
                 files.append(file)
             }
