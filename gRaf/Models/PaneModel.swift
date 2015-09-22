@@ -36,6 +36,13 @@ class PaneModel {
                     return false
                 }
 
+                if $0.isDirectory && !$1.isDirectory {
+                    return self.sortDescriptor.ascending
+                }
+                if $1.isDirectory && !$0.isDirectory {
+                    return !self.sortDescriptor.ascending
+                }
+
                 var first: File
                 var second: File
                 if self.sortDescriptor.ascending {
