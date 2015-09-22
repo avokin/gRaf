@@ -31,4 +31,8 @@ class TextUtil {
 
         return "\(sizeAsString) \(SIZE_SUFFIXES[i])"
     }
+
+    static func getDateText(date: NSDate) -> String {
+        return NSDateFormatter.localizedStringFromDate(date, dateStyle: NSDateFormatterStyle.ShortStyle, timeStyle: NSDateFormatterStyle.MediumStyle)
+    }
 }

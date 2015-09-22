@@ -39,7 +39,7 @@ class PaneController: NSViewController, NSTableViewDataSource, NSTableViewDelega
             }
             return TextUtil.getSizeText(file.size)
         } else {
-            return file.dateModified
+            return TextUtil.getDateText(file.dateModified)
         }
     }
 

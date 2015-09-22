@@ -36,4 +36,9 @@ class TextUtilTest : XCTestCase {
         var result = TextUtil.getSizeText(1368666858)
         XCTAssertEqual("1,27 GB", result)
     }
+
+    func testGetDateText() {
+        var result = TextUtil.getDateText(NSDate(timeIntervalSince1970: 123000))
+        XCTAssertEqual("02/01/70 13:10:00", result)
+    }
 }
