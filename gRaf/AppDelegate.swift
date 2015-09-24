@@ -18,8 +18,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         window = NSWindow(contentRect: contentSize, styleMask: windowStyleMask, backing: NSBackingStoreType.Buffered, defer: true);
         window.title = "gRaf";
 
-        paneController1 = PaneController()
-        paneController2 = PaneController()
+        paneController1 = FileListPaneController()
+        paneController2 = FileViewPaneController()
 
         scrollView1 = NSScrollView(frame: CGRectMake(0, 0, 1, 1))
         scrollView2 = NSScrollView(frame: CGRectMake(0, 0, 1, 1))

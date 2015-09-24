@@ -17,6 +17,7 @@
 		AC38F4F18AA53FD552144035 /* FSUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FCDA9BE999CFA76CF01C /* FSUtil.swift */; };
 		AC38F67915517DE943BDBE5A /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FEE0D27728E97CECD076 /* File.swift */; };
 		AC38F6BF5C5FB79C5638C689 /* TestUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FB040D8F538045B8573A /* TestUtil.swift */; };
+		AC38F6F018EA88AD2C0B10CD /* FileListPaneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F31B6C3E7DCD7C0C672B /* FileListPaneController.swift */; };
 		AC38F6FAEA57A49F76DDB8D2 /* PaneModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FF4CC5D3FAFF1FEBA357 /* PaneModel.swift */; };
 		AC38F9616FACFC7BFD3B1CF3 /* gRafTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FF3B68277D075BFFB29B /* gRafTests.swift */; };
 		AC38FA33B7603F17B9EA95A3 /* Sorting.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F446EA402CB6C7976448 /* Sorting.swift */; };
@@ -25,14 +26,17 @@
 		AC38FB30B1BCE80EE0B6C54F /* TextUtilTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F699EE3BD339D6C21D98 /* TextUtilTest.swift */; };
 		AC38FB3C8572104EC52BDDB1 /* TextUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F397DBDB690C0C1E0940 /* TextUtil.swift */; };
 		AC38FB3D93F013E49F110D55 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC38FA8264F6F362133278A6 /* Images.xcassets */; };
+		AC38FB3F662566D407279B0E /* FileViewPaneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FC80957C950C0D222CA6 /* FileViewPaneController.swift */; };
 		AC38FBAA9B3C258296261712 /* PaneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F26A9C916249546ACFCB /* PaneController.swift */; };
 		AC38FBC3682377F9E1BC4464 /* TestUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FB040D8F538045B8573A /* TestUtil.swift */; };
 		AC38FC66EFC0CC136204D20C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F53351AD918D798D6B70 /* AppDelegate.swift */; };
+		AC38FC9DDF27F8ECDBE4CC64 /* FileListPaneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F31B6C3E7DCD7C0C672B /* FileListPaneController.swift */; };
 		AC38FD4109C9C5E3CCC74131 /* PaneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F26A9C916249546ACFCB /* PaneController.swift */; };
 		AC38FD43745AB5FE90FC161B /* PaneModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FE9C679F34E260399A17 /* PaneModelTest.swift */; };
 		AC38FD67C502C6CA0F34F1F0 /* file.png in Resources */ = {isa = PBXBuildFile; fileRef = AC38F67418DA8BDC0143F990 /* file.png */; };
 		AC38FDA576ABCC50839B3D24 /* FileActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FDC61BCF91E3AB9EB05B /* FileActions.swift */; };
 		AC38FDDFCAD6274725E3729A /* TextUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F397DBDB690C0C1E0940 /* TextUtil.swift */; };
+		AC38FE49FE48E7D304E0AC19 /* FileViewPaneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FC80957C950C0D222CA6 /* FileViewPaneController.swift */; };
 		AC38FE711E649921E15BB890 /* PaneModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FF4CC5D3FAFF1FEBA357 /* PaneModel.swift */; };
 		AC38FEBD7250862D353DD41F /* FSUtilTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F5323401723385811EFE /* FSUtilTest.swift */; };
 		AC38FECC209E545A357BFD20 /* Sorting.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F446EA402CB6C7976448 /* Sorting.swift */; };
@@ -53,6 +57,7 @@
 		AC38F24E7B251D064C97A8D3 /* folder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "folder@2x.png"; sourceTree = "<group>"; };
 		AC38F2553110E11DBAB8A0F4 /* ProgressWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressWindow.swift; sourceTree = "<group>"; };
 		AC38F26A9C916249546ACFCB /* PaneController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaneController.swift; sourceTree = "<group>"; };
+		AC38F31B6C3E7DCD7C0C672B /* FileListPaneController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileListPaneController.swift; sourceTree = "<group>"; };
 		AC38F397DBDB690C0C1E0940 /* TextUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextUtil.swift; sourceTree = "<group>"; };
 		AC38F446EA402CB6C7976448 /* Sorting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sorting.swift; sourceTree = "<group>"; };
 		AC38F4F1C016BA3DDBB30F83 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
@@ -66,6 +71,7 @@
 		AC38F8955443631852ECF0AA /* gRafTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = gRafTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC38FA8264F6F362133278A6 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		AC38FB040D8F538045B8573A /* TestUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUtil.swift; sourceTree = "<group>"; };
+		AC38FC80957C950C0D222CA6 /* FileViewPaneController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileViewPaneController.swift; sourceTree = "<group>"; };
 		AC38FCDA9BE999CFA76CF01C /* FSUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FSUtil.swift; sourceTree = "<group>"; };
 		AC38FDC484CEA78A41982E6B /* file@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "file@2x.png"; sourceTree = "<group>"; };
 		AC38FDC61BCF91E3AB9EB05B /* FileActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileActions.swift; sourceTree = "<group>"; };
@@ -105,6 +111,8 @@
 			isa = PBXGroup;
 			children = (
 				AC38F26A9C916249546ACFCB /* PaneController.swift */,
+				AC38F31B6C3E7DCD7C0C672B /* FileListPaneController.swift */,
+				AC38FC80957C950C0D222CA6 /* FileViewPaneController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -348,6 +356,8 @@
 				AC38FB3C8572104EC52BDDB1 /* TextUtil.swift in Sources */,
 				AC38FB30B1BCE80EE0B6C54F /* TextUtilTest.swift in Sources */,
 				AC38FD43745AB5FE90FC161B /* PaneModelTest.swift in Sources */,
+				AC38F6F018EA88AD2C0B10CD /* FileListPaneController.swift in Sources */,
+				AC38FE49FE48E7D304E0AC19 /* FileViewPaneController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -365,6 +375,8 @@
 				AC38FDA576ABCC50839B3D24 /* FileActions.swift in Sources */,
 				AC38FBC3682377F9E1BC4464 /* TestUtil.swift in Sources */,
 				AC38FDDFCAD6274725E3729A /* TextUtil.swift in Sources */,
+				AC38FC9DDF27F8ECDBE4CC64 /* FileListPaneController.swift in Sources */,
+				AC38FB3F662566D407279B0E /* FileViewPaneController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
