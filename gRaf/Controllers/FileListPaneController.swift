@@ -201,5 +201,4 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
         model.setSortDescriptor(first as! NSSortDescriptor)
         tableView.reloadData()
     }
-
 }

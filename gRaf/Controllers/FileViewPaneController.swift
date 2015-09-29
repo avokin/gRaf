@@ -6,8 +6,8 @@
 import Cocoa
 import Foundation
 
-class FileViewPaneController : PaneController, NSTextViewDelegate {
-    var textView: NSTextView!
+class FileViewPaneController : PaneController {
+    var textView: TextView!
     override init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
 
@@ -20,8 +20,12 @@ class FileViewPaneController : PaneController, NSTextViewDelegate {
     }
 
     func createView() {
-        textView = NSTextView(frame: NSMakeRect(0, 0, 1000, 1000))
-        textView.delegate = self
+        textView = TextView(frame: NSMakeRect(0, 0, 1000, 1000))
+        textView.myDelegate = self
+    }
+
+    override func keyDown(theEvent: NSEvent) {
+        println("1 - \(theEvent.keyCode)")
     }
 
     func textDidChange(notification: NSNotification) {
@@ -29,10 +33,6 @@ class FileViewPaneController : PaneController, NSTextViewDelegate {
         var size = a.sizeWithAttributes([NSFontAttributeName: self.textView.font!])
 
         self.textView.frame = NSMakeRect(self.textView.frame.origin.x, self.textView.frame.origin.y, round(size.width + 15), round(size.height))
-    }
-
-    func textAttributes() -> [String: AnyObject] {
-        return [NSFontAttributeName: self.textView.font!]
     }
 }
 
