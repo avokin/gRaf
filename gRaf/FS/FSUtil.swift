@@ -97,4 +97,8 @@ public class FSUtil {
         }
         return destPath
     }
+
+    static func getFileContent(file: File) {
+        let text2 = String(contentsOfFile: file.path, encoding: NSUTF8StringEncoding, error: nil)
+    }
 }

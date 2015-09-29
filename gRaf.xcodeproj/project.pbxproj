@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		05B9A4DC1BBB147200C49619 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05B9A4DB1BBB147200C49619 /* AppKit.framework */; };
 		AC38F0C23D515E7AD96E9143 /* FSUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FCDA9BE999CFA76CF01C /* FSUtil.swift */; };
 		AC38F18ED5F275E2F770AAD8 /* ProgressWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F2553110E11DBAB8A0F4 /* ProgressWindow.swift */; };
 		AC38F1C193FBD9F43E2BCA2F /* FileActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FDC61BCF91E3AB9EB05B /* FileActions.swift */; };
@@ -21,6 +20,7 @@
 		AC38F6BF5C5FB79C5638C689 /* TestUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FB040D8F538045B8573A /* TestUtil.swift */; };
 		AC38F6F018EA88AD2C0B10CD /* FileListPaneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F31B6C3E7DCD7C0C672B /* FileListPaneController.swift */; };
 		AC38F6FAEA57A49F76DDB8D2 /* PaneModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FF4CC5D3FAFF1FEBA357 /* PaneModel.swift */; };
+		AC38F832E05B3006D6F91ECD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F53351AD918D798D6B70 /* AppDelegate.swift */; };
 		AC38F9616FACFC7BFD3B1CF3 /* gRafTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FF3B68277D075BFFB29B /* gRafTests.swift */; };
 		AC38FA33B7603F17B9EA95A3 /* Sorting.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F446EA402CB6C7976448 /* Sorting.swift */; };
 		AC38FA3D0B7A696D85FC37F9 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FEE0D27728E97CECD076 /* File.swift */; };
@@ -91,7 +91,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				05B9A4DC1BBB147200C49619 /* AppKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -367,6 +366,7 @@
 				AC38F6F018EA88AD2C0B10CD /* FileListPaneController.swift in Sources */,
 				AC38FE49FE48E7D304E0AC19 /* FileViewPaneController.swift in Sources */,
 				AC38F48A0D1421C2F9D7BD3C /* TextView.swift in Sources */,
+				AC38F832E05B3006D6F91ECD /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

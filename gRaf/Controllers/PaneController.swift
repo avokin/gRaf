@@ -9,6 +9,9 @@ import Foundation
 class PaneController : NSViewController {
     var otherPaneController: PaneController!
     var window: NSWindow? = nil
+    var appDelegate: AppDelegate! = nil
 
-    func focus() {}
+    func focus() {
+        window!.makeKeyWindow()
+    }
 }

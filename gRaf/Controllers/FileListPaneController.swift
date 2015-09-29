@@ -27,7 +27,7 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
     }
 
     override func focus() {
-        window!.makeKeyWindow()
+        super.focus()
         let tableView: NSTableView = view as! NSTableView
         window!.makeFirstResponder(tableView)
     }
@@ -74,7 +74,10 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
     }
 
     override func keyDown(theEvent: NSEvent) {
-        if theEvent.keyCode == 36 {
+        println("\(theEvent.keyCode)")
+        if theEvent.keyCode == 99 {
+            appDelegate.createFileViewController(self)
+        } else if theEvent.keyCode == 36 {
             let tableView: NSTableView = view as! NSTableView
             var file : File = model.getItems()[tableView.selectedRow]
 

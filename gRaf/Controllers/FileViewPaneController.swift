@@ -25,7 +25,9 @@ class FileViewPaneController : PaneController {
     }
 
     override func keyDown(theEvent: NSEvent) {
-        println("1 - \(theEvent.keyCode)")
+        if theEvent.keyCode == 53 {
+            appDelegate.createFileListController(self)
+        }
     }
 
     func textDidChange(notification: NSNotification) {
@@ -34,5 +36,11 @@ class FileViewPaneController : PaneController {
 
         self.textView.frame = NSMakeRect(self.textView.frame.origin.x, self.textView.frame.origin.y, round(size.width + 15), round(size.height))
     }
+
+    override func focus() {
+        super.focus()
+        window!.makeFirstResponder(textView)
+    }
+
 }
 
