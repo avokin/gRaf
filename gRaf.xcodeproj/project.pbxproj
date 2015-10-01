@@ -22,7 +22,6 @@
 		AC38F6FAEA57A49F76DDB8D2 /* PaneModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FF4CC5D3FAFF1FEBA357 /* PaneModel.swift */; };
 		AC38F832E05B3006D6F91ECD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F53351AD918D798D6B70 /* AppDelegate.swift */; };
 		AC38F9616FACFC7BFD3B1CF3 /* gRafTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FF3B68277D075BFFB29B /* gRafTests.swift */; };
-		AC38FA33B7603F17B9EA95A3 /* Sorting.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F446EA402CB6C7976448 /* Sorting.swift */; };
 		AC38FA3D0B7A696D85FC37F9 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FEE0D27728E97CECD076 /* File.swift */; };
 		AC38FA467122DC4E11725C21 /* folder.png in Resources */ = {isa = PBXBuildFile; fileRef = AC38F6BF180DAFC910AD27B3 /* folder.png */; };
 		AC38FA96DD467F10599E56C4 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F3C33D92818793711AA8 /* TextView.swift */; };
@@ -42,7 +41,6 @@
 		AC38FE49FE48E7D304E0AC19 /* FileViewPaneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FC80957C950C0D222CA6 /* FileViewPaneController.swift */; };
 		AC38FE711E649921E15BB890 /* PaneModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FF4CC5D3FAFF1FEBA357 /* PaneModel.swift */; };
 		AC38FEBD7250862D353DD41F /* FSUtilTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F5323401723385811EFE /* FSUtilTest.swift */; };
-		AC38FECC209E545A357BFD20 /* Sorting.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F446EA402CB6C7976448 /* Sorting.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,7 +62,6 @@
 		AC38F31B6C3E7DCD7C0C672B /* FileListPaneController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileListPaneController.swift; sourceTree = "<group>"; };
 		AC38F397DBDB690C0C1E0940 /* TextUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextUtil.swift; sourceTree = "<group>"; };
 		AC38F3C33D92818793711AA8 /* TextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
-		AC38F446EA402CB6C7976448 /* Sorting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sorting.swift; sourceTree = "<group>"; };
 		AC38F4F1C016BA3DDBB30F83 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		AC38F5323401723385811EFE /* FSUtilTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FSUtilTest.swift; sourceTree = "<group>"; };
 		AC38F53351AD918D798D6B70 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -252,7 +249,6 @@
 			isa = PBXGroup;
 			children = (
 				AC38FF4CC5D3FAFF1FEBA357 /* PaneModel.swift */,
-				AC38F446EA402CB6C7976448 /* Sorting.swift */,
 				AC38FEE0D27728E97CECD076 /* File.swift */,
 			);
 			path = Models;
@@ -354,7 +350,6 @@
 				AC38FEBD7250862D353DD41F /* FSUtilTest.swift in Sources */,
 				AC38F0C23D515E7AD96E9143 /* FSUtil.swift in Sources */,
 				AC38F6FAEA57A49F76DDB8D2 /* PaneModel.swift in Sources */,
-				AC38FA33B7603F17B9EA95A3 /* Sorting.swift in Sources */,
 				AC38FD4109C9C5E3CCC74131 /* PaneController.swift in Sources */,
 				AC38F67915517DE943BDBE5A /* File.swift in Sources */,
 				AC38F386DB7619AA81E64163 /* ProgressWindow.swift in Sources */,
@@ -377,7 +372,6 @@
 				AC38FC66EFC0CC136204D20C /* AppDelegate.swift in Sources */,
 				AC38F4F18AA53FD552144035 /* FSUtil.swift in Sources */,
 				AC38FE711E649921E15BB890 /* PaneModel.swift in Sources */,
-				AC38FECC209E545A357BFD20 /* Sorting.swift in Sources */,
 				AC38FBAA9B3C258296261712 /* PaneController.swift in Sources */,
 				AC38FA3D0B7A696D85FC37F9 /* File.swift in Sources */,
 				AC38F18ED5F275E2F770AAD8 /* ProgressWindow.swift in Sources */,
