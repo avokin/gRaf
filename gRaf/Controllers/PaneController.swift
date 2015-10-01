@@ -14,4 +14,14 @@ class PaneController : NSViewController {
     func focus() {
         window!.makeKeyWindow()
     }
+
+    func viewKeyDown(event: NSEvent) -> Bool {
+        return true
+    }
+
+    func dispose() {
+        otherPaneController = nil
+        window = nil
+        appDelegate = nil
+    }
 }

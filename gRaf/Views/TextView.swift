@@ -7,11 +7,13 @@ import Cocoa
 import Foundation
 
 class TextView : NSTextView {
-    var myDelegate: NSResponder?
+    var myDelegate: PaneController?
 
     override func keyDown(theEvent: NSEvent) {
         if let d = myDelegate {
-            d.keyDown(theEvent)
+            if !d.viewKeyDown(theEvent) {
+                return
+            }
         }
 
         super.keyDown(theEvent)

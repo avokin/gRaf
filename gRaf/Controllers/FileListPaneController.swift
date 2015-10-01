@@ -15,8 +15,13 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
     let COLUMN_SIZE_ID = "Size"
     let COLUMN_DATE_MODIFIED_ID = "Date modified"
 
-    override init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    init?(root: File, from: File?) {
+        super.init(nibName: nil, bundle: nil)
+
+        model.setRoot(root)
+        if from != nil {
+            model.selectChild(from!)
+        }
 
         createTable()
         view = tableView
@@ -74,9 +79,9 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
     }
 
     override func keyDown(theEvent: NSEvent) {
-        println("\(theEvent.keyCode)")
         if theEvent.keyCode == 99 {
-            appDelegate.createFileViewController(self)
+            var file = model.getItems()[tableView.selectedRow]
+            appDelegate.createFileViewController(self, file: file)
         } else if theEvent.keyCode == 36 {
             let tableView: NSTableView = view as! NSTableView
             var file : File = model.getItems()[tableView.selectedRow]
@@ -95,24 +100,10 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
             }
 
             if (equal("..", file.name)) {
-                var previousName = model.getPath().lastPathComponent
-
-                // ToDo: get parent from current root
-                var newPath = model.getPath().stringByDeletingLastPathComponent
-                var newRoot = File(name: newPath.lastPathComponent, path: newPath, size: UInt64.max, dateModified: NSDate(), isDirectory: true)
-                model.setRoot(newRoot)
-
-                var index = 0
-                for file: File in model.getItems() {
-                    if equal(previousName, file.name) {
-                        break
-                    }
-                    index++
-                }
-                if (index >= model.getItems().count) {
-                    index = 0
-                }
-                model.selectedIndex = index
+                var previousRoot = model.getRoot()
+                var newRoot = previousRoot.getParent()
+                model.setRoot(newRoot!)
+                model.selectChild(previousRoot)
             } else {
                 // ToDo: use model.selectedIndex
                 var selectedFile = model.getItems()[tableView.selectedRow]

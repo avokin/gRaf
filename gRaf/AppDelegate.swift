@@ -29,36 +29,46 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         mainView = NSView(frame: window.frame)
     }
 
-    func createFileListController() -> PaneController {
-        var result = FileListPaneController()
+    func createFileListController(root: File, from: File?) -> PaneController {
+        var result = FileListPaneController(root: root, from: from)!
         result.window = window
         result.appDelegate = self
 
         return result
     }
 
-    func createFileViewController() -> PaneController  {
-        var result = FileViewPaneController()
-        result.window = window
-        result.appDelegate = self
+    func createFileViewController(file: File) -> PaneController  {
+        var result = FileViewPaneController(file: file)
+        result!.file = file
+        result!.window = window
+        result!.appDelegate = self
 
-        return result
+        return result!
     }
 
-    func createFileListController(insteadOf: PaneController) {
-        var newController = createFileListController()
+    func createFileListController(insteadOf: PaneController, root: File, from: File) {
+        var newController = createFileListController(root, from: from)
+        var oldController: PaneController
         if paneController1 == insteadOf {
+            oldController = paneController1
             paneController1 = newController
         } else {
+            oldController = paneController2
             paneController2 = newController
         }
 
         setupLeftAndRight()
         newController.focus()
+        oldController.dispose()
     }
 
-    func createFileViewController(insteadOf: PaneController) {
-        var newController = createFileViewController()
+    func dispose(controller: PaneController) {
+        controller.window = nil
+        controller.appDelegate = nil
+    }
+
+    func createFileViewController(insteadOf: PaneController, file: File) {
+        var newController = createFileViewController(file)
         if paneController1 == insteadOf {
             paneController1 = newController
         } else {
@@ -70,8 +80,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func initPaneControllers() {
-        paneController1 = createFileListController()
-        paneController2 = createFileViewController()
+        var root = FSUtil.getRoot()
+        paneController1 = createFileListController(root, from: nil)
+        paneController2 = createFileListController(root, from: nil)
     }
 
     func setupLeftAndRight() {

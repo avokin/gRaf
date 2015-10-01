@@ -6,11 +6,35 @@
 import Foundation
 
 class PaneModel {
-    private var root: File = File(name: "/", path: "/", size: UInt64.max, dateModified: NSDate(), isDirectory: true)
+    private var root: File
     private var sortDescriptor: NSSortDescriptor = NSSortDescriptor(key: "Name", ascending: true)
     var selectedIndex = 0
 
     private var cached: [File]? = nil
+
+    init() {
+        root = File(name: "/", path: "/", size: UInt64.max, dateModified: NSDate(), isDirectory: true);
+    }
+
+    init(root: File, from: File) {
+        self.root = root
+        clearCaches()
+        selectChild(from)
+    }
+
+    func selectChild(previous: File) {
+        var index = 0
+        for file: File in getItems() {
+            if equal(previous.name, file.name) {
+                break
+            }
+            index++
+        }
+        if (index >= getItems().count) {
+            index = 0
+        }
+        selectedIndex = index
+    }
 
     func getPath() -> String {
         return root.path;

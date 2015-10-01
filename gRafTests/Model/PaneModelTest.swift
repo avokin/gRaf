@@ -17,7 +17,15 @@ class PaneModelTest : XCTestCase {
         model.setSortDescriptor(NSSortDescriptor(key: "size", ascending: false))
 
         var first = model.getItems()[0]
-        println(first)
         XCTAssertEqual("..", first.name)
+    }
+
+    func testSelectChild() {
+        var root = File(name: "/", path: "/", size: UInt64.max, dateModified: NSDate(), isDirectory: true);
+        var v  = TestUtil.findFileInRoot("var")!
+
+        var model = PaneModel(root: root, from: v)
+
+        XCTAssertEqual("var", model.getItems()[model.selectedIndex].name)
     }
 }

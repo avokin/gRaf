@@ -7,10 +7,12 @@ import Cocoa
 import Foundation
 
 class FileViewPaneController : PaneController {
+    var file: File!
     var textView: TextView!
-    override init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
 
+    init?(file: File) {
+        super.init(nibName: nil, bundle: nil)
+        self.file = file
         createView()
         view = textView
     }
@@ -22,12 +24,15 @@ class FileViewPaneController : PaneController {
     func createView() {
         textView = TextView(frame: NSMakeRect(0, 0, 1000, 1000))
         textView.myDelegate = self
+        textView.string = FSUtil.getFileContent(file)
     }
 
-    override func keyDown(theEvent: NSEvent) {
+    override func viewKeyDown(theEvent: NSEvent) -> Bool {
         if theEvent.keyCode == 53 {
-            appDelegate.createFileListController(self)
+            appDelegate.createFileListController(self, root:file.getParent()!, from: file)
+            return false
         }
+        return true
     }
 
     func textDidChange(notification: NSNotification) {
@@ -38,9 +43,13 @@ class FileViewPaneController : PaneController {
     }
 
     override func focus() {
-        super.focus()
         window!.makeFirstResponder(textView)
+        super.focus()
     }
 
+    override func dispose() {
+        textView.myDelegate = nil
+        super.dispose()
+    }
 }
 

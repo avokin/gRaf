@@ -12,12 +12,23 @@ class File: NSObject{
     var dateModified: NSDate?
     var isDirectory: Bool
 
+    private var parent: File?
+
     init(name: String, path: String, size: UInt64, dateModified: NSDate?, isDirectory: Bool) {
         self.name = name
         self.path = path
         self.size = size
         self.dateModified = dateModified
         self.isDirectory = isDirectory
+    }
+
+    func getParent() -> File? {
+        if parent == nil && count(path) > 1{
+            var parentPath = path.stringByDeletingLastPathComponent
+            parent = File(name: parentPath.lastPathComponent, path: parentPath, size: UInt64.max, dateModified: NSDate(), isDirectory: true)
+        }
+
+        return parent
     }
 
     override var debugDescription: String { get {return self.path} }

@@ -6,6 +6,10 @@
 import Foundation
 
 public class FSUtil {
+    static func getRoot() -> File {
+        return File(name: "/", path: "/", size: UInt64.max, dateModified: NSDate(), isDirectory: true)
+    }
+
     static func getFilesOfDirectory(path: String) -> [File] {
         let fileManager = NSFileManager.defaultManager()
 
@@ -98,7 +102,8 @@ public class FSUtil {
         return destPath
     }
 
-    static func getFileContent(file: File) {
-        let text2 = String(contentsOfFile: file.path, encoding: NSUTF8StringEncoding, error: nil)
+    static func getFileContent(file: File) -> String? {
+        let result = String(contentsOfFile: file.path, encoding: NSUTF8StringEncoding, error: nil)
+        return result
     }
 }
