@@ -31,6 +31,13 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
         super.init(coder: coder)
     }
 
+    override func viewDidAppear() {
+        super.viewDidAppear()
+
+        tableView.selectRowIndexes(NSIndexSet(index: model.selectedIndex), byExtendingSelection: false)
+        tableView.scrollRowToVisible(model.selectedIndex)
+    }
+
     override func focus() {
         super.focus()
         let tableView: NSTableView = view as! NSTableView
@@ -191,8 +198,9 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
 
     func tableView(tableView: NSTableView, sortDescriptorsDidChange oldDescriptors: [AnyObject]) {
         var descriptors = tableView.sortDescriptors
-        var first = descriptors[0]
-        model.setSortDescriptor(first as! NSSortDescriptor)
-        tableView.reloadData()
+        if let first = descriptors[0] as? NSSortDescriptor {
+            model.setSortDescriptor(first)
+            tableView.reloadData()
+        }
     }
 }
