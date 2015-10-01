@@ -25,6 +25,7 @@ class FileViewPaneController : PaneController {
         textView = TextView(frame: NSMakeRect(0, 0, 1000, 1000))
         textView.myDelegate = self
         textView.string = FSUtil.getFileContent(file)
+        textView.setSelectedRange(NSMakeRange(0, 0))
     }
 
     override func viewKeyDown(theEvent: NSEvent) -> Bool {
