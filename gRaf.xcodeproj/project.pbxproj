@@ -21,6 +21,7 @@
 		AC38F6F018EA88AD2C0B10CD /* FileListPaneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F31B6C3E7DCD7C0C672B /* FileListPaneController.swift */; };
 		AC38F6FAEA57A49F76DDB8D2 /* PaneModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FF4CC5D3FAFF1FEBA357 /* PaneModel.swift */; };
 		AC38F832E05B3006D6F91ECD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F53351AD918D798D6B70 /* AppDelegate.swift */; };
+		AC38F882D37B973D50541B68 /* FileTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FD42274B2966597A2A8C /* FileTest.swift */; };
 		AC38F9616FACFC7BFD3B1CF3 /* gRafTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FF3B68277D075BFFB29B /* gRafTests.swift */; };
 		AC38FA3D0B7A696D85FC37F9 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FEE0D27728E97CECD076 /* File.swift */; };
 		AC38FA467122DC4E11725C21 /* folder.png in Resources */ = {isa = PBXBuildFile; fileRef = AC38F6BF180DAFC910AD27B3 /* folder.png */; };
@@ -75,6 +76,7 @@
 		AC38FB040D8F538045B8573A /* TestUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUtil.swift; sourceTree = "<group>"; };
 		AC38FC80957C950C0D222CA6 /* FileViewPaneController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileViewPaneController.swift; sourceTree = "<group>"; };
 		AC38FCDA9BE999CFA76CF01C /* FSUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FSUtil.swift; sourceTree = "<group>"; };
+		AC38FD42274B2966597A2A8C /* FileTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileTest.swift; sourceTree = "<group>"; };
 		AC38FDC484CEA78A41982E6B /* file@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "file@2x.png"; sourceTree = "<group>"; };
 		AC38FDC61BCF91E3AB9EB05B /* FileActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileActions.swift; sourceTree = "<group>"; };
 		AC38FE9C679F34E260399A17 /* PaneModelTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaneModelTest.swift; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				AC38FE9C679F34E260399A17 /* PaneModelTest.swift */,
+				AC38FD42274B2966597A2A8C /* FileTest.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -362,6 +365,7 @@
 				AC38FE49FE48E7D304E0AC19 /* FileViewPaneController.swift in Sources */,
 				AC38F48A0D1421C2F9D7BD3C /* TextView.swift in Sources */,
 				AC38F832E05B3006D6F91ECD /* AppDelegate.swift in Sources */,
+				AC38F882D37B973D50541B68 /* FileTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
