@@ -55,7 +55,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		05B9A4DB1BBB147200C49619 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		AC38F154536A0F26957D2B3F /* gRaf.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gRaf.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC38F24E7B251D064C97A8D3 /* folder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "folder@2x.png"; sourceTree = "<group>"; };
 		AC38F2553110E11DBAB8A0F4 /* ProgressWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressWindow.swift; sourceTree = "<group>"; };
@@ -209,7 +208,6 @@
 		AC38FB36158B8F31922BA8CC = {
 			isa = PBXGroup;
 			children = (
-				05B9A4DB1BBB147200C49619 /* AppKit.framework */,
 				AC38F608F8ABB0DE57663C1C /* Products */,
 				AC38F9B05FD12E448DD506D9 /* gRaf */,
 				AC38FBC3CACF3C9E3B872363 /* gRafTests */,
