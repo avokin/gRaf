@@ -20,7 +20,7 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
 
         model.setRoot(root)
         if from != nil {
-            model.selectChild(from!)
+            model.selectChild(from!.name)
         }
 
         createTable()
@@ -69,7 +69,7 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
     }
 
     func tableView(tableView: NSTableView, dataCellForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSCell? {
-        if (tableColumn != nil && equal(tableColumn!.identifier, COLUMN_TYPE_ID)) {
+        if tableColumn != nil && equal(tableColumn!.identifier, COLUMN_TYPE_ID) {
             var file: File = model.getItems()[row]
             var image = NSImage(named: "file")
             if file.isDirectory {
@@ -82,7 +82,19 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
     }
 
     func tableView(tableView: NSTableView, shouldEditTableColumn tableColumn: NSTableColumn?, row: Int) -> Bool {
-        return false
+        return tableColumn != nil && equal(tableColumn!.identifier, COLUMN_NAME_ID)
+    }
+
+    func tableView(tableView: NSTableView, setObjectValue object: AnyObject?, forTableColumn tableColumn: NSTableColumn?, row: Int) {
+        if let newName = object {
+            var file = model.getItems()[row]
+            FSUtil.rename(file, newName: "\(object!)")
+            model.clearCaches()
+            model.selectChild("\(object!)")
+            tableView.reloadData()
+            tableView.selectRowIndexes(NSIndexSet(index: model.selectedIndex), byExtendingSelection: false)
+            tableView.scrollRowToVisible(model.selectedIndex)
+        }
     }
 
     override func keyDown(theEvent: NSEvent) {
@@ -110,7 +122,7 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
                 var previousRoot = model.getRoot()
                 var newRoot = previousRoot.getParent()
                 model.setRoot(newRoot!)
-                model.selectChild(previousRoot)
+                model.selectChild(previousRoot.name)
             } else {
                 // ToDo: use model.selectedIndex
                 var selectedFile = model.getItems()[tableView.selectedRow]
@@ -176,7 +188,7 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
     }
 
     func createTable() {
-        tableView = NSTableView(frame: CGRectMake(0, 0, 1, 1))
+        tableView = FileTableView()
         var typeColumn = createColumn(COLUMN_TYPE_ID)
         typeColumn.width = 30
         tableView.addTableColumn(typeColumn)

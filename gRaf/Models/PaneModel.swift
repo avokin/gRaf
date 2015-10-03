@@ -19,13 +19,13 @@ class PaneModel {
     init(root: File, from: File) {
         self.root = root
         clearCaches()
-        selectChild(from)
+        selectChild(from.name)
     }
 
-    func selectChild(previous: File) {
+    func selectChild(name: String) {
         var index = 0
         for file: File in getItems() {
-            if equal(previous.name, file.name) {
+            if equal(name, file.name) {
                 break
             }
             index++

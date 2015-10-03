@@ -16,6 +16,7 @@
 		AC38F48A0D1421C2F9D7BD3C /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F3C33D92818793711AA8 /* TextView.swift */; };
 		AC38F4A58C4AE4B20D2CA83A /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC38FE1BD3E955C2DA64D84C /* MainMenu.xib */; };
 		AC38F4F18AA53FD552144035 /* FSUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FCDA9BE999CFA76CF01C /* FSUtil.swift */; };
+		AC38F63E29D408E3498FB3D8 /* FileTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FBC149F551EECF0DB1CF /* FileTableView.swift */; };
 		AC38F67915517DE943BDBE5A /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FEE0D27728E97CECD076 /* File.swift */; };
 		AC38F6BF5C5FB79C5638C689 /* TestUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FB040D8F538045B8573A /* TestUtil.swift */; };
 		AC38F6F018EA88AD2C0B10CD /* FileListPaneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F31B6C3E7DCD7C0C672B /* FileListPaneController.swift */; };
@@ -34,6 +35,7 @@
 		AC38FBC3682377F9E1BC4464 /* TestUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FB040D8F538045B8573A /* TestUtil.swift */; };
 		AC38FC66EFC0CC136204D20C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F53351AD918D798D6B70 /* AppDelegate.swift */; };
 		AC38FC9DDF27F8ECDBE4CC64 /* FileListPaneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F31B6C3E7DCD7C0C672B /* FileListPaneController.swift */; };
+		AC38FCB24784FCC0400A3776 /* FileTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FBC149F551EECF0DB1CF /* FileTableView.swift */; };
 		AC38FD4109C9C5E3CCC74131 /* PaneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F26A9C916249546ACFCB /* PaneController.swift */; };
 		AC38FD43745AB5FE90FC161B /* PaneModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FE9C679F34E260399A17 /* PaneModelTest.swift */; };
 		AC38FD67C502C6CA0F34F1F0 /* file.png in Resources */ = {isa = PBXBuildFile; fileRef = AC38F67418DA8BDC0143F990 /* file.png */; };
@@ -73,6 +75,7 @@
 		AC38F8955443631852ECF0AA /* gRafTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = gRafTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC38FA8264F6F362133278A6 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		AC38FB040D8F538045B8573A /* TestUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUtil.swift; sourceTree = "<group>"; };
+		AC38FBC149F551EECF0DB1CF /* FileTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileTableView.swift; sourceTree = "<group>"; };
 		AC38FC80957C950C0D222CA6 /* FileViewPaneController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileViewPaneController.swift; sourceTree = "<group>"; };
 		AC38FCDA9BE999CFA76CF01C /* FSUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FSUtil.swift; sourceTree = "<group>"; };
 		AC38FD42274B2966597A2A8C /* FileTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileTest.swift; sourceTree = "<group>"; };
@@ -185,6 +188,7 @@
 			children = (
 				AC38F2553110E11DBAB8A0F4 /* ProgressWindow.swift */,
 				AC38F3C33D92818793711AA8 /* TextView.swift */,
+				AC38FBC149F551EECF0DB1CF /* FileTableView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -364,6 +368,7 @@
 				AC38F48A0D1421C2F9D7BD3C /* TextView.swift in Sources */,
 				AC38F832E05B3006D6F91ECD /* AppDelegate.swift in Sources */,
 				AC38F882D37B973D50541B68 /* FileTest.swift in Sources */,
+				AC38F63E29D408E3498FB3D8 /* FileTableView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -383,6 +388,7 @@
 				AC38FC9DDF27F8ECDBE4CC64 /* FileListPaneController.swift in Sources */,
 				AC38FB3F662566D407279B0E /* FileViewPaneController.swift in Sources */,
 				AC38FA96DD467F10599E56C4 /* TextView.swift in Sources */,
+				AC38FCB24784FCC0400A3776 /* FileTableView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

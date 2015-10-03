@@ -102,6 +102,11 @@ public class FSUtil {
         return destPath
     }
 
+    static func rename(file: File, newName: String) {
+        var newPath = file.path.stringByDeletingLastPathComponent + "/" + newName
+        NSFileManager.defaultManager().moveItemAtPath(file.path, toPath: newPath, error: nil)
+    }
+
     static func getFileContent(file: File) -> String? {
         let result = String(contentsOfFile: file.path, encoding: NSUTF8StringEncoding, error: nil)
         return result
