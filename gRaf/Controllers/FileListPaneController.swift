@@ -151,6 +151,7 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
                 tableView.scrollRowToVisible(model.selectedIndex)
             }
         }
+        super.keyDown(theEvent)
     }
 
     func refresh() {
