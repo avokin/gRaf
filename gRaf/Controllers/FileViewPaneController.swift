@@ -24,7 +24,12 @@ class FileViewPaneController : PaneController {
     func createView() {
         textView = TextView(frame: NSMakeRect(0, 0, 1000, 1000))
         textView.myDelegate = self
-        textView.string = FSUtil.getFileContent(file)
+        var content = FSUtil.getFileContent(file)
+        if content == nil {
+            content = ""
+        }
+
+        textView.string = content
         textView.setSelectedRange(NSMakeRange(0, 0))
     }
 
