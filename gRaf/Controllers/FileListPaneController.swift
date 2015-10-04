@@ -40,7 +40,6 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
 
     override func focus() {
         super.focus()
-        let tableView: NSTableView = view as! NSTableView
         window!.makeFirstResponder(tableView)
     }
 
@@ -162,8 +161,9 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
                 tableView.selectRowIndexes(NSIndexSet(index: model.selectedIndex), byExtendingSelection: false)
                 tableView.scrollRowToVisible(model.selectedIndex)
             }
+        } else {
+            super.keyDown(theEvent)
         }
-        super.keyDown(theEvent)
     }
 
     func refresh() {

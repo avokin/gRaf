@@ -9,7 +9,7 @@ import Foundation
 
 class FileTableView: NSTableView {
     override func keyDown(theEvent: NSEvent) {
-        if theEvent.keyCode == 36 {
+        if theEvent.keyCode == 36 || theEvent.keyCode == 48 {
             if let responder = delegate() as? NSResponder {
                 responder.keyDown(theEvent)
             }
