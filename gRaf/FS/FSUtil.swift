@@ -111,4 +111,8 @@ public class FSUtil {
         let result = String(contentsOfFile: file.path, encoding: NSUTF8StringEncoding, error: nil)
         return result
     }
+
+    static func setFileContent(file: File, content: String) {
+        content.writeToFile(file.path, atomically: false, encoding: NSUTF8StringEncoding, error: nil);
+    }
 }
