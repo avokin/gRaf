@@ -34,7 +34,7 @@ class FileViewPaneController : PaneController {
     }
 
     override func viewKeyDown(theEvent: NSEvent) -> Bool {
-        if theEvent.keyCode == 22 {
+        if theEvent.keyCode == 1 {
             if theEvent.modifierFlags & NSEventModifierFlags.CommandKeyMask != nil {
                 FSUtil.setFileContent(file, content: textView.string!)
             }
