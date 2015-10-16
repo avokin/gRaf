@@ -38,8 +38,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func createFileViewController(file: File) -> PaneController  {
-        var result = FileViewPaneController(file: file)
-        result!.file = file
+        var result: PaneController?
+        var a = file.name.lastPathComponent
+        if equal("jpg", file.name.lastPathComponent.pathExtension) {
+            result = ImageViewPaneController(file: file)
+        } else {
+            result = FileViewPaneController(file: file)
+        }
+
         result!.window = window
         result!.appDelegate = self
 
