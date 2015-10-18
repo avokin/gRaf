@@ -37,13 +37,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return result
     }
 
-    func createFileViewController(file: File) -> PaneController  {
+    func createFileViewController(file: File, parentController: FileListPaneController) -> PaneController  {
         var result: PaneController?
         var a = file.name.lastPathComponent
         if equal("jpg", file.name.lastPathComponent.pathExtension) {
-            result = ImageViewPaneController(file: file)
+            result = ImageViewPaneController(file: file, parentController: parentController)
         } else {
-            result = FileViewPaneController(file: file)
+            result = FileViewPaneController(file: file, parentController: parentController)
         }
 
         result!.window = window
@@ -73,8 +73,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         controller.appDelegate = nil
     }
 
-    func createFileViewController(insteadOf: PaneController, file: File) {
-        var newController = createFileViewController(file)
+    func createFileViewController(insteadOf: FileListPaneController, file: File) {
+        var newController = createFileViewController(file, parentController: insteadOf)
         if paneController1 == insteadOf {
             paneController1 = newController
         } else {

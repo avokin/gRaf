@@ -6,12 +6,12 @@
 import Cocoa
 import Foundation
 
-class FileViewPaneController : PaneController {
+class FileViewPaneController : ChildController {
     var file: File!
     var textView: TextView!
 
-    init?(file: File) {
-        super.init(nibName: nil, bundle: nil)
+    init?(file: File, parentController: FileListPaneController) {
+        super.init(parentController: parentController)
         self.file = file
         createView()
         view = textView

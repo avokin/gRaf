@@ -25,6 +25,7 @@
 		AC38F832E05B3006D6F91ECD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F53351AD918D798D6B70 /* AppDelegate.swift */; };
 		AC38F882D37B973D50541B68 /* FileTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FD42274B2966597A2A8C /* FileTest.swift */; };
 		AC38F9616FACFC7BFD3B1CF3 /* gRafTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FF3B68277D075BFFB29B /* gRafTests.swift */; };
+		AC38F9D3AB829DD4293EE3F1 /* ChildController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F72CE0A653B507C6E9EF /* ChildController.swift */; };
 		AC38FA3D0B7A696D85FC37F9 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FEE0D27728E97CECD076 /* File.swift */; };
 		AC38FA467122DC4E11725C21 /* folder.png in Resources */ = {isa = PBXBuildFile; fileRef = AC38F6BF180DAFC910AD27B3 /* folder.png */; };
 		AC38FA96DD467F10599E56C4 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F3C33D92818793711AA8 /* TextView.swift */; };
@@ -41,6 +42,7 @@
 		AC38FD43745AB5FE90FC161B /* PaneModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FE9C679F34E260399A17 /* PaneModelTest.swift */; };
 		AC38FD67C502C6CA0F34F1F0 /* file.png in Resources */ = {isa = PBXBuildFile; fileRef = AC38F67418DA8BDC0143F990 /* file.png */; };
 		AC38FDA576ABCC50839B3D24 /* FileActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FDC61BCF91E3AB9EB05B /* FileActions.swift */; };
+		AC38FDC4A8F7D8F77CB56FDC /* ChildController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F72CE0A653B507C6E9EF /* ChildController.swift */; };
 		AC38FDDFCAD6274725E3729A /* TextUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F397DBDB690C0C1E0940 /* TextUtil.swift */; };
 		AC38FE1FF917D36646CA186F /* ImageViewPaneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F8F1756EA0D8CBB676AC /* ImageViewPaneController.swift */; };
 		AC38FE49FE48E7D304E0AC19 /* FileViewPaneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FC80957C950C0D222CA6 /* FileViewPaneController.swift */; };
@@ -72,6 +74,7 @@
 		AC38F67418DA8BDC0143F990 /* file.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = file.png; sourceTree = "<group>"; };
 		AC38F699EE3BD339D6C21D98 /* TextUtilTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextUtilTest.swift; sourceTree = "<group>"; };
 		AC38F6BF180DAFC910AD27B3 /* folder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = folder.png; sourceTree = "<group>"; };
+		AC38F72CE0A653B507C6E9EF /* ChildController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChildController.swift; sourceTree = "<group>"; };
 		AC38F77927A4E2E15AD07808 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
 		AC38F87BAA8557C9439751F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
 		AC38F8955443631852ECF0AA /* gRafTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = gRafTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -123,6 +126,7 @@
 				AC38F31B6C3E7DCD7C0C672B /* FileListPaneController.swift */,
 				AC38FC80957C950C0D222CA6 /* FileViewPaneController.swift */,
 				AC38F8F1756EA0D8CBB676AC /* ImageViewPaneController.swift */,
+				AC38F72CE0A653B507C6E9EF /* ChildController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -374,6 +378,7 @@
 				AC38F882D37B973D50541B68 /* FileTest.swift in Sources */,
 				AC38F63E29D408E3498FB3D8 /* FileTableView.swift in Sources */,
 				AC38F7B35AD47462915DAB39 /* ImageViewPaneController.swift in Sources */,
+				AC38FDC4A8F7D8F77CB56FDC /* ChildController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -395,6 +400,7 @@
 				AC38FA96DD467F10599E56C4 /* TextView.swift in Sources */,
 				AC38FCB24784FCC0400A3776 /* FileTableView.swift in Sources */,
 				AC38FE1FF917D36646CA186F /* ImageViewPaneController.swift in Sources */,
+				AC38F9D3AB829DD4293EE3F1 /* ChildController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
