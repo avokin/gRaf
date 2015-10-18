@@ -52,7 +52,8 @@ class ImageViewPaneController : ChildController {
                 while i > 0 {
                     i--
                     var candidate: File = parentController.model.getItems()[i]
-                    if equal(candidate.name.lowercaseString.pathExtension, "jpg") {
+
+                    if ImageUtil.isImageFile(candidate) {
                         file = candidate
                         resetImage()
                         break
@@ -64,7 +65,7 @@ class ImageViewPaneController : ChildController {
                 while i < parentController.model.getItems().count - 1 {
                     i++
                     var candidate: File = parentController.model.getItems()[i]
-                    if equal(candidate.name.lowercaseString.pathExtension, "jpg") {
+                    if ImageUtil.isImageFile(candidate) {
                         file = candidate
                         resetImage()
                         break
