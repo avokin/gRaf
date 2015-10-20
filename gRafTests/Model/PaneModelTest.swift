@@ -9,22 +9,22 @@ import XCTest
 
 class PaneModelTest : XCTestCase {
     func testParentIsAlwaysOnTop() {
-        var model = PaneModel()
+        let model = PaneModel()
 
-        var bin = TestUtil.findFileInRoot("bin")
+        let bin = TestUtil.findFileInRoot("bin")
         model.setRoot(bin!)
 
         model.setSortDescriptor(NSSortDescriptor(key: "size", ascending: false))
 
-        var first = model.getItems()[0]
+        let first = model.getItems()[0]
         XCTAssertEqual("..", first.name)
     }
 
     func testSelectChild() {
-        var root = File(name: "/", path: "/", size: UInt64.max, dateModified: NSDate(), isDirectory: true);
-        var v  = TestUtil.findFileInRoot("var")!
+        let root = File(name: "/", path: "/", size: UInt64.max, dateModified: NSDate(), isDirectory: true);
+        let v  = TestUtil.findFileInRoot("var")!
 
-        var model = PaneModel(root: root, from: v)
+        let model = PaneModel(root: root, from: v)
 
         XCTAssertEqual("var", model.getItems()[model.selectedIndex].name)
     }

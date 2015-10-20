@@ -10,27 +10,31 @@ import XCTest
 
 class FSUtilTest : XCTestCase {
     func testExample() {
-        var users = TestUtil.findFileInRoot("Users")
+        let users = TestUtil.findFileInRoot("Users")
 
         XCTAssertNotNil(users)
     }
 
     func testDirectoryCheck() {
-        var v  = TestUtil.findFileInRoot("var")
+        let v  = TestUtil.findFileInRoot("var")
         XCTAssertNotNil(v)
         XCTAssert(v!.isDirectory)
     }
 
     func testCopyFile() {
-        var from = TestUtil.findFileInRoot(".DS_Store")
+        let from = TestUtil.findFileInRoot(".DS_Store")
         XCTAssertNotNil(from)
 
-        var to = TestUtil.findFileInRoot("tmp")
+        let to = TestUtil.findFileInRoot("tmp")
         XCTAssertNotNil(to)
 
-        var newFilePath = FSUtil.getDestinationFileName(from!, to: to!)
+        let newFilePath = FSUtil.getDestinationFileName(from!, to: to!)
         var err: NSError?
-        NSFileManager.defaultManager().removeItemAtPath(newFilePath, error: &err);
+        do {
+            try NSFileManager.defaultManager().removeItemAtPath(newFilePath)
+        } catch let error as NSError {
+            err = error
+        };
 
         XCTAssertFalse(NSFileManager.defaultManager().fileExistsAtPath(newFilePath))
 
@@ -39,13 +43,13 @@ class FSUtilTest : XCTestCase {
     }
 
     func testDeleteFile() {
-        var from = TestUtil.findFileInRoot(".DS_Store")
+        let from = TestUtil.findFileInRoot(".DS_Store")
         XCTAssertNotNil(from)
 
-        var to = TestUtil.findFileInRoot("tmp")
+        let to = TestUtil.findFileInRoot("tmp")
         XCTAssertNotNil(to)
 
-        var newFilePath = FSUtil.getDestinationFileName(from!, to: to!)
+        let newFilePath = FSUtil.getDestinationFileName(from!, to: to!)
 
         FSUtil.copyFile(from!.path, to: newFilePath)
         XCTAssert(NSFileManager.defaultManager().fileExistsAtPath(newFilePath))

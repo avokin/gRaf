@@ -48,12 +48,12 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
     }
 
     func tableView(tableView: NSTableView, objectValueForTableColumn tableColumn: NSTableColumn?, row: Int) -> AnyObject? {
-        var file: File = model.getItems()[row]
-        if (equal(tableColumn!.identifier, COLUMN_TYPE_ID)) {
+        let file: File = model.getItems()[row]
+        if (tableColumn!.identifier.characters.elementsEqual(COLUMN_TYPE_ID.characters)) {
             return nil
-        } else if (equal(tableColumn!.identifier, COLUMN_NAME_ID)) {
+        } else if (tableColumn!.identifier.characters.elementsEqual(COLUMN_NAME_ID.characters)) {
             return file.name
-        } else if (equal(tableColumn!.identifier, COLUMN_SIZE_ID)) {
+        } else if (tableColumn!.identifier.characters.elementsEqual(COLUMN_SIZE_ID.characters)) {
             if file.isDirectory {
                 return ""
             }
@@ -68,8 +68,8 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
     }
 
     func tableView(tableView: NSTableView, dataCellForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSCell? {
-        if tableColumn != nil && equal(tableColumn!.identifier, COLUMN_TYPE_ID) {
-            var file: File = model.getItems()[row]
+        if tableColumn != nil && tableColumn!.identifier.characters.elementsEqual(COLUMN_TYPE_ID.characters) {
+            let file: File = model.getItems()[row]
             var image = NSImage(named: "file")
             if file.isDirectory {
                 image = NSImage(named: "folder")
@@ -81,12 +81,12 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
     }
 
     func tableView(tableView: NSTableView, shouldEditTableColumn tableColumn: NSTableColumn?, row: Int) -> Bool {
-        return tableColumn != nil && equal(tableColumn!.identifier, COLUMN_NAME_ID)
+        return tableColumn != nil && tableColumn!.identifier.characters.elementsEqual(COLUMN_NAME_ID.characters)
     }
 
     func tableView(tableView: NSTableView, setObjectValue object: AnyObject?, forTableColumn tableColumn: NSTableColumn?, row: Int) {
         if let newName = object {
-            var file = model.getItems()[row]
+            let file = model.getItems()[row]
             FSUtil.rename(file, newName: "\(object!)")
             model.clearCaches()
             model.selectChild("\(object!)")
@@ -98,13 +98,13 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
 
     override func keyDown(theEvent: NSEvent) {
         if theEvent.keyCode == 99 {
-            var file = model.getItems()[tableView.selectedRow]
+            let file = model.getItems()[tableView.selectedRow]
             appDelegate.createFileViewController(self, file: file)
         } else if theEvent.keyCode == 36 {
             let tableView: NSTableView = view as! NSTableView
-            var file : File = model.getItems()[tableView.selectedRow]
+            let file : File = model.getItems()[tableView.selectedRow]
 
-            if theEvent.modifierFlags & NSEventModifierFlags.ShiftKeyMask != nil {
+            if theEvent.modifierFlags.intersect(NSEventModifierFlags.ShiftKeyMask) != [] {
                 let showFolder = NSTask()
                 if file.isDirectory {
                     showFolder.launchPath = "/usr/bin/open"
@@ -117,14 +117,14 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
                 return
             }
 
-            if (equal("..", file.name)) {
-                var previousRoot = model.getRoot()
-                var newRoot = previousRoot.getParent()
+            if ("..".characters.elementsEqual(file.name.characters)) {
+                let previousRoot = model.getRoot()
+                let newRoot = previousRoot.getParent()
                 model.setRoot(newRoot!)
                 model.selectChild(previousRoot.name)
             } else {
                 // ToDo: use model.selectedIndex
-                var selectedFile = model.getItems()[tableView.selectedRow]
+                let selectedFile = model.getItems()[tableView.selectedRow]
                 model.selectedIndex = 0
                 model.setRoot(selectedFile)
             }
@@ -137,26 +137,26 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
         } else if theEvent.keyCode == 96 {
             // ToDo: use model.selectedIndex
             if let fileListController = otherPaneController as? FileListPaneController {
-                var from = model.getItems()[tableView.selectedRow]
-                var to = fileListController.model.getRoot();
+                let from = model.getItems()[tableView.selectedRow]
+                let to = fileListController.model.getRoot();
 
                 FileActions.copyFileAction(from, to: to)
                 refresh()
             }
         } else if theEvent.keyCode == 97 {
             if let fileListController = otherPaneController as? FileListPaneController {
-                var from = model.getItems()[tableView.selectedRow]
-                var to = fileListController.model.getRoot();
+                let from = model.getItems()[tableView.selectedRow]
+                let to = fileListController.model.getRoot();
 
                 FileActions.moveFileAction(from, to: to)
                 refresh()
             }
         } else if theEvent.keyCode == 100 {
-            var file = model.getItems()[tableView.selectedRow]
+            let file = model.getItems()[tableView.selectedRow]
             FileActions.deleteFileAction(file)
             refresh()
         } else if theEvent.keyCode == 116 {
-            if theEvent.modifierFlags & NSEventModifierFlags.FunctionKeyMask != nil {
+            if theEvent.modifierFlags.intersect(NSEventModifierFlags.FunctionKeyMask) != [] {
                 model.selectedIndex = 0
                 tableView.selectRowIndexes(NSIndexSet(index: model.selectedIndex), byExtendingSelection: false)
                 tableView.scrollRowToVisible(model.selectedIndex)
@@ -178,8 +178,8 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
     }
 
     func createColumn(name: String) -> NSTableColumn {
-        var column = NSTableColumn(identifier: name)
-        var headerCell = NSTableHeaderCell()
+        let column = NSTableColumn(identifier: name)
+        let headerCell = NSTableHeaderCell()
         headerCell.objectValue = name
         column.headerCell = headerCell
 
@@ -189,15 +189,15 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
 
     func createTable() {
         tableView = FileTableView()
-        var typeColumn = createColumn(COLUMN_TYPE_ID)
+        let typeColumn = createColumn(COLUMN_TYPE_ID)
         typeColumn.width = 30
         tableView.addTableColumn(typeColumn)
 
-        var nameColumn = createColumn(COLUMN_NAME_ID)
+        let nameColumn = createColumn(COLUMN_NAME_ID)
         nameColumn.width = 300
         tableView.addTableColumn(nameColumn)
 
-        var sizeColumn = createColumn(COLUMN_SIZE_ID)
+        let sizeColumn = createColumn(COLUMN_SIZE_ID)
         sizeColumn.width = 80
         tableView.addTableColumn(sizeColumn)
 
@@ -209,7 +209,7 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
         tableView.setDelegate(self)
     }
 
-    func tableView(tableView: NSTableView, sortDescriptorsDidChange oldDescriptors: [AnyObject]) {
+    func tableView(tableView: NSTableView, sortDescriptorsDidChange oldDescriptors: [NSSortDescriptor]) {
         var descriptors = tableView.sortDescriptors
         if let first = descriptors[0] as? NSSortDescriptor {
             model.setSortDescriptor(first)

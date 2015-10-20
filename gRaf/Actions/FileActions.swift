@@ -19,7 +19,7 @@ class FileActions {
     }
 
     class func deleteFileAction(file: File) {
-        var progressWindow = ProgressWindow();
+        let progressWindow = ProgressWindow();
 
         progressWindow.start({
             FSUtil.deleteFile(file.path)
@@ -29,10 +29,10 @@ class FileActions {
     }
 
     private class func createFileFromSource(from: File, to: File, action: (fromPath: String, destPath: String) -> Void) {
-        var progressWindow = ProgressWindow();
-        var sourceSize = FSUtil.fileSize(from)
+        let progressWindow = ProgressWindow();
+        let sourceSize = FSUtil.fileSize(from)
 
-        var destPath = FSUtil.getDestinationFileName(from, to: to)
+        let destPath = FSUtil.getDestinationFileName(from, to: to)
 
         progressWindow.start({
             action(fromPath: from.path, destPath: destPath)
@@ -40,9 +40,9 @@ class FileActions {
             if sourceSize <= 0 {
                 return 0
             }
-            var destSize = FSUtil.fileSize(destPath)
-            var a = 10000 * destSize
-            var b = a / sourceSize
+            let destSize = FSUtil.fileSize(destPath)
+            let a = 10000 * destSize
+            let b = a / sourceSize
             return Int(b + 1)
         })
     }

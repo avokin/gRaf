@@ -15,70 +15,79 @@ public class FSUtil {
 
         var files = [File]()
 
-        var allFiles = fileManager.contentsOfDirectoryAtPath(path, error: nil)
+        var allFiles = try? fileManager.contentsOfDirectoryAtPath(path)
 
-        if !equal("/", path) {
+        if !"/".characters.elementsEqual(path.characters) {
             var linkToParent = File(name: "..", path: path, size: UInt64.max, dateModified: NSDate(), isDirectory: true)
             files.append(linkToParent)
         }
+        if allFiles == nil {
+            return files
+        }
 
-        if allFiles is [String] {
-            var allSuperFiles = allFiles as! [String]
-            for element: String in allSuperFiles {
-                var size: UInt64 = UInt64.max
-                var modificationDate: NSDate? = nil
-                var isDirectory = false
-                var elementPath = path + "/" + element
+        for element: String in allFiles! {
+            var size: UInt64 = UInt64.max
+            var modificationDate: NSDate? = nil
+            var isDirectory = false
+            var elementPath = path + "/" + element
 
-                var i = 0
-                while i < 3 {
-                    i++
-                    var attributes:NSDictionary? = fileManager.attributesOfItemAtPath(elementPath, error: nil)
-                    if let _attr = attributes {
-                        size = _attr.fileSize()
-                        modificationDate = _attr.fileModificationDate()
+            var i = 0
+            while i < 3 {
+                i++
+                var attributes:NSDictionary? = try? fileManager.attributesOfItemAtPath(elementPath)
+                if let _attr = attributes {
+                    size = _attr.fileSize()
+                    modificationDate = _attr.fileModificationDate()
 
-                        if let fileType1 = _attr.fileType() {
-                            if (equal("NSFileTypeSymbolicLink", fileType1)) {
-                                var newPathElement = fileManager.destinationOfSymbolicLinkAtPath(elementPath, error: nil)
+                    if let fileType1 = _attr.fileType() {
+                        if ("NSFileTypeSymbolicLink".characters.elementsEqual(fileType1.characters)) {
+                            var newPathElement = try? fileManager.destinationOfSymbolicLinkAtPath(elementPath)
 
-                                if newPathElement != nil {
-                                    elementPath = path + "/" + newPathElement!
-                                } else {
-                                    break;
-                                }
+                            if newPathElement != nil {
+                                elementPath = path + "/" + newPathElement!
                             } else {
-                                if equal("NSFileTypeDirectory", fileType1) {
-                                    isDirectory = true
-                                    size = UInt64.max
-                                    break;
-                                }
+                                break;
+                            }
+                        } else {
+                            if "NSFileTypeDirectory".characters.elementsEqual(fileType1.characters) {
+                                isDirectory = true
+                                size = UInt64.max
+                                break;
                             }
                         }
-                    } else {
-                        break
                     }
+                } else {
+                    break
                 }
-
-                var file = File(name: element, path: path + "/" + element, size: size, dateModified: modificationDate, isDirectory: isDirectory)
-
-                files.append(file)
             }
+
+            var file = File(name: element, path: path + "/" + element, size: size, dateModified: modificationDate, isDirectory: isDirectory)
+
+            files.append(file)
         }
 
         return files
     }
 
     static func copyFile(from: String, to: String) {
-        NSFileManager.defaultManager().copyItemAtPath(from, toPath: to, error: nil)
+        do {
+            try NSFileManager.defaultManager().copyItemAtPath(from, toPath: to)
+        } catch _ {
+        }
     }
 
     static func moveFile(from: String, to: String) {
-        NSFileManager.defaultManager().moveItemAtPath(from, toPath: to, error: nil)
+        do {
+            try NSFileManager.defaultManager().moveItemAtPath(from, toPath: to)
+        } catch _ {
+        }
     }
 
     static func deleteFile(filePath: String) {
-        NSFileManager.defaultManager().removeItemAtPath(filePath, error: nil)
+        do {
+            try NSFileManager.defaultManager().removeItemAtPath(filePath)
+        } catch _ {
+        }
     }
 
     static func fileSize(file: File) -> UInt64 {
@@ -86,7 +95,7 @@ public class FSUtil {
     }
 
     static func fileSize(path: String) -> UInt64 {
-        var attributes:NSDictionary? = NSFileManager.defaultManager().attributesOfItemAtPath(path, error: nil)
+        let attributes:NSDictionary? = try? NSFileManager.defaultManager().attributesOfItemAtPath(path)
 
         if let _attr = attributes {
             return _attr.fileSize()
@@ -103,16 +112,23 @@ public class FSUtil {
     }
 
     static func rename(file: File, newName: String) {
-        var newPath = file.path.stringByDeletingLastPathComponent + "/" + newName
-        NSFileManager.defaultManager().moveItemAtPath(file.path, toPath: newPath, error: nil)
+        if let newPath = NSURL(fileURLWithPath: file.path).URLByDeletingLastPathComponent!.path {
+            do {
+                try NSFileManager.defaultManager().moveItemAtPath(file.path, toPath: newPath)
+            } catch _ {
+            }
+        }
     }
 
     static func getFileContent(file: File) -> String? {
-        let result = String(contentsOfFile: file.path, encoding: NSUTF8StringEncoding, error: nil)
+        let result = try? String(contentsOfFile: file.path, encoding: NSUTF8StringEncoding)
         return result
     }
 
     static func setFileContent(file: File, content: String) {
-        content.writeToFile(file.path, atomically: false, encoding: NSUTF8StringEncoding, error: nil);
+        do {
+            try content.writeToFile(file.path, atomically: false, encoding: NSUTF8StringEncoding)
+        } catch _ {
+        };
     }
 }

@@ -9,13 +9,13 @@ import XCTest
 
 class FileTest : XCTestCase {
     func testGetParentWhenRoot() {
-        var root = FSUtil.getRoot()
+        let root = FSUtil.getRoot()
 
         XCTAssertNil(root.getParent())
     }
 
     func testParentRootForTmp() {
-        var tmp = TestUtil.findFileInRoot("tmp")!
+        let tmp = TestUtil.findFileInRoot("tmp")!
         XCTAssertNotNil(tmp.getParent())
         XCTAssertEqual(tmp.getParent()!.name, "/")
     }

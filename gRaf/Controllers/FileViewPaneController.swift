@@ -35,7 +35,7 @@ class FileViewPaneController : ChildController {
 
     override func viewKeyDown(theEvent: NSEvent) -> Bool {
         if theEvent.keyCode == 1 {
-            if theEvent.modifierFlags & NSEventModifierFlags.CommandKeyMask != nil {
+            if theEvent.modifierFlags.intersect(NSEventModifierFlags.CommandKeyMask) != [] {
                 FSUtil.setFileContent(file, content: textView.string!)
             }
         } else if theEvent.keyCode == 53 {
@@ -46,8 +46,8 @@ class FileViewPaneController : ChildController {
     }
 
     func textDidChange(notification: NSNotification) {
-        var a: NSString = self.textView.string!;
-        var size = a.sizeWithAttributes([NSFontAttributeName: self.textView.font!])
+        let a: NSString = self.textView.string!;
+        let size = a.sizeWithAttributes([NSFontAttributeName: self.textView.font!])
 
         self.textView.frame = NSMakeRect(self.textView.frame.origin.x, self.textView.frame.origin.y, round(size.width + 15), round(size.height))
     }

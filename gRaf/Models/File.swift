@@ -23,9 +23,12 @@ class File: NSObject{
     }
 
     func getParent() -> File? {
-        if parent == nil && count(path) > 1{
-            var parentPath = path.stringByDeletingLastPathComponent
-            parent = File(name: parentPath.lastPathComponent, path: parentPath, size: UInt64.max, dateModified: NSDate(), isDirectory: true)
+        if parent == nil && path.characters.count > 1 {
+            if let parentPath = NSURL(fileURLWithPath: path).URLByDeletingLastPathComponent!.path {
+                if let parentName = NSURL(fileURLWithPath: parentPath).lastPathComponent {
+                    parent = File(name: parentName, path: parentPath, size: UInt64.max, dateModified: NSDate(), isDirectory: true)
+                }
+            }
         }
 
         return parent

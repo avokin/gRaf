@@ -7,11 +7,11 @@ import Foundation
 
 class TestUtil {
     class func findFileInRoot(name: String) -> File? {
-        var files = FSUtil.getFilesOfDirectory("/")
+        let files = FSUtil.getFilesOfDirectory("/")
 
         var result: File? = nil
         for file: File in files {
-            if equal(file.name, name) {
+            if file.name.characters.elementsEqual(name.characters) {
                 result = file
                 break;
             }

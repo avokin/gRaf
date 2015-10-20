@@ -27,7 +27,7 @@ class TextUtil {
         let formatter = NSNumberFormatter()
         formatter.minimumFractionDigits = 0
         formatter.maximumFractionDigits = 2
-        var sizeAsString = formatter.stringFromNumber(quotient)!
+        let sizeAsString = formatter.stringFromNumber(quotient)!
 
         return "\(sizeAsString) \(SIZE_SUFFIXES[i])"
     }

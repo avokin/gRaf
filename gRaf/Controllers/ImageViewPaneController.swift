@@ -8,7 +8,7 @@ import Foundation
 
 class ImageViewPaneController : ChildController {
     var file: File!
-    var imageView: NSImageView!
+    var imageView: ImageView!
 
     init?(file: File, parentController: FileListPaneController) {
         super.init(parentController: parentController)
@@ -22,16 +22,21 @@ class ImageViewPaneController : ChildController {
     }
 
     func resetImage() {
-        var image = NSImage(contentsOfFile: file.path)
+        let image = NSImage(contentsOfFile: file.path)
 
-        var width = image != nil ? image!.size.width : 0
-        var height = image != nil ? image!.size.height : 0
-        imageView.frame = NSMakeRect(0, 0, width, height)
+//        var superView = parentController.view.superview
+//        if superView == nil {
+//            superView = imageView.superview
+//        }
+//
+//        var width = superView!.frame.width
+//        var height = superView!.frame.height
+//        imageView.frame = NSMakeRect(0, 0, width, height)
         imageView.image = image
     }
 
     func createView() {
-        imageView = NSImageView(frame: NSMakeRect(0, 0, 1, 1))
+        imageView = ImageView(frame: NSMakeRect(0, 0, 1, 1))
         resetImage()
     }
 
@@ -51,7 +56,7 @@ class ImageViewPaneController : ChildController {
             if var i = getCurrentFileIndex() {
                 while i > 0 {
                     i--
-                    var candidate: File = parentController.model.getItems()[i]
+                    let candidate: File = parentController.model.getItems()[i]
 
                     if ImageUtil.isImageFile(candidate) {
                         file = candidate
@@ -64,7 +69,7 @@ class ImageViewPaneController : ChildController {
             if var i = getCurrentFileIndex() {
                 while i < parentController.model.getItems().count - 1 {
                     i++
-                    var candidate: File = parentController.model.getItems()[i]
+                    let candidate: File = parentController.model.getItems()[i]
                     if ImageUtil.isImageFile(candidate) {
                         file = candidate
                         resetImage()

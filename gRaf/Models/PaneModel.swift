@@ -25,7 +25,7 @@ class PaneModel {
     func selectChild(name: String) {
         var index = 0
         for file: File in getItems() {
-            if equal(name, file.name) {
+            if name.characters.elementsEqual(file.name.characters) {
                 break
             }
             index++
@@ -52,11 +52,11 @@ class PaneModel {
     func getItems() -> [File] {
         if (cached == nil) {
             cached = FSUtil.getFilesOfDirectory(root.path)
-            cached!.sort({
-                if equal("..", $0.name) {
+            cached!.sortInPlace({
+                if "..".characters.elementsEqual($0.name.characters) {
                     return true
                 }
-                if equal("..", $1.name) {
+                if "..".characters.elementsEqual($1.name.characters) {
                     return false
                 }
 
@@ -80,7 +80,7 @@ class PaneModel {
                 var left : String = $0.name
                 var right : String = $1.name
 
-                var key: String? = self.sortDescriptor.key()
+                let key: String? = self.sortDescriptor.key
                 if key! == "Size" {
                     if first.size == UInt64.max {
                         return false

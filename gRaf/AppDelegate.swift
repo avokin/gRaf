@@ -13,24 +13,24 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var paneController2: PaneController!
 
     override init() {
-        var contentSize = NSMakeRect(0.0, 0.0, 600.0, 400.0);
-        var windowStyleMask = NSTitledWindowMask | NSResizableWindowMask | NSClosableWindowMask | NSMiniaturizableWindowMask;
-        window = NSWindow(contentRect: contentSize, styleMask: windowStyleMask, backing: NSBackingStoreType.Buffered, defer: true);
+        let contentSize = NSMakeRect(0.0, 0.0, 600.0, 400.0);
+        let windowStyleMask = NSTitledWindowMask | NSResizableWindowMask | NSClosableWindowMask | NSMiniaturizableWindowMask;
+        window = NSWindow(contentRect: contentSize, styleMask: windowStyleMask, backing: NSBackingStoreType.Buffered, `defer`: true);
         window.title = "gRaf";
 
         scrollView1 = NSScrollView(frame: CGRectMake(0, 0, 1, 1))
         scrollView2 = NSScrollView(frame: CGRectMake(0, 0, 1, 1))
 
-        var statusBarHeight: CGFloat = 20
-        var topBarHeight: CGFloat = 20
-        var splitViewHeight = window.frame.size.height - statusBarHeight - topBarHeight
+        let statusBarHeight: CGFloat = 20
+        let topBarHeight: CGFloat = 20
+        let splitViewHeight = window.frame.size.height - statusBarHeight - topBarHeight
         splitView = NSSplitView(frame: CGRectMake(0, statusBarHeight, window.frame.size.width, splitViewHeight))
 
         mainView = NSView(frame: window.frame)
     }
 
     func createFileListController(root: File, from: File?) -> PaneController {
-        var result = FileListPaneController(root: root, from: from)!
+        let result = FileListPaneController(root: root, from: from)!
         result.window = window
         result.appDelegate = self
 
@@ -52,7 +52,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func createFileListController(insteadOf: PaneController, root: File, from: File) {
-        var newController = createFileListController(root, from: from)
+        let newController = createFileListController(root, from: from)
         var oldController: PaneController
         if paneController1 == insteadOf {
             oldController = paneController1
@@ -73,7 +73,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func createFileViewController(insteadOf: FileListPaneController, file: File) {
-        var newController = createFileViewController(file, parentController: insteadOf)
+        let newController = createFileViewController(file, parentController: insteadOf)
         if paneController1 == insteadOf {
             paneController1 = newController
         } else {
@@ -85,7 +85,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func initPaneControllers() {
-        var root = FSUtil.getRoot()
+        let root = FSUtil.getRoot()
         paneController1 = createFileListController(root, from: nil)
         paneController2 = createFileListController(root, from: nil)
     }
@@ -105,11 +105,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         splitView.addSubview(scrollView2)
 
         mainView.addSubview(splitView)
-        splitView.autoresizingMask = NSAutoresizingMaskOptions.ViewWidthSizable | NSAutoresizingMaskOptions.ViewHeightSizable
+        splitView.autoresizingMask = [NSAutoresizingMaskOptions.ViewWidthSizable, NSAutoresizingMaskOptions.ViewHeightSizable]
     }
 
     func initWindowController() {
-        var controller = NSViewController(nibName: nil, bundle: nil)
+        let controller = NSViewController(nibName: nil, bundle: nil)
         controller!.view = mainView
 
         controller!.addChildViewController(paneController1)

@@ -11,6 +11,7 @@
 		AC38F0C23D515E7AD96E9143 /* FSUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FCDA9BE999CFA76CF01C /* FSUtil.swift */; };
 		AC38F18ED5F275E2F770AAD8 /* ProgressWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F2553110E11DBAB8A0F4 /* ProgressWindow.swift */; };
 		AC38F1C193FBD9F43E2BCA2F /* FileActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FDC61BCF91E3AB9EB05B /* FileActions.swift */; };
+		AC38F285E59947D859B93289 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FE67C0ED38997B2101B7 /* ImageView.swift */; };
 		AC38F386DB7619AA81E64163 /* ProgressWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F2553110E11DBAB8A0F4 /* ProgressWindow.swift */; };
 		AC38F45BAEA8A45B0C5DD65F /* file@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AC38FDC484CEA78A41982E6B /* file@2x.png */; };
 		AC38F4684A364CDB044F089A /* folder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AC38F24E7B251D064C97A8D3 /* folder@2x.png */; };
@@ -32,6 +33,7 @@
 		AC38FA467122DC4E11725C21 /* folder.png in Resources */ = {isa = PBXBuildFile; fileRef = AC38F6BF180DAFC910AD27B3 /* folder.png */; };
 		AC38FA96DD467F10599E56C4 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F3C33D92818793711AA8 /* TextView.swift */; };
 		AC38FAA83BC73EC224A73F8A /* ImageUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F518F4D1041D3C02A4F0 /* ImageUtil.swift */; };
+		AC38FAEF5B340C06FF77A2DE /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FE67C0ED38997B2101B7 /* ImageView.swift */; };
 		AC38FB30B1BCE80EE0B6C54F /* TextUtilTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F699EE3BD339D6C21D98 /* TextUtilTest.swift */; };
 		AC38FB3C8572104EC52BDDB1 /* TextUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F397DBDB690C0C1E0940 /* TextUtil.swift */; };
 		AC38FB3D93F013E49F110D55 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC38FA8264F6F362133278A6 /* Images.xcassets */; };
@@ -92,6 +94,7 @@
 		AC38FD42274B2966597A2A8C /* FileTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileTest.swift; sourceTree = "<group>"; };
 		AC38FDC484CEA78A41982E6B /* file@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "file@2x.png"; sourceTree = "<group>"; };
 		AC38FDC61BCF91E3AB9EB05B /* FileActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileActions.swift; sourceTree = "<group>"; };
+		AC38FE67C0ED38997B2101B7 /* ImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 		AC38FE9C679F34E260399A17 /* PaneModelTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaneModelTest.swift; sourceTree = "<group>"; };
 		AC38FEE0D27728E97CECD076 /* File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		AC38FF3B68277D075BFFB29B /* gRafTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gRafTests.swift; sourceTree = "<group>"; };
@@ -203,6 +206,7 @@
 				AC38F2553110E11DBAB8A0F4 /* ProgressWindow.swift */,
 				AC38F3C33D92818793711AA8 /* TextView.swift */,
 				AC38FBC149F551EECF0DB1CF /* FileTableView.swift */,
+				AC38FE67C0ED38997B2101B7 /* ImageView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -318,6 +322,8 @@
 		AC38F68318C43E9238EEFBB5 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftMigration = 0700;
+				LastSwiftUpdateCheck = 0700;
 				ORGANIZATIONNAME = "Andrey Vokin";
 			};
 			buildConfigurationList = AC38F4802E3A6F95F65FEAAC /* Build configuration list for PBXProject "gRaf" */;
@@ -388,6 +394,7 @@
 				AC38FDC4A8F7D8F77CB56FDC /* ChildController.swift in Sources */,
 				AC38F7E2A79BA34A82616466 /* ImageUtil.swift in Sources */,
 				AC38F05674C1D103E576C57F /* ImageUtilTest.swift in Sources */,
+				AC38F285E59947D859B93289 /* ImageView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -411,6 +418,7 @@
 				AC38FE1FF917D36646CA186F /* ImageViewPaneController.swift in Sources */,
 				AC38F9D3AB829DD4293EE3F1 /* ChildController.swift in Sources */,
 				AC38FAA83BC73EC224A73F8A /* ImageUtil.swift in Sources */,
+				AC38FAEF5B340C06FF77A2DE /* ImageView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
