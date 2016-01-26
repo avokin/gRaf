@@ -24,15 +24,23 @@ class ImageViewPaneController : ChildController {
     func resetImage() {
         let image = NSImage(contentsOfFile: file.path)
 
-//        var superView = parentController.view.superview
-//        if superView == nil {
-//            superView = imageView.superview
-//        }
-//
-//        var width = superView!.frame.width
-//        var height = superView!.frame.height
-//        imageView.frame = NSMakeRect(0, 0, width, height)
+        var superView = parentController.view.superview
+        if superView == nil {
+            superView = imageView.superview
+        }
+
+        var width = superView!.frame.width
+        var height = superView!.frame.height
+        imageView.frame = NSMakeRect(0, 0, width, height)
         imageView.image = image
+        if let _image = image {
+            imageView.magnification = width / _image.size.width
+        }
+    }
+
+    override func viewWillDisappear() {
+        super.viewWillDisappear()
+        imageView.fitToSize()
     }
 
     func createView() {
