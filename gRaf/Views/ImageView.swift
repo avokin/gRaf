@@ -28,20 +28,20 @@ class ImageView : NSImageView {
                 magnification = 1
             }
 
-            var newWidth = max(im.size.width * magnification, superview!.frame.size.width)
-            var newHeight = max(im.size.height * magnification, superview!.frame.size.height)
-            var newSize = NSSize(width: newWidth, height: newHeight)
-
             let clipView = superview as! NSClipView
+
+            var newWidth = max(im.size.width * magnification, clipView.frame.size.width)
+            var newHeight = max(im.size.height * magnification, clipView.frame.size.height)
+
             var centerX = clipView.bounds.origin.x + clipView.bounds.width / 2
             var centerY = clipView.bounds.origin.y + clipView.bounds.height / 2
             let oldWidth = frame.size.width
             let oldHeight = frame.size.height
 
-            setFrameSize(newSize)
+            setFrameSize(NSSize(width: newWidth, height: newHeight))
 
-            var newCenterX = centerX * newSize.width / oldWidth
-            var newCenterY = centerY * newSize.height / oldHeight
+            var newCenterX = centerX * newWidth / oldWidth
+            var newCenterY = centerY * newHeight / oldHeight
 
             var minX = newCenterX - clipView.bounds.width / 2
             var minY = newCenterY - clipView.bounds.height / 2
