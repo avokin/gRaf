@@ -28,10 +28,26 @@ class ImageView : NSImageView {
                 magnification = 1
             }
 
-            var width = max(im.size.width * magnification, superview!.frame.size.width)
-            var height = max(im.size.height * magnification, superview!.frame.size.height)
-            var newSize = NSSize(width: width, height: height)
+            var newWidth = max(im.size.width * magnification, superview!.frame.size.width)
+            var newHeight = max(im.size.height * magnification, superview!.frame.size.height)
+            var newSize = NSSize(width: newWidth, height: newHeight)
+
+            let clipView = superview as! NSClipView
+            var centerX = clipView.bounds.origin.x + clipView.bounds.width / 2
+            var centerY = clipView.bounds.origin.y + clipView.bounds.height / 2
+            let oldWidth = frame.size.width
+            let oldHeight = frame.size.height
+
             setFrameSize(newSize)
+
+            var newCenterX = centerX * newSize.width / oldWidth
+            var newCenterY = centerY * newSize.height / oldHeight
+
+            var minX = newCenterX - clipView.bounds.width / 2
+            var minY = newCenterY - clipView.bounds.height / 2
+
+            var rect = NSMakeRect(minX, minY, clipView.bounds.width, clipView.bounds.height)
+            clipView.scrollRectToVisible(rect)
         }
     }
 
