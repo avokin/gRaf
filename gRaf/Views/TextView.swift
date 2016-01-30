@@ -9,6 +9,12 @@ import Foundation
 class TextView : NSTextView {
     var myDelegate: PaneController?
 
+    class func create(frame: NSRect) -> TextView {
+        var result = TextView(frame: frame)
+        result.richText = false
+        return result
+    }
+
     override func keyDown(theEvent: NSEvent) {
         if let d = myDelegate {
             if !d.viewKeyDown(theEvent) {
