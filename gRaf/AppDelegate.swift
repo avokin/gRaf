@@ -27,6 +27,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         splitView = NSSplitView(frame: CGRectMake(0, statusBarHeight, window.frame.size.width, splitViewHeight))
 
         mainView = NSView(frame: window.frame)
+        window.center()
     }
 
     func createFileListController(root: File, from: File?) -> PaneController {
