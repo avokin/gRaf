@@ -12,6 +12,7 @@ class TextView : NSTextView {
     class func create(frame: NSRect) -> TextView {
         var result = TextView(frame: frame)
         result.richText = false
+        result.allowsUndo = true
         return result
     }
 
