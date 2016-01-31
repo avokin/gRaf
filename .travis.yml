@@ -1,1 +1,3 @@
 language: swift
+xcode_workspace: project.xcworkspace
+xcode_scheme: gRafTests
