@@ -24,6 +24,7 @@
 		AC38F6F018EA88AD2C0B10CD /* FileListPaneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F31B6C3E7DCD7C0C672B /* FileListPaneController.swift */; };
 		AC38F6FAEA57A49F76DDB8D2 /* PaneModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FF4CC5D3FAFF1FEBA357 /* PaneModel.swift */; };
 		AC38F7B35AD47462915DAB39 /* ImageViewPaneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F8F1756EA0D8CBB676AC /* ImageViewPaneController.swift */; };
+		AC38F7B5F9F1F032425B4BE1 /* .travis.yml in Resources */ = {isa = PBXBuildFile; fileRef = AC38FF51611EF4C9E0CC7057 /* .travis.yml */; };
 		AC38F7E2A79BA34A82616466 /* ImageUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F518F4D1041D3C02A4F0 /* ImageUtil.swift */; };
 		AC38F832E05B3006D6F91ECD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F53351AD918D798D6B70 /* AppDelegate.swift */; };
 		AC38F882D37B973D50541B68 /* FileTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FD42274B2966597A2A8C /* FileTest.swift */; };
@@ -48,6 +49,7 @@
 		AC38FD67C502C6CA0F34F1F0 /* file.png in Resources */ = {isa = PBXBuildFile; fileRef = AC38F67418DA8BDC0143F990 /* file.png */; };
 		AC38FDA576ABCC50839B3D24 /* FileActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FDC61BCF91E3AB9EB05B /* FileActions.swift */; };
 		AC38FDC4A8F7D8F77CB56FDC /* ChildController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F72CE0A653B507C6E9EF /* ChildController.swift */; };
+		AC38FDD6A8AB964B48C0AB61 /* .travis.yml in Resources */ = {isa = PBXBuildFile; fileRef = AC38FF51611EF4C9E0CC7057 /* .travis.yml */; };
 		AC38FDDFCAD6274725E3729A /* TextUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F397DBDB690C0C1E0940 /* TextUtil.swift */; };
 		AC38FE1FF917D36646CA186F /* ImageViewPaneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F8F1756EA0D8CBB676AC /* ImageViewPaneController.swift */; };
 		AC38FE49FE48E7D304E0AC19 /* FileViewPaneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FC80957C950C0D222CA6 /* FileViewPaneController.swift */; };
@@ -99,6 +101,7 @@
 		AC38FEE0D27728E97CECD076 /* File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		AC38FF3B68277D075BFFB29B /* gRafTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gRafTests.swift; sourceTree = "<group>"; };
 		AC38FF4CC5D3FAFF1FEBA357 /* PaneModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaneModel.swift; sourceTree = "<group>"; };
+		AC38FF51611EF4C9E0CC7057 /* .travis.yml */ = {isa = PBXFileReference; lastKnownFileType = file.yml; path = .travis.yml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -234,6 +237,7 @@
 				AC38F608F8ABB0DE57663C1C /* Products */,
 				AC38F9B05FD12E448DD506D9 /* gRaf */,
 				AC38FBC3CACF3C9E3B872363 /* gRafTests */,
+				AC38FF51611EF4C9E0CC7057 /* .travis.yml */,
 			);
 			sourceTree = "<group>";
 		};
@@ -355,6 +359,7 @@
 				AC38FA467122DC4E11725C21 /* folder.png in Resources */,
 				AC38F45BAEA8A45B0C5DD65F /* file@2x.png in Resources */,
 				AC38FD67C502C6CA0F34F1F0 /* file.png in Resources */,
+				AC38FDD6A8AB964B48C0AB61 /* .travis.yml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -362,6 +367,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC38F7B5F9F1F032425B4BE1 /* .travis.yml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
