@@ -20,6 +20,9 @@ class ImageView : NSImageView {
     }
 
     func updateImageSize() {
+        if superview == nil {
+            return
+        }
         if let im = image {
             var minMagnification = getMinimumMagnification()
             if magnification < minMagnification {
@@ -58,9 +61,10 @@ class ImageView : NSImageView {
 
     private func getMinimumMagnification() -> CGFloat {
         if let im = image {
-            return min(superview!.frame.size.width / im.size.width, superview!.frame.size.height / im.size.height)
-        } else {
-            return 1
+            if let sv = superview {
+                return min(sv.frame.size.width / im.size.width, sv.frame.size.height / im.size.height)
+            }
         }
+        return 1
     }
 }
