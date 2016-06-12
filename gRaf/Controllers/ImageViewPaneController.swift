@@ -29,8 +29,8 @@ class ImageViewPaneController : ChildController {
             superView = imageView.superview
         }
 
-        var width = superView!.frame.width
-        var height = superView!.frame.height
+        let width = superView!.frame.width
+        let height = superView!.frame.height
         imageView.frame = NSMakeRect(0, 0, width, height)
         imageView.image = image
         if let _image = image {
@@ -49,7 +49,7 @@ class ImageViewPaneController : ChildController {
     }
 
     func getCurrentFileIndex() -> Int? {
-        for (var i = 0; i < parentController.model.getItems().count; i++) {
+        for i in 0 ..< parentController.model.getItems().count {
             if parentController.model.getItems()[i] == file {
                 return i
             }
@@ -63,7 +63,7 @@ class ImageViewPaneController : ChildController {
         } else if theEvent.keyCode == 123 {
             if var i = getCurrentFileIndex() {
                 while i > 0 {
-                    i--
+                    i -= 1
                     let candidate: File = parentController.model.getItems()[i]
 
                     if ImageUtil.isImageFile(candidate) {
@@ -76,7 +76,7 @@ class ImageViewPaneController : ChildController {
         } else if theEvent.keyCode == 124 {
             if var i = getCurrentFileIndex() {
                 while i < parentController.model.getItems().count - 1 {
-                    i++
+                    i += 1
                     let candidate: File = parentController.model.getItems()[i]
                     if ImageUtil.isImageFile(candidate) {
                         file = candidate
