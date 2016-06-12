@@ -15,8 +15,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     override init() {
         let contentSize = NSMakeRect(0.0, 0.0, 600.0, 400.0);
-        let windowStyleMask = NSTitledWindowMask | NSResizableWindowMask | NSClosableWindowMask | NSMiniaturizableWindowMask;
-        window = NSWindow(contentRect: contentSize, styleMask: windowStyleMask, backing: NSBackingStoreType.Buffered, `defer`: true);
+        let windowStyleMask = NSTitledWindowMask | NSResizableWindowMask | NSClosableWindowMask |
+                NSMiniaturizableWindowMask;
+        window = NSWindow(contentRect: contentSize, styleMask: windowStyleMask, backing: NSBackingStoreType.Buffered,
+                defer: true);
         window.title = "gRaf";
 
         scrollView1 = NSScrollView()
@@ -125,7 +127,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func installSingleView() {
         splitView.removeFromSuperview()
         singleView.frame = mainView.frame
-        singleView.autoresizingMask = [NSAutoresizingMaskOptions.ViewWidthSizable, NSAutoresizingMaskOptions.ViewHeightSizable]
+        singleView.autoresizingMask = [NSAutoresizingMaskOptions.ViewWidthSizable,
+                                       NSAutoresizingMaskOptions.ViewHeightSizable]
         mainView.addSubview(singleView)
     }
 
