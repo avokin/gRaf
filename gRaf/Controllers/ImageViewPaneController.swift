@@ -92,4 +92,8 @@ class ImageViewPaneController : ChildController {
         window!.makeFirstResponder(self)
         super.focus()
     }
+
+    override func updateView() {
+        imageView.updateImageSize()
+    }
 }

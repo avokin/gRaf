@@ -88,8 +88,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             singleView = scrollView2
         }
         singleView.documentView = newController.view
-
         installSingleView()
+        newController.updateView()
         newController.focus()
     }
 
