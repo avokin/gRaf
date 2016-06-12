@@ -7,6 +7,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var scrollView1: NSScrollView
     var scrollView2: NSScrollView
     var splitView: NSSplitView
+    var singleView: NSScrollView
     var mainView: NSView
 
     var paneController1: PaneController!
@@ -18,8 +19,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         window = NSWindow(contentRect: contentSize, styleMask: windowStyleMask, backing: NSBackingStoreType.Buffered, `defer`: true);
         window.title = "gRaf";
 
-        scrollView1 = NSScrollView(frame: CGRectMake(0, 0, 1, 1))
-        scrollView2 = NSScrollView(frame: CGRectMake(0, 0, 1, 1))
+        scrollView1 = NSScrollView()
+        scrollView2 = NSScrollView()
 
         let statusBarHeight: CGFloat = 20
         let topBarHeight: CGFloat = 20
@@ -27,6 +28,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         splitView = NSSplitView(frame: CGRectMake(0, statusBarHeight, window.frame.size.width, splitViewHeight))
 
         mainView = NSView(frame: window.frame)
+        singleView = scrollView1
+
         window.center()
     }
 
@@ -73,15 +76,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         controller.appDelegate = nil
     }
 
-    func createFileViewController(insteadOf: FileListPaneController, file: File) {
+    func openFileViewController(insteadOf: FileListPaneController, file: File) {
         let newController = createFileViewController(file, parentController: insteadOf)
         if paneController1 == insteadOf {
             paneController1 = newController
+            singleView = scrollView1
         } else {
             paneController2 = newController
+            singleView = scrollView2
         }
+        singleView.documentView = newController.view
 
-        setupLeftAndRight()
+        installSingleView()
         newController.focus()
     }
 
@@ -97,16 +103,30 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         scrollView1.documentView = paneController1.view
         scrollView2.documentView = paneController2.view
-    }
 
-    func initUI() {
-        splitView.vertical = true
+        scrollView1.removeFromSuperview()
+        scrollView1.frame = CGRectMake(0, 0, 1, 1)
+
+        scrollView2.removeFromSuperview()
+        scrollView2.frame = CGRectMake(0, 0, 1, 1)
 
         splitView.addSubview(scrollView1)
         splitView.addSubview(scrollView2)
 
         mainView.addSubview(splitView)
+    }
+
+    func initUI() {
+        splitView.vertical = true
+
         splitView.autoresizingMask = [NSAutoresizingMaskOptions.ViewWidthSizable, NSAutoresizingMaskOptions.ViewHeightSizable]
+    }
+
+    func installSingleView() {
+        splitView.removeFromSuperview()
+        singleView.frame = mainView.frame
+        singleView.autoresizingMask = [NSAutoresizingMaskOptions.ViewWidthSizable, NSAutoresizingMaskOptions.ViewHeightSizable]
+        mainView.addSubview(singleView)
     }
 
     func initWindowController() {

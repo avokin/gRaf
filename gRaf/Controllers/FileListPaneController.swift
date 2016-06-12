@@ -99,7 +99,7 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
     override func keyDown(theEvent: NSEvent) {
         if theEvent.keyCode == 99 {
             let file = model.getItems()[tableView.selectedRow]
-            appDelegate.createFileViewController(self, file: file)
+            appDelegate.openFileViewController(self, file: file)
         } else if theEvent.keyCode == 36 {
             let tableView: NSTableView = view as! NSTableView
             let file : File = model.getItems()[tableView.selectedRow]
