@@ -104,7 +104,7 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
             let tableView: NSTableView = view as! NSTableView
             let file : File = model.getItems()[tableView.selectedRow]
 
-            if theEvent.modifierFlags.intersect(NSEventModifierFlags.ShiftKeyMask) != [] {
+            if theEvent.modifierFlags.intersect(NSEventModifierFlags.ShiftKeyMask) != [] || !file.isDirectory {
                 let showFolder = NSTask()
                 if file.isDirectory {
                     showFolder.launchPath = "/usr/bin/open"
