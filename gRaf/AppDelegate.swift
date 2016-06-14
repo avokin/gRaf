@@ -24,10 +24,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         scrollView1 = NSScrollView()
         scrollView2 = NSScrollView()
 
-        let statusBarHeight: CGFloat = 20
-        let topBarHeight: CGFloat = 20
-        let splitViewHeight = window.frame.size.height - statusBarHeight - topBarHeight
-        splitView = NSSplitView(frame: CGRectMake(0, statusBarHeight, window.frame.size.width, splitViewHeight))
+        splitView = NSSplitView()
 
         mainView = NSView(frame: window.frame)
         singleView = scrollView1
@@ -114,6 +111,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         splitView.addSubview(scrollView1)
         splitView.addSubview(scrollView2)
+
+        let statusBarHeight: CGFloat = 20
+        let topBarHeight: CGFloat = 20
+        let splitViewHeight = window.frame.size.height - statusBarHeight - topBarHeight
+        splitView.frame = CGRectMake(0, statusBarHeight, window.frame.size.width, splitViewHeight)
 
         mainView.addSubview(splitView)
     }
