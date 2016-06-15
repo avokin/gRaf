@@ -24,7 +24,4 @@ class PaneController : NSViewController {
         window = nil
         appDelegate = nil
     }
-
-    func updateView() {
-    }
 }

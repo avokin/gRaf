@@ -46,12 +46,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return result
     }
 
-    func createFileViewController(file: File, parentController: FileListPaneController) -> PaneController  {
-        var result: PaneController?
+    func createFileViewController(file: File, parentController: FileListPaneController) -> FileViewController {
+        var result: FileViewController?
         if ImageUtil.isImageFile(file) {
-            result = ImageViewPaneController(file: file, parentController: parentController)
+            result = ImageViewController(file: file, parentController: parentController)
         } else {
-            result = FileViewPaneController(file: file, parentController: parentController)
+            result = TextViewController(file: file, parentController: parentController)
         }
 
         result!.window = window
@@ -168,5 +168,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationShouldTerminateAfterLastWindowClosed(sender: NSApplication) -> Bool {
         return true;
+    }
+
+    func updateStatus(status: String) {
+        statusBar.stringValue = status
     }
 }

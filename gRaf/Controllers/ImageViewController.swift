@@ -6,12 +6,12 @@ import Cocoa
 
 import Foundation
 
-class ImageViewPaneController : ChildController {
-    var file: File!
+class ImageViewController: FileViewController {
     var imageView: ImageView!
 
-    init?(file: File, parentController: FileListPaneController) {
-        super.init(parentController: parentController)
+    override init?(file: File, parentController: FileListPaneController) {
+        super.init(file: file, parentController: parentController)
+        self.appDelegate = parentController.appDelegate
         self.file = file
         createView()
         view = imageView
@@ -36,11 +36,7 @@ class ImageViewPaneController : ChildController {
         if let _image = image {
             imageView.magnification = width / _image.size.width
         }
-    }
-
-    override func viewWillDisappear() {
-        super.viewWillDisappear()
-        imageView.fitToSize()
+        super.updateView()
     }
 
     func createView() {
@@ -94,6 +90,7 @@ class ImageViewPaneController : ChildController {
     }
 
     override func updateView() {
+        super.updateView()
         imageView.updateImageSize()
     }
 }

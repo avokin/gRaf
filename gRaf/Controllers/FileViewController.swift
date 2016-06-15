@@ -5,16 +5,22 @@
 
 import Foundation
 
-class ChildController : PaneController {
+class FileViewController: PaneController {
+    var file: File!
     var parentController: FileListPaneController!;
 
-    init?(parentController: FileListPaneController) {
+    init?(file: File, parentController: FileListPaneController) {
         super.init(nibName: nil, bundle: nil)
 
+        self.file = file
         self.parentController = parentController
     }
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+    }
+
+    func updateView() {
+        self.appDelegate.updateStatus(self.file.path)
     }
 }

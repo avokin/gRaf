@@ -6,13 +6,11 @@
 import Cocoa
 import Foundation
 
-class FileViewPaneController : ChildController {
-    var file: File!
+class TextViewController: FileViewController {
     var textView: TextView!
 
-    init?(file: File, parentController: FileListPaneController) {
-        super.init(parentController: parentController)
-        self.file = file
+    override init?(file: File, parentController: FileListPaneController) {
+        super.init(file: file, parentController: parentController)
         createView()
         view = textView
     }

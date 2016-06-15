@@ -23,13 +23,13 @@
 		AC38F6BF5C5FB79C5638C689 /* TestUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FB040D8F538045B8573A /* TestUtil.swift */; };
 		AC38F6F018EA88AD2C0B10CD /* FileListPaneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F31B6C3E7DCD7C0C672B /* FileListPaneController.swift */; };
 		AC38F6FAEA57A49F76DDB8D2 /* PaneModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FF4CC5D3FAFF1FEBA357 /* PaneModel.swift */; };
-		AC38F7B35AD47462915DAB39 /* ImageViewPaneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F8F1756EA0D8CBB676AC /* ImageViewPaneController.swift */; };
+		AC38F7B35AD47462915DAB39 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F8F1756EA0D8CBB676AC /* ImageViewController.swift */; };
 		AC38F7B5F9F1F032425B4BE1 /* .travis.yml in Resources */ = {isa = PBXBuildFile; fileRef = AC38FF51611EF4C9E0CC7057 /* .travis.yml */; };
 		AC38F7E2A79BA34A82616466 /* ImageUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F518F4D1041D3C02A4F0 /* ImageUtil.swift */; };
 		AC38F832E05B3006D6F91ECD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F53351AD918D798D6B70 /* AppDelegate.swift */; };
 		AC38F882D37B973D50541B68 /* FileTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FD42274B2966597A2A8C /* FileTest.swift */; };
 		AC38F9616FACFC7BFD3B1CF3 /* gRafTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FF3B68277D075BFFB29B /* gRafTests.swift */; };
-		AC38F9D3AB829DD4293EE3F1 /* ChildController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F72CE0A653B507C6E9EF /* ChildController.swift */; };
+		AC38F9D3AB829DD4293EE3F1 /* FileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F72CE0A653B507C6E9EF /* FileViewController.swift */; };
 		AC38FA3D0B7A696D85FC37F9 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FEE0D27728E97CECD076 /* File.swift */; };
 		AC38FA467122DC4E11725C21 /* folder.png in Resources */ = {isa = PBXBuildFile; fileRef = AC38F6BF180DAFC910AD27B3 /* folder.png */; };
 		AC38FA96DD467F10599E56C4 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F3C33D92818793711AA8 /* TextView.swift */; };
@@ -38,7 +38,7 @@
 		AC38FB30B1BCE80EE0B6C54F /* TextUtilTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F699EE3BD339D6C21D98 /* TextUtilTest.swift */; };
 		AC38FB3C8572104EC52BDDB1 /* TextUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F397DBDB690C0C1E0940 /* TextUtil.swift */; };
 		AC38FB3D93F013E49F110D55 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC38FA8264F6F362133278A6 /* Images.xcassets */; };
-		AC38FB3F662566D407279B0E /* FileViewPaneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FC80957C950C0D222CA6 /* FileViewPaneController.swift */; };
+		AC38FB3F662566D407279B0E /* TextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FC80957C950C0D222CA6 /* TextViewController.swift */; };
 		AC38FBAA9B3C258296261712 /* PaneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F26A9C916249546ACFCB /* PaneController.swift */; };
 		AC38FBC3682377F9E1BC4464 /* TestUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FB040D8F538045B8573A /* TestUtil.swift */; };
 		AC38FC66EFC0CC136204D20C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F53351AD918D798D6B70 /* AppDelegate.swift */; };
@@ -48,11 +48,11 @@
 		AC38FD43745AB5FE90FC161B /* PaneModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FE9C679F34E260399A17 /* PaneModelTest.swift */; };
 		AC38FD67C502C6CA0F34F1F0 /* file.png in Resources */ = {isa = PBXBuildFile; fileRef = AC38F67418DA8BDC0143F990 /* file.png */; };
 		AC38FDA576ABCC50839B3D24 /* FileActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FDC61BCF91E3AB9EB05B /* FileActions.swift */; };
-		AC38FDC4A8F7D8F77CB56FDC /* ChildController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F72CE0A653B507C6E9EF /* ChildController.swift */; };
+		AC38FDC4A8F7D8F77CB56FDC /* FileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F72CE0A653B507C6E9EF /* FileViewController.swift */; };
 		AC38FDD6A8AB964B48C0AB61 /* .travis.yml in Resources */ = {isa = PBXBuildFile; fileRef = AC38FF51611EF4C9E0CC7057 /* .travis.yml */; };
 		AC38FDDFCAD6274725E3729A /* TextUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F397DBDB690C0C1E0940 /* TextUtil.swift */; };
-		AC38FE1FF917D36646CA186F /* ImageViewPaneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F8F1756EA0D8CBB676AC /* ImageViewPaneController.swift */; };
-		AC38FE49FE48E7D304E0AC19 /* FileViewPaneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FC80957C950C0D222CA6 /* FileViewPaneController.swift */; };
+		AC38FE1FF917D36646CA186F /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F8F1756EA0D8CBB676AC /* ImageViewController.swift */; };
+		AC38FE49FE48E7D304E0AC19 /* TextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FC80957C950C0D222CA6 /* TextViewController.swift */; };
 		AC38FE711E649921E15BB890 /* PaneModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FF4CC5D3FAFF1FEBA357 /* PaneModel.swift */; };
 		AC38FEBD7250862D353DD41F /* FSUtilTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F5323401723385811EFE /* FSUtilTest.swift */; };
 /* End PBXBuildFile section */
@@ -83,15 +83,15 @@
 		AC38F67418DA8BDC0143F990 /* file.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = file.png; sourceTree = "<group>"; };
 		AC38F699EE3BD339D6C21D98 /* TextUtilTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextUtilTest.swift; sourceTree = "<group>"; };
 		AC38F6BF180DAFC910AD27B3 /* folder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = folder.png; sourceTree = "<group>"; };
-		AC38F72CE0A653B507C6E9EF /* ChildController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChildController.swift; sourceTree = "<group>"; };
+		AC38F72CE0A653B507C6E9EF /* FileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileViewController.swift; sourceTree = "<group>"; };
 		AC38F77927A4E2E15AD07808 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
 		AC38F87BAA8557C9439751F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
 		AC38F8955443631852ECF0AA /* gRafTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = gRafTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		AC38F8F1756EA0D8CBB676AC /* ImageViewPaneController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewPaneController.swift; sourceTree = "<group>"; };
+		AC38F8F1756EA0D8CBB676AC /* ImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		AC38FA8264F6F362133278A6 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		AC38FB040D8F538045B8573A /* TestUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUtil.swift; sourceTree = "<group>"; };
 		AC38FBC149F551EECF0DB1CF /* FileTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileTableView.swift; sourceTree = "<group>"; };
-		AC38FC80957C950C0D222CA6 /* FileViewPaneController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileViewPaneController.swift; sourceTree = "<group>"; };
+		AC38FC80957C950C0D222CA6 /* TextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewController.swift; sourceTree = "<group>"; };
 		AC38FCDA9BE999CFA76CF01C /* FSUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FSUtil.swift; sourceTree = "<group>"; };
 		AC38FD42274B2966597A2A8C /* FileTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileTest.swift; sourceTree = "<group>"; };
 		AC38FDC484CEA78A41982E6B /* file@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "file@2x.png"; sourceTree = "<group>"; };
@@ -136,9 +136,9 @@
 			children = (
 				AC38F26A9C916249546ACFCB /* PaneController.swift */,
 				AC38F31B6C3E7DCD7C0C672B /* FileListPaneController.swift */,
-				AC38FC80957C950C0D222CA6 /* FileViewPaneController.swift */,
-				AC38F8F1756EA0D8CBB676AC /* ImageViewPaneController.swift */,
-				AC38F72CE0A653B507C6E9EF /* ChildController.swift */,
+				AC38FC80957C950C0D222CA6 /* TextViewController.swift */,
+				AC38F8F1756EA0D8CBB676AC /* ImageViewController.swift */,
+				AC38F72CE0A653B507C6E9EF /* FileViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -391,13 +391,13 @@
 				AC38FB30B1BCE80EE0B6C54F /* TextUtilTest.swift in Sources */,
 				AC38FD43745AB5FE90FC161B /* PaneModelTest.swift in Sources */,
 				AC38F6F018EA88AD2C0B10CD /* FileListPaneController.swift in Sources */,
-				AC38FE49FE48E7D304E0AC19 /* FileViewPaneController.swift in Sources */,
+				AC38FE49FE48E7D304E0AC19 /* TextViewController.swift in Sources */,
 				AC38F48A0D1421C2F9D7BD3C /* TextView.swift in Sources */,
 				AC38F832E05B3006D6F91ECD /* AppDelegate.swift in Sources */,
 				AC38F882D37B973D50541B68 /* FileTest.swift in Sources */,
 				AC38F63E29D408E3498FB3D8 /* FileTableView.swift in Sources */,
-				AC38F7B35AD47462915DAB39 /* ImageViewPaneController.swift in Sources */,
-				AC38FDC4A8F7D8F77CB56FDC /* ChildController.swift in Sources */,
+				AC38F7B35AD47462915DAB39 /* ImageViewController.swift in Sources */,
+				AC38FDC4A8F7D8F77CB56FDC /* FileViewController.swift in Sources */,
 				AC38F7E2A79BA34A82616466 /* ImageUtil.swift in Sources */,
 				AC38F05674C1D103E576C57F /* ImageUtilTest.swift in Sources */,
 				AC38F285E59947D859B93289 /* ImageView.swift in Sources */,
@@ -418,11 +418,11 @@
 				AC38FBC3682377F9E1BC4464 /* TestUtil.swift in Sources */,
 				AC38FDDFCAD6274725E3729A /* TextUtil.swift in Sources */,
 				AC38FC9DDF27F8ECDBE4CC64 /* FileListPaneController.swift in Sources */,
-				AC38FB3F662566D407279B0E /* FileViewPaneController.swift in Sources */,
+				AC38FB3F662566D407279B0E /* TextViewController.swift in Sources */,
 				AC38FA96DD467F10599E56C4 /* TextView.swift in Sources */,
 				AC38FCB24784FCC0400A3776 /* FileTableView.swift in Sources */,
-				AC38FE1FF917D36646CA186F /* ImageViewPaneController.swift in Sources */,
-				AC38F9D3AB829DD4293EE3F1 /* ChildController.swift in Sources */,
+				AC38FE1FF917D36646CA186F /* ImageViewController.swift in Sources */,
+				AC38F9D3AB829DD4293EE3F1 /* FileViewController.swift in Sources */,
 				AC38FAA83BC73EC224A73F8A /* ImageUtil.swift in Sources */,
 				AC38FAEF5B340C06FF77A2DE /* ImageView.swift in Sources */,
 			);
