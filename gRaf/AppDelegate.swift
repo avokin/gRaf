@@ -3,12 +3,16 @@ import Cocoa
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
+    let statusBarHeight: CGFloat = 20
+    let topBarHeight: CGFloat = 20
+
     var window: NSWindow
     var scrollView1: NSScrollView
     var scrollView2: NSScrollView
     var splitView: NSSplitView
     var singleView: NSScrollView
     var mainView: NSView
+    var statusBar: NSTextField
 
     var paneController1: PaneController!
     var paneController2: PaneController!
@@ -27,6 +31,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         splitView = NSSplitView()
 
         mainView = NSView(frame: window.frame)
+        statusBar = NSTextField(frame: CGRectMake(0, 0, window.frame.size.width, statusBarHeight))
+
         singleView = scrollView1
 
         window.center()
@@ -96,6 +102,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         paneController2 = createFileListController(root, from: nil)
     }
 
+    func fillMainView(view: NSView) {
+        let viewHeight = window.frame.size.height - statusBarHeight - topBarHeight
+        view.frame = CGRectMake(0, statusBarHeight, window.frame.size.width, viewHeight)
+
+        mainView.addSubview(view)
+    }
+
     func setupLeftAndRight() {
         paneController1.otherPaneController = paneController2
         paneController2.otherPaneController = paneController1
@@ -112,26 +125,24 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         splitView.addSubview(scrollView1)
         splitView.addSubview(scrollView2)
 
-        let statusBarHeight: CGFloat = 20
-        let topBarHeight: CGFloat = 20
-        let splitViewHeight = window.frame.size.height - statusBarHeight - topBarHeight
-        splitView.frame = CGRectMake(0, statusBarHeight, window.frame.size.width, splitViewHeight)
-
-        mainView.addSubview(splitView)
+        fillMainView(splitView)
     }
 
     func initUI() {
         splitView.vertical = true
+        splitView.autoresizingMask = [NSAutoresizingMaskOptions.ViewWidthSizable,
+                                      NSAutoresizingMaskOptions.ViewHeightSizable]
 
-        splitView.autoresizingMask = [NSAutoresizingMaskOptions.ViewWidthSizable, NSAutoresizingMaskOptions.ViewHeightSizable]
+        statusBar.autoresizingMask = [NSAutoresizingMaskOptions.ViewWidthSizable]
+        statusBar.backgroundColor = window.backgroundColor
+        mainView.addSubview(statusBar)
     }
 
     func installSingleView() {
         splitView.removeFromSuperview()
-        singleView.frame = mainView.frame
         singleView.autoresizingMask = [NSAutoresizingMaskOptions.ViewWidthSizable,
                                        NSAutoresizingMaskOptions.ViewHeightSizable]
-        mainView.addSubview(singleView)
+        fillMainView(singleView)
     }
 
     func initWindowController() {
