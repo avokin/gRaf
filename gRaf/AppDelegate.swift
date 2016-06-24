@@ -3,6 +3,8 @@ import Cocoa
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
+    static var appDelegate: AppDelegate? = nil;
+
     let statusBarHeight: CGFloat = 20
     let topBarHeight: CGFloat = 20
 
@@ -18,12 +20,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var paneController2: PaneController!
 
     override init() {
-        let contentSize = NSMakeRect(0.0, 0.0, 600.0, 400.0);
+        let contentSize = NSMakeRect(0.0, 0.0, 600.0, 400.0)
         let windowStyleMask = NSTitledWindowMask | NSResizableWindowMask | NSClosableWindowMask |
                 NSMiniaturizableWindowMask;
         window = NSWindow(contentRect: contentSize, styleMask: windowStyleMask, backing: NSBackingStoreType.Buffered,
                 defer: true);
-        window.title = "gRaf";
+        window.title = "gRaf"
 
         scrollView1 = NSScrollView()
         scrollView2 = NSScrollView()
@@ -36,12 +38,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         singleView = scrollView1
 
         window.center()
+
+        super.init()
+
+        AppDelegate.appDelegate = self
+    }
+
+    static func getAppDelegate() -> AppDelegate? {
+        return appDelegate;
     }
 
     func createFileListController(root: File, from: File?) -> PaneController {
         let result = FileListPaneController(root: root, from: from)!
         result.window = window
-        result.appDelegate = self
 
         return result
     }
@@ -55,7 +64,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
 
         result!.window = window
-        result!.appDelegate = self
 
         return result!
     }

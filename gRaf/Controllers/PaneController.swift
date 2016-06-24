@@ -11,6 +11,16 @@ class PaneController : NSViewController {
     var window: NSWindow? = nil
     var appDelegate: AppDelegate! = nil
 
+    override required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        appDelegate = AppDelegate.getAppDelegate();
+    }
+
+    override init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        appDelegate = AppDelegate.getAppDelegate()!;
+    }
+
     func focus() {
         window!.makeKeyWindow()
     }
