@@ -7,7 +7,8 @@ import Foundation
 
 class ImageUtil {
     static func isImageFile(file: File) -> Bool {
-        var ext = NSURL(fileURLWithPath: file.name.lowercaseString).pathExtension
-        return ext != nil && !file.isDirectory && "jpg".characters.elementsEqual(ext!.characters)
+        let ext = NSURL(fileURLWithPath: file.name.lowercaseString).pathExtension
+        return ext != nil && (!file.isDirectory && "jpg".characters.elementsEqual(ext!.characters) ||
+                "png".characters.elementsEqual(ext!.characters))
     }
 }
