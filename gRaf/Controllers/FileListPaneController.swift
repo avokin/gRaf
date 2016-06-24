@@ -19,6 +19,7 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
         super.init(nibName: nil, bundle: nil)
 
         model.setRoot(root)
+        self.appDelegate.updateStatus(root.path)
         if from != nil {
             model.selectChild(from!.name)
         }
@@ -100,7 +101,7 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
         if theEvent.keyCode == 99 {
             let file = model.getItems()[tableView.selectedRow]
             appDelegate.openFileViewController(self, file: file)
-        } else if theEvent.keyCode == 36 {
+        } else if theEvent.keyCode == 36 { // Enter
             let tableView: NSTableView = view as! NSTableView
             let file : File = model.getItems()[tableView.selectedRow]
 
@@ -129,6 +130,7 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
                 model.setRoot(selectedFile)
             }
 
+            self.appDelegate.updateStatus(model.getRoot().path)
             tableView.reloadData()
             tableView.selectRowIndexes(NSIndexSet(index: model.selectedIndex), byExtendingSelection: false)
             tableView.scrollRowToVisible(model.selectedIndex)
@@ -167,6 +169,7 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
     }
 
     func refresh() {
+        self.appDelegate.updateStatus(model.getRoot().path)
         focus()
         model.clearCaches()
         tableView.reloadData()
