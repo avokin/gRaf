@@ -18,11 +18,13 @@
 		AC38F48A0D1421C2F9D7BD3C /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F3C33D92818793711AA8 /* TextView.swift */; };
 		AC38F4A58C4AE4B20D2CA83A /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC38FE1BD3E955C2DA64D84C /* MainMenu.xib */; };
 		AC38F4F18AA53FD552144035 /* FSUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FCDA9BE999CFA76CF01C /* FSUtil.swift */; };
+		AC38F5E1D55122A5E5654885 /* FileSystemWatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FC9D25721E37788FBF75 /* FileSystemWatcher.swift */; };
 		AC38F63E29D408E3498FB3D8 /* FileTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FBC149F551EECF0DB1CF /* FileTableView.swift */; };
 		AC38F67915517DE943BDBE5A /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FEE0D27728E97CECD076 /* File.swift */; };
 		AC38F6BF5C5FB79C5638C689 /* TestUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FB040D8F538045B8573A /* TestUtil.swift */; };
 		AC38F6F018EA88AD2C0B10CD /* FileListPaneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F31B6C3E7DCD7C0C672B /* FileListPaneController.swift */; };
 		AC38F6FAEA57A49F76DDB8D2 /* PaneModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FF4CC5D3FAFF1FEBA357 /* PaneModel.swift */; };
+		AC38F7A5CBA0028EB617C2E9 /* FileSystemWatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FC9D25721E37788FBF75 /* FileSystemWatcher.swift */; };
 		AC38F7B35AD47462915DAB39 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F8F1756EA0D8CBB676AC /* ImageViewController.swift */; };
 		AC38F7B5F9F1F032425B4BE1 /* .travis.yml in Resources */ = {isa = PBXBuildFile; fileRef = AC38FF51611EF4C9E0CC7057 /* .travis.yml */; };
 		AC38F7E2A79BA34A82616466 /* ImageUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F518F4D1041D3C02A4F0 /* ImageUtil.swift */; };
@@ -92,6 +94,7 @@
 		AC38FB040D8F538045B8573A /* TestUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUtil.swift; sourceTree = "<group>"; };
 		AC38FBC149F551EECF0DB1CF /* FileTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileTableView.swift; sourceTree = "<group>"; };
 		AC38FC80957C950C0D222CA6 /* TextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewController.swift; sourceTree = "<group>"; };
+		AC38FC9D25721E37788FBF75 /* FileSystemWatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileSystemWatcher.swift; sourceTree = "<group>"; };
 		AC38FCDA9BE999CFA76CF01C /* FSUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FSUtil.swift; sourceTree = "<group>"; };
 		AC38FD42274B2966597A2A8C /* FileTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileTest.swift; sourceTree = "<group>"; };
 		AC38FDC484CEA78A41982E6B /* file@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "file@2x.png"; sourceTree = "<group>"; };
@@ -147,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				AC38FCDA9BE999CFA76CF01C /* FSUtil.swift */,
+				AC38FC9D25721E37788FBF75 /* FileSystemWatcher.swift */,
 			);
 			path = FS;
 			sourceTree = "<group>";
@@ -401,6 +405,7 @@
 				AC38F7E2A79BA34A82616466 /* ImageUtil.swift in Sources */,
 				AC38F05674C1D103E576C57F /* ImageUtilTest.swift in Sources */,
 				AC38F285E59947D859B93289 /* ImageView.swift in Sources */,
+				AC38F5E1D55122A5E5654885 /* FileSystemWatcher.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -425,6 +430,7 @@
 				AC38F9D3AB829DD4293EE3F1 /* FileViewController.swift in Sources */,
 				AC38FAA83BC73EC224A73F8A /* ImageUtil.swift in Sources */,
 				AC38FAEF5B340C06FF77A2DE /* ImageView.swift in Sources */,
+				AC38F7A5CBA0028EB617C2E9 /* FileSystemWatcher.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

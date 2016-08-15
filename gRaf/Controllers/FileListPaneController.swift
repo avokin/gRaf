@@ -26,6 +26,8 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
 
         createTable()
         view = tableView
+
+        model.callback = refresh
     }
 
     required init?(coder: NSCoder) {
@@ -91,6 +93,7 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
             FSUtil.rename(file, newName: "\(object!)")
             model.clearCaches()
             model.selectChild("\(object!)")
+            // ToDo: make as callback of refresh()
             tableView.reloadData()
             tableView.selectRowIndexes(NSIndexSet(index: model.selectedIndex), byExtendingSelection: false)
             tableView.scrollRowToVisible(model.selectedIndex)
@@ -143,7 +146,6 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
                 let to = fileListController.model.getRoot();
 
                 FileActions.copyFileAction(from, to: to)
-                refresh()
             }
         } else if theEvent.keyCode == 97 {
             if let fileListController = otherPaneController as? FileListPaneController {
@@ -151,12 +153,10 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
                 let to = fileListController.model.getRoot();
 
                 FileActions.moveFileAction(from, to: to)
-                refresh()
             }
         } else if theEvent.keyCode == 100 {
             let file = model.getItems()[tableView.selectedRow]
             FileActions.deleteFileAction(file)
-            refresh()
         } else if theEvent.keyCode == 116 {
             if theEvent.modifierFlags.intersect(NSEventModifierFlags.FunctionKeyMask) != [] {
                 model.selectedIndex = 0
@@ -169,14 +169,9 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
     }
 
     func refresh() {
-        self.appDelegate.updateStatus(model.getRoot().path)
-        focus()
-        model.clearCaches()
-        tableView.reloadData()
-
-        if let fileListController = otherPaneController as? FileListPaneController {
-            fileListController.model.clearCaches()
-            fileListController.tableView.reloadData()
+        dispatch_async(dispatch_get_main_queue()) {
+            self.appDelegate.updateStatus(self.model.getRoot().path)
+            self.tableView.reloadData()
         }
     }
 
