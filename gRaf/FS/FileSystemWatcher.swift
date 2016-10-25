@@ -19,10 +19,14 @@ open class FileSystemWatcher {
         let pathsToWatch = paths.map({ $0 as NSString }) as [AnyObject];
 
         let fileSystemObserverCallback: FSEventStreamCallback = {
-            (stream: ConstFSEventStreamRef, contextInfo: UnsafeMutableRawPointer, numEvents: Int,
-             eventPaths: UnsafeMutableRawPointer, eventFlags: UnsafePointer<FSEventStreamEventFlags>,
-             eventIds: UnsafePointer<FSEventStreamEventId>) in
-            let mySelf = Unmanaged<FileSystemWatcher>.fromOpaque(_ : UnsafeRawPointer(contextInfo)).takeUnretainedValue()
+            (stream: ConstFSEventStreamRef,
+             contextInfo: Optional<UnsafeMutableRawPointer>,
+             numEvents: Int,
+             eventPaths: UnsafeMutableRawPointer,
+             eventFlags: Optional<UnsafePointer<UInt32>>,
+             eventIds: Optional<UnsafePointer<UInt64>>) in
+
+            let mySelf = Unmanaged<FileSystemWatcher>.fromOpaque(_ : UnsafeRawPointer(contextInfo!)).takeUnretainedValue()
             let paths = unsafeBitCast(eventPaths, to: NSArray.self) as! [String]
 
             for paneModel in mySelf.paneModels {
@@ -33,13 +37,13 @@ open class FileSystemWatcher {
                     paneModel.refreshCallback()
                 }
             }
-        } as! FSEventStreamCallback
+        }
 
         fsEventStream = FSEventStreamCreate(nil, fileSystemObserverCallback, &context, pathsToWatch as CFArray,
                 FSEventStreamEventId(kFSEventStreamEventIdSinceNow), CFTimeInterval(1.0),
                 FSEventStreamCreateFlags(kFSEventStreamCreateFlagUseCFTypes))
 
-        FSEventStreamScheduleWithRunLoop(fsEventStream!, CFRunLoopGetCurrent(), CFRunLoopMode.defaultMode as! CFString)
+        FSEventStreamScheduleWithRunLoop(fsEventStream!, CFRunLoopGetCurrent(), CFRunLoopMode.defaultMode!.rawValue)
         FSEventStreamStart(fsEventStream!)
     }
 
