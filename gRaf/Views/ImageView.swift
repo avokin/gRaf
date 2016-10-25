@@ -13,8 +13,8 @@ class ImageView : NSImageView {
         updateImageSize()
     }
 
-    override func magnifyWithEvent(event: NSEvent) {
-        super.magnifyWithEvent(event)
+    override func magnify(with event: NSEvent) {
+        super.magnify(with: event)
         magnification += event.magnification
         updateImageSize()
     }
@@ -24,7 +24,7 @@ class ImageView : NSImageView {
             return
         }
         if let im = image {
-            var minMagnification = getMinimumMagnification()
+            let minMagnification = getMinimumMagnification()
             if magnification < minMagnification {
                 magnification = minMagnification
             } else if (magnification > 1) {
@@ -33,24 +33,24 @@ class ImageView : NSImageView {
 
             let clipView = superview as! NSClipView
 
-            var newWidth = max(im.size.width * magnification, clipView.frame.size.width)
-            var newHeight = max(im.size.height * magnification, clipView.frame.size.height)
+            let newWidth = max(im.size.width * magnification, clipView.frame.size.width)
+            let newHeight = max(im.size.height * magnification, clipView.frame.size.height)
 
-            var centerX = clipView.bounds.origin.x + clipView.bounds.width / 2
-            var centerY = clipView.bounds.origin.y + clipView.bounds.height / 2
+            let centerX = clipView.bounds.origin.x + clipView.bounds.width / 2
+            let centerY = clipView.bounds.origin.y + clipView.bounds.height / 2
             let oldWidth = frame.size.width
             let oldHeight = frame.size.height
 
             setFrameSize(NSSize(width: newWidth, height: newHeight))
 
-            var newCenterX = centerX * newWidth / oldWidth
-            var newCenterY = centerY * newHeight / oldHeight
+            let newCenterX = centerX * newWidth / oldWidth
+            let newCenterY = centerY * newHeight / oldHeight
 
-            var minX = newCenterX - clipView.bounds.width / 2
-            var minY = newCenterY - clipView.bounds.height / 2
+            let minX = newCenterX - clipView.bounds.width / 2
+            let minY = newCenterY - clipView.bounds.height / 2
 
-            var rect = NSMakeRect(minX, minY, clipView.bounds.width, clipView.bounds.height)
-            clipView.scrollRectToVisible(rect)
+            let rect = NSMakeRect(minX, minY, clipView.bounds.width, clipView.bounds.height)
+            clipView.scrollToVisible(rect)
         }
     }
 
@@ -59,7 +59,7 @@ class ImageView : NSImageView {
         updateImageSize()
     }
 
-    private func getMinimumMagnification() -> CGFloat {
+    fileprivate func getMinimumMagnification() -> CGFloat {
         if let im = image {
             if let sv = superview {
                 return min(sv.frame.size.width / im.size.width, sv.frame.size.height / im.size.height)

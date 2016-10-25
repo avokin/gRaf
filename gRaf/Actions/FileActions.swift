@@ -6,19 +6,19 @@
 import Foundation
 
 class FileActions {
-    class func copyFileAction(from: File, to: File) {
+    class func copyFileAction(_ from: File, to: File) {
         createFileFromSource(from, to: to) { (fromPath: String, destPath: String) -> Void in
             FSUtil.copyFile(fromPath, to: destPath)
         }
     }
 
-    class func moveFileAction(from: File, to: File) {
+    class func moveFileAction(_ from: File, to: File) {
         createFileFromSource(from, to: to) { (fromPath: String, destPath: String) -> Void in
             FSUtil.moveFile(fromPath, to: destPath)
         }
     }
 
-    class func deleteFileAction(file: File) {
+    class func deleteFileAction(_ file: File) {
         let progressWindow = ProgressWindow();
 
         progressWindow.start({
@@ -28,14 +28,14 @@ class FileActions {
         })
     }
 
-    private class func createFileFromSource(from: File, to: File, action: (fromPath: String, destPath: String) -> Void) {
+    fileprivate class func createFileFromSource(_ from: File, to: File, action: @escaping (_ fromPath: String, _ destPath: String) -> Void) {
         let progressWindow = ProgressWindow();
         let sourceSize = FSUtil.fileSize(from)
 
         let destPath = FSUtil.getDestinationFileName(from, to: to)
 
         progressWindow.start({
-            action(fromPath: from.path, destPath: destPath)
+            action(from.path, destPath)
         }, progressUpdater: {
             if sourceSize <= 0 {
                 return 0

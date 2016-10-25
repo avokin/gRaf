@@ -9,12 +9,12 @@ class File: NSObject{
     var name: String
     var path: String
     var size: UInt64
-    var dateModified: NSDate?
+    var dateModified: Date?
     var isDirectory: Bool
 
-    private var parent: File?
+    fileprivate var parent: File?
 
-    init(name: String, path: String, size: UInt64, dateModified: NSDate?, isDirectory: Bool) {
+    init(name: String, path: String, size: UInt64, dateModified: Date?, isDirectory: Bool) {
         self.name = name
         self.path = path
         self.size = size
@@ -24,11 +24,9 @@ class File: NSObject{
 
     func getParent() -> File? {
         if parent == nil && path.characters.count > 1 {
-            if let parentPath = NSURL(fileURLWithPath: path).URLByDeletingLastPathComponent!.path {
-                if let parentName = NSURL(fileURLWithPath: parentPath).lastPathComponent {
-                    parent = File(name: parentName, path: parentPath, size: UInt64.max, dateModified: NSDate(), isDirectory: true)
-                }
-            }
+        let parentPath = NSURL(fileURLWithPath: path).deletingLastPathComponent!.path
+            let parentName = URL(fileURLWithPath: parentPath).lastPathComponent
+            parent = File(name: parentName, path: parentPath, size: UInt64.max, dateModified: Date(), isDirectory: true)
         }
 
         return parent

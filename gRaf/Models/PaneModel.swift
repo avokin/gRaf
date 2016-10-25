@@ -6,15 +6,15 @@
 import Foundation
 
 class PaneModel {
-    private var root: File
-    private var sortDescriptor: NSSortDescriptor = NSSortDescriptor(key: "Name", ascending: true)
-    public var callback: (() -> Void)?
+    fileprivate var root: File
+    fileprivate var sortDescriptor: NSSortDescriptor = NSSortDescriptor(key: "Name", ascending: true)
+    open var callback: (() -> Void)?
     var selectedIndex = 0
 
-    private var cached: [File]? = nil
+    fileprivate var cached: [File]? = nil
 
     convenience init() {
-        var file = File(name: "/", path: "/", size: UInt64.max, dateModified: NSDate(), isDirectory: true);
+        var file = File(name: "/", path: "/", size: UInt64.max, dateModified: Date(), isDirectory: true);
         self.init(root: file, from: nil)
     }
 
@@ -28,13 +28,13 @@ class PaneModel {
         FileSystemWatcher.instance.subscribeToFsEvents(self)
     }
 
-    func selectChild(name: String) {
+    func selectChild(_ name: String) {
         var index = 0
         for file: File in getItems() {
             if name.characters.elementsEqual(file.name.characters) {
                 break
             }
-            index++
+            index += 1
         }
         if (index >= getItems().count) {
             index = 0
@@ -50,14 +50,14 @@ class PaneModel {
         return root
     }
 
-    func setRoot(root: File) {
+    func setRoot(_ root: File) {
         self.root = root;
         refresh()
     }
 
     func calculateCache() -> [File] {
         var result = FSUtil.getFilesOfDirectory(root.path)
-        result.sortInPlace({
+        result.sort(by: {
             if "..".characters.elementsEqual($0.name.characters) {
                 return true
             }
@@ -96,7 +96,7 @@ class PaneModel {
 
                 return first.size > second.size
             }
-            return first.name.localizedCompare(second.name) == NSComparisonResult.OrderedAscending
+            return first.name.localizedCompare(second.name) == ComparisonResult.orderedAscending
         })
 
         return result;
@@ -121,7 +121,7 @@ class PaneModel {
         cached = nil
     }
 
-    func setSortDescriptor(value: NSSortDescriptor) {
+    func setSortDescriptor(_ value: NSSortDescriptor) {
         sortDescriptor = value
         clearCaches()
     }

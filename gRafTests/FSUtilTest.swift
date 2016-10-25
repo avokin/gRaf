@@ -31,15 +31,15 @@ class FSUtilTest : XCTestCase {
         let newFilePath = FSUtil.getDestinationFileName(from!, to: to!)
         var err: NSError?
         do {
-            try NSFileManager.defaultManager().removeItemAtPath(newFilePath)
+            try FileManager.default.removeItem(atPath: newFilePath)
         } catch let error as NSError {
             err = error
         };
 
-        XCTAssertFalse(NSFileManager.defaultManager().fileExistsAtPath(newFilePath))
+        XCTAssertFalse(FileManager.default.fileExists(atPath: newFilePath))
 
         FSUtil.copyFile(from!.path, to: newFilePath)
-        XCTAssert(NSFileManager.defaultManager().fileExistsAtPath(newFilePath))
+        XCTAssert(FileManager.default.fileExists(atPath: newFilePath))
     }
 
     func testDeleteFile() {
@@ -52,10 +52,10 @@ class FSUtilTest : XCTestCase {
         let newFilePath = FSUtil.getDestinationFileName(from!, to: to!)
 
         FSUtil.copyFile(from!.path, to: newFilePath)
-        XCTAssert(NSFileManager.defaultManager().fileExistsAtPath(newFilePath))
+        XCTAssert(FileManager.default.fileExists(atPath: newFilePath))
 
         FSUtil.deleteFile(newFilePath)
 
-        XCTAssertFalse(NSFileManager.defaultManager().fileExistsAtPath(newFilePath))
+        XCTAssertFalse(FileManager.default.fileExists(atPath: newFilePath))
     }
 }

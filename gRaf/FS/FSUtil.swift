@@ -5,20 +5,20 @@
 
 import Foundation
 
-public class FSUtil {
+open class FSUtil {
     static func getRoot() -> File {
-        return File(name: "/", path: "/", size: UInt64.max, dateModified: NSDate(), isDirectory: true)
+        return File(name: "/", path: "/", size: UInt64.max, dateModified: Date(), isDirectory: true)
     }
 
-    static func getFilesOfDirectory(path: String) -> [File] {
-        let fileManager = NSFileManager.defaultManager()
+    static func getFilesOfDirectory(_ path: String) -> [File] {
+        let fileManager = FileManager.default
 
         var files = [File]()
 
-        var allFiles = try? fileManager.contentsOfDirectoryAtPath(path)
+        var allFiles = try? fileManager.contentsOfDirectory(atPath: path)
 
         if !"/".characters.elementsEqual(path.characters) {
-            var linkToParent = File(name: "..", path: path, size: UInt64.max, dateModified: NSDate(), isDirectory: true)
+            var linkToParent = File(name: "..", path: path, size: UInt64.max, dateModified: Date(), isDirectory: true)
             files.append(linkToParent)
         }
         if allFiles == nil {
@@ -27,21 +27,21 @@ public class FSUtil {
 
         for element: String in allFiles! {
             var size: UInt64 = UInt64.max
-            var modificationDate: NSDate? = nil
+            var modificationDate: Date? = nil
             var isDirectory = false
             var elementPath = path + "/" + element
 
             var i = 0
             while i < 3 {
-                i++
-                var attributes:NSDictionary? = try? fileManager.attributesOfItemAtPath(elementPath)
+                i += 1
+                var attributes:NSDictionary? = try! fileManager.attributesOfItem(atPath: elementPath) as NSDictionary?
                 if let _attr = attributes {
                     size = _attr.fileSize()
                     modificationDate = _attr.fileModificationDate()
 
                     if let fileType1 = _attr.fileType() {
                         if ("NSFileTypeSymbolicLink".characters.elementsEqual(fileType1.characters)) {
-                            var newPathElement = try? fileManager.destinationOfSymbolicLinkAtPath(elementPath)
+                            var newPathElement = try? fileManager.destinationOfSymbolicLink(atPath: elementPath)
 
                             if newPathElement != nil {
                                 elementPath = path + "/" + newPathElement!
@@ -69,33 +69,33 @@ public class FSUtil {
         return files
     }
 
-    static func copyFile(from: String, to: String) {
+    static func copyFile(_ from: String, to: String) {
         do {
-            try NSFileManager.defaultManager().copyItemAtPath(from, toPath: to)
+            try FileManager.default.copyItem(atPath: from, toPath: to)
         } catch _ {
         }
     }
 
-    static func moveFile(from: String, to: String) {
+    static func moveFile(_ from: String, to: String) {
         do {
-            try NSFileManager.defaultManager().moveItemAtPath(from, toPath: to)
+            try FileManager.default.moveItem(atPath: from, toPath: to)
         } catch _ {
         }
     }
 
-    static func deleteFile(filePath: String) {
+    static func deleteFile(_ filePath: String) {
         do {
-            try NSFileManager.defaultManager().removeItemAtPath(filePath)
+            try FileManager.default.removeItem(atPath: filePath)
         } catch _ {
         }
     }
 
-    static func fileSize(file: File) -> UInt64 {
+    static func fileSize(_ file: File) -> UInt64 {
         return fileSize(file.path)
     }
 
-    static func fileSize(path: String) -> UInt64 {
-        let attributes:NSDictionary? = try? NSFileManager.defaultManager().attributesOfItemAtPath(path)
+    static func fileSize(_ path: String) -> UInt64 {
+        let attributes:NSDictionary? = try! FileManager.default.attributesOfItem(atPath: path) as NSDictionary?
 
         if let _attr = attributes {
             return _attr.fileSize()
@@ -103,7 +103,7 @@ public class FSUtil {
         return 0
     }
 
-    static func getDestinationFileName(from: File, to: File) -> String {
+    static func getDestinationFileName(_ from: File, to: File) -> String {
         var destPath = to.path
         if to.isDirectory {
             destPath = to.path + "/" + from.name
@@ -111,23 +111,22 @@ public class FSUtil {
         return destPath
     }
 
-    static func rename(file: File, newName: String) {
-        if let newPath = NSURL(fileURLWithPath: file.path).URLByDeletingLastPathComponent!.path {
-            do {
-                try NSFileManager.defaultManager().moveItemAtPath(file.path, toPath: newPath)
-            } catch _ {
-            }
+    static func rename(_ file: File, newName: String) {
+        let newPath = NSURL(fileURLWithPath: file.path).deletingLastPathComponent!.path
+        do {
+            try FileManager.default.moveItem(atPath: file.path, toPath: newPath)
+        } catch _ {
         }
     }
 
-    static func getFileContent(file: File) -> String? {
-        let result = try? String(contentsOfFile: file.path, encoding: NSUTF8StringEncoding)
+    static func getFileContent(_ file: File) -> String? {
+        let result = try? String(contentsOfFile: file.path, encoding: String.Encoding.utf8)
         return result
     }
 
-    static func setFileContent(file: File, content: String) {
+    static func setFileContent(_ file: File, content: String) {
         do {
-            try content.writeToFile(file.path, atomically: false, encoding: NSUTF8StringEncoding)
+            try content.write(toFile: file.path, atomically: false, encoding: String.Encoding.utf8)
         } catch _ {
         };
     }

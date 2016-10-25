@@ -8,22 +8,22 @@ import XCTest
 
 class ImageUtilTest : XCTestCase {
     func testIsImageFile() {
-        let imageFile = File(name: "abc.jpg", path: "/abc.jpg", size: UInt64.max, dateModified: NSDate(), isDirectory: false)
+        let imageFile = File(name: "abc.jpg", path: "/abc.jpg", size: UInt64.max, dateModified: Date(), isDirectory: false)
         XCTAssertTrue(ImageUtil.isImageFile(imageFile))
     }
 
     func testIsImageFileWithUpCaseExtension() {
-        let imageFile = File(name: "ABC.JPG", path: "/ABC.JPG", size: UInt64.max, dateModified: NSDate(), isDirectory: false)
+        let imageFile = File(name: "ABC.JPG", path: "/ABC.JPG", size: UInt64.max, dateModified: Date(), isDirectory: false)
         XCTAssertTrue(ImageUtil.isImageFile(imageFile))
     }
 
     func testWhenDirectory() {
-        let directory = File(name: "abc.jpg", path: "/abc.jpg", size: UInt64.max, dateModified: NSDate(), isDirectory: true)
+        let directory = File(name: "abc.jpg", path: "/abc.jpg", size: UInt64.max, dateModified: Date(), isDirectory: true)
         XCTAssertFalse(ImageUtil.isImageFile(directory))
     }
 
     func testTextFile() {
-        let textFile = File(name: "abc.txt", path: "/abc.txt", size: UInt64.max, dateModified: NSDate(), isDirectory: false)
+        let textFile = File(name: "abc.txt", path: "/abc.txt", size: UInt64.max, dateModified: Date(), isDirectory: false)
         XCTAssertFalse(ImageUtil.isImageFile(textFile))
     }
 }

@@ -1,11 +1,11 @@
 import Foundation
 
-public class FileSystemWatcher {
-    public static var instance: FileSystemWatcher = FileSystemWatcher();
+open class FileSystemWatcher {
+    open static var instance: FileSystemWatcher = FileSystemWatcher();
 
     var paneModels: [PaneModel] = []
 
-    public var fsEventStream: FSEventStreamRef? = nil
+    open var fsEventStream: FSEventStreamRef? = nil
 
     init() {
         var context: FSEventStreamContext = FSEventStreamContext()
@@ -13,38 +13,38 @@ public class FileSystemWatcher {
         context.retain = nil;
         context.release = nil;
         context.copyDescription = nil;
-        context.info = UnsafeMutablePointer<Void>(unsafeAddressOf(self))
+        context.info = UnsafeMutableRawPointer(Unmanaged.passUnretained(self).toOpaque())
 
         let paths = ["/"];
         let pathsToWatch = paths.map({ $0 as NSString }) as [AnyObject];
 
         let fileSystemObserverCallback: FSEventStreamCallback = {
-            (stream: ConstFSEventStreamRef, contextInfo: UnsafeMutablePointer<Void>, numEvents: Int,
-             eventPaths: UnsafeMutablePointer<Void>, eventFlags: UnsafePointer<FSEventStreamEventFlags>,
+            (stream: ConstFSEventStreamRef, contextInfo: UnsafeMutableRawPointer, numEvents: Int,
+             eventPaths: UnsafeMutableRawPointer, eventFlags: UnsafePointer<FSEventStreamEventFlags>,
              eventIds: UnsafePointer<FSEventStreamEventId>) in
-            let mySelf = Unmanaged<FileSystemWatcher>.fromOpaque(COpaquePointer(contextInfo)).takeUnretainedValue()
-            let paths = unsafeBitCast(eventPaths, NSArray.self) as! [String]
+            let mySelf = Unmanaged<FileSystemWatcher>.fromOpaque(_ : UnsafeRawPointer(contextInfo)).takeUnretainedValue()
+            let paths = unsafeBitCast(eventPaths, to: NSArray.self) as! [String]
 
             for paneModel in mySelf.paneModels {
                 var modelPath = paneModel.getRoot().path + "/"
 
-                modelPath = modelPath.substringFromIndex(modelPath.startIndex.advancedBy(1))
+                modelPath = modelPath.substring(from: modelPath.characters.index(modelPath.startIndex, offsetBy: 1))
                 if paths.contains(modelPath) {
                     paneModel.refreshCallback()
                 }
             }
-        }
+        } as! FSEventStreamCallback
 
-        fsEventStream = FSEventStreamCreate(nil, fileSystemObserverCallback, &context, pathsToWatch,
+        fsEventStream = FSEventStreamCreate(nil, fileSystemObserverCallback, &context, pathsToWatch as CFArray,
                 FSEventStreamEventId(kFSEventStreamEventIdSinceNow), CFTimeInterval(1.0),
                 FSEventStreamCreateFlags(kFSEventStreamCreateFlagUseCFTypes))
 
-        FSEventStreamScheduleWithRunLoop(fsEventStream!, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode)
+        FSEventStreamScheduleWithRunLoop(fsEventStream!, CFRunLoopGetCurrent(), CFRunLoopMode.defaultMode as! CFString)
         FSEventStreamStart(fsEventStream!)
     }
 
-    func subscribeToFsEvents(paneModel: PaneModel) {
-        if !paneModels.contains({$0 === paneModel}) {
+    func subscribeToFsEvents(_ paneModel: PaneModel) {
+        if !paneModels.contains(where: {$0 === paneModel}) {
             paneModels.append(paneModel)
         }
     }

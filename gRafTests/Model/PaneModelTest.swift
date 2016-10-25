@@ -21,7 +21,7 @@ class PaneModelTest : XCTestCase {
     }
 
     func testSelectChild() {
-        let root = File(name: "/", path: "/", size: UInt64.max, dateModified: NSDate(), isDirectory: true);
+        let root = File(name: "/", path: "/", size: UInt64.max, dateModified: Date(), isDirectory: true);
         let v  = TestUtil.findFileInRoot("var")!
 
         let model = PaneModel(root: root, from: v)

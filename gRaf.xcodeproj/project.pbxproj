@@ -333,6 +333,14 @@
 				LastSwiftMigration = 0700;
 				LastSwiftUpdateCheck = 0700;
 				ORGANIZATIONNAME = "Andrey Vokin";
+				TargetAttributes = {
+					AC38F49DE5A7735F1E9FB249 = {
+						LastSwiftMigration = 0800;
+					};
+					AC38F9299127AF9BE27868B7 = {
+						LastSwiftMigration = 0800;
+					};
+				};
 			};
 			buildConfigurationList = AC38F4802E3A6F95F65FEAAC /* Build configuration list for PBXProject "gRaf" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -464,6 +472,7 @@
 				INFOPLIST_FILE = gRaf/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_NAME = gRaf;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -479,6 +488,7 @@
 				INFOPLIST_FILE = gRafTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_NAME = gRafTests;
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 			};
 			name = Release;
@@ -535,6 +545,7 @@
 				INFOPLIST_FILE = gRaf/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_NAME = gRaf;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -586,6 +597,7 @@
 				INFOPLIST_FILE = gRafTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_NAME = gRafTests;
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 			};
 			name = Debug;

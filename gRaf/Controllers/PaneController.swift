@@ -16,16 +16,16 @@ class PaneController : NSViewController {
         appDelegate = AppDelegate.getAppDelegate();
     }
 
-    override init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+    override init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         appDelegate = AppDelegate.getAppDelegate()!;
     }
 
     func focus() {
-        window!.makeKeyWindow()
+        window!.makeKey()
     }
 
-    func viewKeyDown(event: NSEvent) -> Bool {
+    func viewKeyDown(_ event: NSEvent) -> Bool {
         return true
     }
 

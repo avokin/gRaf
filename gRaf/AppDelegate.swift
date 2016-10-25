@@ -21,9 +21,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     override init() {
         let contentSize = NSMakeRect(0.0, 0.0, 600.0, 400.0)
-        let windowStyleMask = NSTitledWindowMask | NSResizableWindowMask | NSClosableWindowMask |
-                NSMiniaturizableWindowMask;
-        window = NSWindow(contentRect: contentSize, styleMask: windowStyleMask, backing: NSBackingStoreType.Buffered,
+        let windowStyleMask = NSWindowStyleMask(rawValue: (NSWindowStyleMask.titled.rawValue | NSWindowStyleMask.resizable.rawValue |  NSWindowStyleMask.closable.rawValue | NSWindowStyleMask.miniaturizable.rawValue))
+        window = NSWindow(contentRect: contentSize, styleMask: windowStyleMask, backing: NSBackingStoreType.buffered,
                 defer: true);
         window.title = "gRaf"
 
@@ -33,7 +32,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         splitView = NSSplitView()
 
         mainView = NSView(frame: window.frame)
-        statusBar = NSTextField(frame: CGRectMake(0, 0, window.frame.size.width, statusBarHeight))
+        statusBar = NSTextField(frame: CGRect(x: 0, y: 0, width: window.frame.size.width, height: statusBarHeight))
 
         singleView = scrollView1
 
@@ -48,14 +47,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return appDelegate;
     }
 
-    func createFileListController(root: File, from: File?) -> PaneController {
+    func createFileListController(_ root: File, from: File?) -> PaneController {
         let result = FileListPaneController(root: root, from: from)!
         result.window = window
 
         return result
     }
 
-    func createFileViewController(file: File, parentController: FileListPaneController) -> FileViewController {
+    func createFileViewController(_ file: File, parentController: FileListPaneController) -> FileViewController {
         var result: FileViewController?
         if ImageUtil.isImageFile(file) {
             result = ImageViewController(file: file, parentController: parentController)
@@ -68,7 +67,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return result!
     }
 
-    func createFileListController(insteadOf: PaneController, root: File, from: File) {
+    func createFileListController(_ insteadOf: PaneController, root: File, from: File) {
         let newController = createFileListController(root, from: from)
         var oldController: PaneController
         if paneController1 == insteadOf {
@@ -84,12 +83,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         oldController.dispose()
     }
 
-    func dispose(controller: PaneController) {
+    func dispose(_ controller: PaneController) {
         controller.window = nil
         controller.appDelegate = nil
     }
 
-    func openFileViewController(insteadOf: FileListPaneController, file: File) {
+    func openFileViewController(_ insteadOf: FileListPaneController, file: File) {
         let newController = createFileViewController(file, parentController: insteadOf)
         if paneController1 == insteadOf {
             paneController1 = newController
@@ -110,9 +109,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         paneController2 = createFileListController(root, from: nil)
     }
 
-    func fillMainView(view: NSView) {
+    func fillMainView(_ view: NSView) {
         let viewHeight = window.frame.size.height - statusBarHeight - topBarHeight
-        view.frame = CGRectMake(0, statusBarHeight, window.frame.size.width, viewHeight)
+        view.frame = CGRect(x: 0, y: statusBarHeight, width: window.frame.size.width, height: viewHeight)
 
         mainView.addSubview(view)
     }
@@ -125,10 +124,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         scrollView2.documentView = paneController2.view
 
         scrollView1.removeFromSuperview()
-        scrollView1.frame = CGRectMake(0, 0, 1, 1)
+        scrollView1.frame = CGRect(x: 0, y: 0, width: 1, height: 1)
 
         scrollView2.removeFromSuperview()
-        scrollView2.frame = CGRectMake(0, 0, 1, 1)
+        scrollView2.frame = CGRect(x: 0, y: 0, width: 1, height: 1)
 
         splitView.addSubview(scrollView1)
         splitView.addSubview(scrollView2)
@@ -137,19 +136,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func initUI() {
-        splitView.vertical = true
-        splitView.autoresizingMask = [NSAutoresizingMaskOptions.ViewWidthSizable,
-                                      NSAutoresizingMaskOptions.ViewHeightSizable]
+        splitView.isVertical = true
+        splitView.autoresizingMask = [NSAutoresizingMaskOptions.viewWidthSizable,
+                                      NSAutoresizingMaskOptions.viewHeightSizable]
 
-        statusBar.autoresizingMask = [NSAutoresizingMaskOptions.ViewWidthSizable]
+        statusBar.autoresizingMask = [NSAutoresizingMaskOptions.viewWidthSizable]
         statusBar.backgroundColor = window.backgroundColor
         mainView.addSubview(statusBar)
     }
 
     func installSingleView() {
         splitView.removeFromSuperview()
-        singleView.autoresizingMask = [NSAutoresizingMaskOptions.ViewWidthSizable,
-                                       NSAutoresizingMaskOptions.ViewHeightSizable]
+        singleView.autoresizingMask = [NSAutoresizingMaskOptions.viewWidthSizable,
+                                       NSAutoresizingMaskOptions.viewHeightSizable]
         fillMainView(singleView)
     }
 
@@ -163,22 +162,22 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         window.contentViewController = controller
     }
 
-    func applicationWillFinishLaunching(notification: NSNotification) {
+    func applicationWillFinishLaunching(_ notification: Notification) {
         initPaneControllers()
         setupLeftAndRight()
         initUI()
         initWindowController()
     }
 
-    func applicationDidFinishLaunching(aNotification: NSNotification) {
+    func applicationDidFinishLaunching(_ aNotification: Notification) {
         window.makeKeyAndOrderFront(self)
     }
 
-    func applicationShouldTerminateAfterLastWindowClosed(sender: NSApplication) -> Bool {
+    func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
         return true;
     }
 
-    func updateStatus(status: String) {
+    func updateStatus(_ status: String) {
         statusBar.stringValue = status
     }
 }

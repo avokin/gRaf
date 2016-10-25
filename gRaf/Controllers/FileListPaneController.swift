@@ -37,7 +37,7 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
     override func viewDidAppear() {
         super.viewDidAppear()
 
-        tableView.selectRowIndexes(NSIndexSet(index: model.selectedIndex), byExtendingSelection: false)
+        tableView.selectRowIndexes(IndexSet(integer: model.selectedIndex), byExtendingSelection: false)
         tableView.scrollRowToVisible(model.selectedIndex)
     }
 
@@ -46,11 +46,11 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
         window!.makeFirstResponder(tableView)
     }
 
-    func numberOfRowsInTableView(tableView: NSTableView) -> Int {
+    func numberOfRows(in tableView: NSTableView) -> Int {
         return model.getItems().count
     }
 
-    func tableView(tableView: NSTableView, objectValueForTableColumn tableColumn: NSTableColumn?, row: Int) -> AnyObject? {
+    func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
         let file: File = model.getItems()[row]
         if (tableColumn!.identifier.characters.elementsEqual(COLUMN_TYPE_ID.characters)) {
             return nil
@@ -70,7 +70,7 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
         }
     }
 
-    func tableView(tableView: NSTableView, dataCellForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSCell? {
+    func tableView(_ tableView: NSTableView, dataCellFor tableColumn: NSTableColumn?, row: Int) -> NSCell? {
         if tableColumn != nil && tableColumn!.identifier.characters.elementsEqual(COLUMN_TYPE_ID.characters) {
             let file: File = model.getItems()[row]
             var image = NSImage(named: "file")
@@ -83,24 +83,24 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
         }
     }
 
-    func tableView(tableView: NSTableView, shouldEditTableColumn tableColumn: NSTableColumn?, row: Int) -> Bool {
+    func tableView(_ tableView: NSTableView, shouldEdit tableColumn: NSTableColumn?, row: Int) -> Bool {
         return tableColumn != nil && tableColumn!.identifier.characters.elementsEqual(COLUMN_NAME_ID.characters)
     }
 
-    func tableView(tableView: NSTableView, setObjectValue object: AnyObject?, forTableColumn tableColumn: NSTableColumn?, row: Int) {
-        if let newName = object {
+    func tableView(_ tableView: NSTableView, setObjectValue object: Any?, for tableColumn: NSTableColumn?, row: Int) {
+        if object != nil {
             let file = model.getItems()[row]
             FSUtil.rename(file, newName: "\(object!)")
             model.clearCaches()
             model.selectChild("\(object!)")
             // ToDo: make as callback of refresh()
             tableView.reloadData()
-            tableView.selectRowIndexes(NSIndexSet(index: model.selectedIndex), byExtendingSelection: false)
+            tableView.selectRowIndexes(IndexSet(integer: model.selectedIndex), byExtendingSelection: false)
             tableView.scrollRowToVisible(model.selectedIndex)
         }
     }
 
-    override func keyDown(theEvent: NSEvent) {
+    override func keyDown(with theEvent: NSEvent) {
         if theEvent.keyCode == 99 {
             let file = model.getItems()[tableView.selectedRow]
             appDelegate.openFileViewController(self, file: file)
@@ -108,14 +108,14 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
             let tableView: NSTableView = view as! NSTableView
             let file : File = model.getItems()[tableView.selectedRow]
 
-            if theEvent.modifierFlags.intersect(NSEventModifierFlags.ShiftKeyMask) != [] || !file.isDirectory {
-                let showFolder = NSTask()
+            if theEvent.modifierFlags.intersection(NSEventModifierFlags.shift) != [] || !file.isDirectory {
+                let showFolder = Process()
                 if file.isDirectory {
                     showFolder.launchPath = "/usr/bin/open"
                     showFolder.arguments = [file.path]
                     showFolder.launch()
                 } else {
-                    NSWorkspace.sharedWorkspace().openFile(file.path)
+                    NSWorkspace.shared().openFile(file.path)
                 }
 
                 return
@@ -135,7 +135,7 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
 
             self.appDelegate.updateStatus(model.getRoot().path)
             tableView.reloadData()
-            tableView.selectRowIndexes(NSIndexSet(index: model.selectedIndex), byExtendingSelection: false)
+            tableView.selectRowIndexes(IndexSet(integer: model.selectedIndex), byExtendingSelection: false)
             tableView.scrollRowToVisible(model.selectedIndex)
         } else if theEvent.keyCode == 48 {
             otherPaneController.focus()
@@ -158,24 +158,24 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
             let file = model.getItems()[tableView.selectedRow]
             FileActions.deleteFileAction(file)
         } else if theEvent.keyCode == 116 {
-            if theEvent.modifierFlags.intersect(NSEventModifierFlags.FunctionKeyMask) != [] {
+            if theEvent.modifierFlags.intersection(NSEventModifierFlags.function) != [] {
                 model.selectedIndex = 0
-                tableView.selectRowIndexes(NSIndexSet(index: model.selectedIndex), byExtendingSelection: false)
+                tableView.selectRowIndexes(IndexSet(integer: model.selectedIndex), byExtendingSelection: false)
                 tableView.scrollRowToVisible(model.selectedIndex)
             }
         } else {
-            super.keyDown(theEvent)
+            super.keyDown(with: theEvent)
         }
     }
 
     func refresh() {
-        dispatch_async(dispatch_get_main_queue()) {
+        DispatchQueue.main.async {
             self.appDelegate.updateStatus(self.model.getRoot().path)
             self.tableView.reloadData()
         }
     }
 
-    func createColumn(name: String) -> NSTableColumn {
+    func createColumn(_ name: String) -> NSTableColumn {
         let column = NSTableColumn(identifier: name)
         let headerCell = NSTableHeaderCell()
         headerCell.objectValue = name
@@ -201,17 +201,17 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
 
         tableView.addTableColumn(createColumn(COLUMN_DATE_MODIFIED_ID))
 
-        tableView.focusRingType = NSFocusRingType.None
+        tableView.focusRingType = NSFocusRingType.none
 
-        tableView.setDataSource(self);
-        tableView.setDelegate(self)
+        tableView.dataSource = self;
+        tableView.delegate = self
     }
 
-    func tableView(tableView: NSTableView, sortDescriptorsDidChange oldDescriptors: [NSSortDescriptor]) {
+    func tableView(_ tableView: NSTableView, sortDescriptorsDidChange oldDescriptors: [NSSortDescriptor]) {
         var descriptors = tableView.sortDescriptors
-        if let first = descriptors[0] as? NSSortDescriptor {
-            model.setSortDescriptor(first)
-            tableView.reloadData()
-        }
+        
+        model.setSortDescriptor(descriptors[0])
+        tableView.reloadData()
+        
     }
 }

@@ -53,7 +53,7 @@ class ImageViewController: FileViewController {
         return nil
     }
 
-    override func keyDown(theEvent: NSEvent) {
+    override func keyDown(with theEvent: NSEvent) {
         if theEvent.keyCode == 53 {
             appDelegate.createFileListController(self, root:file.getParent()!, from: file)
         } else if theEvent.keyCode == 123 {

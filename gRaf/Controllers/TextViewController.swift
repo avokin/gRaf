@@ -31,9 +31,9 @@ class TextViewController: FileViewController {
         textView.setSelectedRange(NSMakeRange(0, 0))
     }
 
-    override func viewKeyDown(theEvent: NSEvent) -> Bool {
+    override func viewKeyDown(_ theEvent: NSEvent) -> Bool {
         if theEvent.keyCode == 1 {
-            if theEvent.modifierFlags.intersect(NSEventModifierFlags.CommandKeyMask) != [] {
+            if theEvent.modifierFlags.intersection(NSEventModifierFlags.command) != [] {
                 FSUtil.setFileContent(file, content: textView.string!)
             }
         } else if theEvent.keyCode == 53 {
@@ -43,9 +43,9 @@ class TextViewController: FileViewController {
         return true
     }
 
-    func textDidChange(notification: NSNotification) {
-        let a: NSString = self.textView.string!;
-        let size = a.sizeWithAttributes([NSFontAttributeName: self.textView.font!])
+    func textDidChange(_ notification: Notification) {
+        let a: NSString = self.textView.string! as NSString;
+        let size = a.size(withAttributes: [NSFontAttributeName: self.textView.font!])
 
         self.textView.frame = NSMakeRect(self.textView.frame.origin.x, self.textView.frame.origin.y, round(size.width + 15), round(size.height))
     }

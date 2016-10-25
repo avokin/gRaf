@@ -6,7 +6,7 @@
 import Foundation
 
 class TestUtil {
-    class func findFileInRoot(name: String) -> File? {
+    class func findFileInRoot(_ name: String) -> File? {
         let files = FSUtil.getFilesOfDirectory("/")
 
         var result: File? = nil
