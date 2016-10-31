@@ -44,7 +44,11 @@ open class FSUtil {
                             var newPathElement = try? fileManager.destinationOfSymbolicLink(atPath: elementPath)
 
                             if newPathElement != nil {
-                                elementPath = path + "/" + newPathElement!
+                                if newPathElement!.hasPrefix("/") {
+                                    elementPath = newPathElement!
+                                } else {
+                                    elementPath = path + "/" + newPathElement!
+                                }
                             } else {
                                 break;
                             }
@@ -61,7 +65,7 @@ open class FSUtil {
                 }
             }
 
-            var file = File(name: element, path: path + "/" + element, size: size, dateModified: modificationDate, isDirectory: isDirectory)
+            let file = File(name: element, path: path + "/" + element, size: size, dateModified: modificationDate, isDirectory: isDirectory)
 
             files.append(file)
         }
