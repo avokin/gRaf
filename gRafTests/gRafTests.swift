@@ -23,7 +23,6 @@ class gRafTests: XCTestCase {
     
     func testExample() {
         // This is an example of a functional test case.
-        XCTAssert(false, "Failed")
     }
     
     func testPerformanceExample() {

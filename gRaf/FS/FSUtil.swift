@@ -65,7 +65,11 @@ open class FSUtil {
                 }
             }
 
-            let file = File(name: element, path: path + "/" + element, size: size, dateModified: modificationDate, isDirectory: isDirectory)
+            var prefix = path
+            if !prefix.hasSuffix("/") {
+                prefix = prefix + "/"
+            }
+            let file = File(name: element, path: prefix + element, size: size, dateModified: modificationDate, isDirectory: isDirectory)
 
             files.append(file)
         }

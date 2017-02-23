@@ -40,6 +40,6 @@ class TextUtilTest : XCTestCase {
 
     func testGetDateText() {
         let result = TextUtil.getDateText(Date(timeIntervalSince1970: 123000))
-        XCTAssertEqual("02/01/70 13:10:00", result)
+        XCTAssertEqual("02/01/1970, 11:10:00", result)
     }
 }
