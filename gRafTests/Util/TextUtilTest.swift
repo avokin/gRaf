@@ -19,8 +19,7 @@ class TextUtilTest : XCTestCase {
 
     func testGetSizeTextLessThanKb() {
         let result = TextUtil.getSizeText(523)
-        XCTAssertEqual("523 bytes",
-                result)
+        XCTAssertEqual("523 bytes", result)
     }
 
     func testGetSizeTextLessThanMb() {

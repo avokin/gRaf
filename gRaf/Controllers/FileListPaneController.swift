@@ -19,7 +19,7 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
         super.init(nibName: nil, bundle: nil)
 
         model.setRoot(root)
-        self.appDelegate.updateStatus(root.path)
+        self.appDelegate.updateTopBar(root.path)
         if from != nil {
             model.selectChild(from!.name)
         }
@@ -133,7 +133,7 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
                 model.setRoot(selectedFile)
             }
 
-            self.appDelegate.updateStatus(model.getRoot().path)
+            self.appDelegate.updateTopBar(model.getRoot().path)
             tableView.reloadData()
             tableView.selectRowIndexes(IndexSet(integer: model.selectedIndex), byExtendingSelection: false)
             tableView.scrollRowToVisible(model.selectedIndex)
@@ -170,7 +170,7 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
 
     func refresh() {
         DispatchQueue.main.async {
-            self.appDelegate.updateStatus(self.model.getRoot().path)
+            self.appDelegate.updateTopBar(self.model.getRoot().path)
             self.tableView.reloadData()
         }
     }

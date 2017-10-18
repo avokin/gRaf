@@ -21,6 +21,6 @@ class FileViewController: PaneController {
     }
 
     func updateView() {
-        self.appDelegate.updateStatus(self.file.path)
+        self.appDelegate.updateTopBar(self.file.path)
     }
 }

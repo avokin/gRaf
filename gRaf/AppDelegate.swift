@@ -7,6 +7,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     let statusBarHeight: CGFloat = 20
     let topBarHeight: CGFloat = 20
+    let padding: CGFloat = 2
+    let titleBarHeight: CGFloat = 20
 
     var window: NSWindow
     var scrollView1: NSScrollView
@@ -15,6 +17,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var singleView: NSScrollView
     var mainView: NSView
     var statusBar: NSTextField
+    var topBar: NSTextField
 
     var paneController1: PaneController!
     var paneController2: PaneController!
@@ -33,6 +36,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         mainView = NSView(frame: window.frame)
         statusBar = NSTextField(frame: CGRect(x: 0, y: 0, width: window.frame.size.width, height: statusBarHeight))
+        topBar = NSTextField(frame: CGRect(x: 0, y: window.frame.size.height - topBarHeight, width: window.frame.size.width, height: topBarHeight))
 
         singleView = scrollView1
 
@@ -110,7 +114,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func fillMainView(_ view: NSView) {
-        let viewHeight = window.frame.size.height - statusBarHeight - topBarHeight
+        var titleBarSpace: CGFloat = 0
+        if (mainView.window != nil) {
+            titleBarSpace = titleBarHeight
+        }
+        let viewHeight = window.frame.size.height - statusBarHeight - topBarHeight - titleBarSpace - padding
         view.frame = CGRect(x: 0, y: statusBarHeight, width: window.frame.size.width, height: viewHeight)
 
         mainView.addSubview(view)
@@ -139,6 +147,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         splitView.isVertical = true
         splitView.autoresizingMask = [NSAutoresizingMaskOptions.viewWidthSizable,
                                       NSAutoresizingMaskOptions.viewHeightSizable]
+
+        topBar.autoresizingMask = [NSAutoresizingMaskOptions.viewWidthSizable]
+        topBar.backgroundColor = window.backgroundColor
+        mainView.addSubview(topBar)
 
         statusBar.autoresizingMask = [NSAutoresizingMaskOptions.viewWidthSizable]
         statusBar.backgroundColor = window.backgroundColor
@@ -179,5 +191,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func updateStatus(_ status: String) {
         statusBar.stringValue = status
+    }
+
+    func updateTopBar(_ text: String) {
+        topBar.stringValue = text
     }
 }
