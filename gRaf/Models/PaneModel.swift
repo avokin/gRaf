@@ -42,6 +42,10 @@ class PaneModel {
         selectedIndex = index
     }
 
+    func selectChild(_ index: Int) {
+        selectedIndex = index
+    }
+
     func getPath() -> String {
         return root.path;
     }
@@ -128,5 +132,13 @@ class PaneModel {
 
     func refreshCallback() {
         refresh()
+    }
+
+    func getSelectedFile() -> File {
+        if (selectedIndex == 0) {
+            return root
+        }
+
+        return getItems()[selectedIndex]
     }
 }

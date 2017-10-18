@@ -100,7 +100,15 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
         }
     }
 
+    public func tableViewSelectionDidChange(_ notification: Notification) {
+        model.selectChild(tableView.selectedRow)
+    }
+
     override func keyDown(with theEvent: NSEvent) {
+        if KeyboardUtil.isCommand_C_Pressed(theEvent) {
+            KeyboardUtil.copyToClipboard(model.getSelectedFile().path)
+            return
+        }
         if theEvent.keyCode == 99 {
             let file = model.getItems()[tableView.selectedRow]
             appDelegate.openFileViewController(self, file: file)
