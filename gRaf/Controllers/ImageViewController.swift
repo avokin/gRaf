@@ -54,33 +54,19 @@ class ImageViewController: FileViewController {
     }
 
     override func keyDown(with theEvent: NSEvent) {
+        if theEvent.keyCode == 117 {
+            // del
+            FSUtil.deleteFile(file.path)
+            openNextImage()
+        }
         if theEvent.keyCode == 53 {
             appDelegate.createFileListController(self, root:file.getParent()!, from: file)
         } else if theEvent.keyCode == 123 {
-            if var i = getCurrentFileIndex() {
-                while i > 0 {
-                    i -= 1
-                    let candidate: File = parentController.model.getItems()[i]
-
-                    if ImageUtil.isImageFile(candidate) {
-                        file = candidate
-                        resetImage()
-                        break
-                    }
-                }
-            }
+            // <-
+            openPreviousImage()
         } else if theEvent.keyCode == 124 {
-            if var i = getCurrentFileIndex() {
-                while i < parentController.model.getItems().count - 1 {
-                    i += 1
-                    let candidate: File = parentController.model.getItems()[i]
-                    if ImageUtil.isImageFile(candidate) {
-                        file = candidate
-                        resetImage()
-                        break
-                    }
-                }
-            }
+            // ->
+            openNextImage()
         }
     }
 
@@ -92,5 +78,34 @@ class ImageViewController: FileViewController {
     override func updateView() {
         super.updateView()
         imageView.updateImageSize()
+    }
+
+    private func openPreviousImage() {
+        if var i = getCurrentFileIndex() {
+            while i > 0 {
+                i -= 1
+                let candidate: File = parentController.model.getItems()[i]
+
+                if ImageUtil.isImageFile(candidate) {
+                    file = candidate
+                    resetImage()
+                    break
+                }
+            }
+        }
+    }
+
+    private func openNextImage() {
+        if var i = getCurrentFileIndex() {
+            while i < parentController.model.getItems().count - 1 {
+                i += 1
+                let candidate: File = parentController.model.getItems()[i]
+                if ImageUtil.isImageFile(candidate) {
+                    file = candidate
+                    resetImage()
+                    break
+                }
+            }
+        }
     }
 }
