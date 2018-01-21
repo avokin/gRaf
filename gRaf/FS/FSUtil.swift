@@ -138,4 +138,17 @@ open class FSUtil {
         } catch _ {
         };
     }
+
+    static func resolveSymlink(at url: URL) -> String? {
+        do {
+            let resourceValues = try url.resourceValues(forKeys: [.isAliasFileKey])
+            if resourceValues.isAliasFile! {
+                let originalURL = try URL(resolvingAliasFileAt: url)
+                return originalURL.path
+            }
+        } catch  {
+           // ignore
+        }
+        return nil
+    }
 }

@@ -7,6 +7,7 @@ import Foundation
 
 class PaneModel {
     fileprivate var root: File
+    fileprivate var rootOriginalPath: String! = nil
     fileprivate var sortDescriptor: NSSortDescriptor = NSSortDescriptor(key: "Name", ascending: true)
     open var callback: (() -> Void)?
     var selectedIndex = 0
@@ -20,6 +21,7 @@ class PaneModel {
 
     init(root: File, from: File?) {
         self.root = root
+        self.rootOriginalPath = calculateRootOriginalPath()
         clearCaches()
         if from != nil {
             selectChild(from!.name)
@@ -54,8 +56,23 @@ class PaneModel {
         return root
     }
 
+     func getRootOriginalPath() -> String {
+         return rootOriginalPath
+     }
+
+    private func calculateRootOriginalPath() -> String {
+        let url = URL.init(fileURLWithPath: root.path)
+        var result =  FSUtil.resolveSymlink(at: url)
+        if result == nil {
+            result = root.path
+        }
+
+        return result!
+    }
+
     func setRoot(_ root: File) {
         self.root = root;
+        self.rootOriginalPath = calculateRootOriginalPath()
         refresh()
     }
 
