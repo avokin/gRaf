@@ -146,6 +146,7 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
             tableView.selectRowIndexes(IndexSet(integer: model.selectedIndex), byExtendingSelection: false)
             tableView.scrollRowToVisible(model.selectedIndex)
         } else if theEvent.keyCode == 48 {
+            // Tab
             otherPaneController.focus()
         } else if theEvent.keyCode == 96 {
             // ToDo: use model.selectedIndex
@@ -165,12 +166,6 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
         } else if theEvent.keyCode == 100 {
             let file = model.getItems()[tableView.selectedRow]
             FileActions.deleteFileAction(file)
-        } else if theEvent.keyCode == 116 {
-            if theEvent.modifierFlags.intersection(NSEventModifierFlags.function) != [] {
-                model.selectedIndex = 0
-                tableView.selectRowIndexes(IndexSet(integer: model.selectedIndex), byExtendingSelection: false)
-                tableView.scrollRowToVisible(model.selectedIndex)
-            }
         } else {
             super.keyDown(with: theEvent)
         }
