@@ -141,16 +141,12 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
                 model.setRoot(newRoot!)
                 model.selectChild(previousRoot.name)
             } else {
-                // ToDo: use model.selectedIndex
-                let selectedFile = model.getItems()[tableView.selectedRow]
-                model.selectedIndex = 0
+                let selectedFile = model.getSelectedFile()
                 model.setRoot(selectedFile)
+                model.selectedIndex = 0
             }
 
-            self.appDelegate.updateStatus(model.getRoot().path)
-            tableView.reloadData()
-            tableView.selectRowIndexes(IndexSet(integer: model.selectedIndex), byExtendingSelection: false)
-            tableView.scrollRowToVisible(model.selectedIndex)
+            refresh()
         } else if theEvent.keyCode == 96 {
             // ToDo: use model.selectedIndex
             if let fileListController = otherPaneController as? FileListPaneController {
@@ -171,8 +167,12 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
 
     func refresh() {
         DispatchQueue.main.async {
+            let selectedIndex = self.model.selectedIndex
             self.appDelegate.updateStatus(self.model.getRoot().path)
             self.tableView.reloadData()
+            self.model.selectChild(selectedIndex)
+            self.tableView.selectRowIndexes(IndexSet(integer: self.model.selectedIndex), byExtendingSelection: false)
+            self.tableView.scrollRowToVisible(self.model.selectedIndex)
         }
     }
 
