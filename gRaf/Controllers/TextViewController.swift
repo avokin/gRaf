@@ -34,9 +34,12 @@ class TextViewController: FileViewController {
     override func viewKeyDown(_ theEvent: NSEvent) -> Bool {
         if theEvent.keyCode == 1 {
             if theEvent.modifierFlags.intersection(NSEventModifierFlags.command) != [] {
+                // Command + S
                 FSUtil.setFileContent(file, content: textView.string!)
+                return false
             }
         } else if theEvent.keyCode == 53 {
+            // Esc
             appDelegate.createFileListController(self, root:file.getParent()!, from: file)
             return false
         }
