@@ -109,13 +109,19 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
             KeyboardUtil.copyToClipboard(model.getSelectedFile().path)
             return
         }
+        if theEvent.keyCode == 48 {
+            // Tab
+            otherPaneController.focus()
+            return
+        }
+        if (tableView.selectedRow < 0) {
+            return
+        }
+        let file = model.getItems()[tableView.selectedRow]
         if theEvent.keyCode == 99 {
             let file = model.getItems()[tableView.selectedRow]
             appDelegate.openFileViewController(self, file: file)
         } else if theEvent.keyCode == 36 { // Enter
-            let tableView: NSTableView = view as! NSTableView
-            let file : File = model.getItems()[tableView.selectedRow]
-
             if theEvent.modifierFlags.intersection(NSEventModifierFlags.shift) != [] || !file.isDirectory {
                 let showFolder = Process()
                 if file.isDirectory {
@@ -145,16 +151,11 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
             tableView.reloadData()
             tableView.selectRowIndexes(IndexSet(integer: model.selectedIndex), byExtendingSelection: false)
             tableView.scrollRowToVisible(model.selectedIndex)
-        } else if theEvent.keyCode == 48 {
-            // Tab
-            otherPaneController.focus()
         } else if theEvent.keyCode == 96 {
             // ToDo: use model.selectedIndex
             if let fileListController = otherPaneController as? FileListPaneController {
-                let from = model.getItems()[tableView.selectedRow]
                 let to = fileListController.model.getRoot();
-
-                FileActions.copyFileAction(from, to: to)
+                FileActions.copyFileAction(file, to: to)
             }
         } else if theEvent.keyCode == 97 {
             if let fileListController = otherPaneController as? FileListPaneController {
@@ -164,10 +165,7 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
                 FileActions.moveFileAction(from, to: to)
             }
         } else if theEvent.keyCode == 100 {
-            let file = model.getItems()[tableView.selectedRow]
             FileActions.deleteFileAction(file)
-        } else {
-            super.keyDown(with: theEvent)
         }
     }
 
