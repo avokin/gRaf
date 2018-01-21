@@ -14,7 +14,7 @@ class PaneModel {
     fileprivate var cached: [File]? = nil
 
     convenience init() {
-        var file = File(name: "/", path: "/", size: UInt64.max, dateModified: Date(), isDirectory: true);
+        let file = File(name: "/", path: "/", size: UInt64.max, dateModified: Date(), isDirectory: true);
         self.init(root: file, from: nil)
     }
 

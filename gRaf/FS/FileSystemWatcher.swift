@@ -30,9 +30,8 @@ open class FileSystemWatcher {
             let paths = unsafeBitCast(eventPaths, to: NSArray.self) as! [String]
 
             for paneModel in mySelf.paneModels {
-                var modelPath = paneModel.getRoot().path + "/"
+                let modelPath = paneModel.getRoot().path + "/"
 
-                modelPath = modelPath.substring(from: modelPath.characters.index(modelPath.startIndex, offsetBy: 1))
                 if paths.contains(modelPath) {
                     paneModel.refreshCallback()
                 }
