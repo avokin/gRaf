@@ -8,7 +8,6 @@ import Foundation
 
 class ProgressWindow : NSWindow {
     var progressIndicator: NSProgressIndicator
-    var progress: Progress
     var cancelled: Bool = false
 
     init() {
@@ -17,8 +16,6 @@ class ProgressWindow : NSWindow {
         let pbHeight: CGFloat = 20.0
         let contentSize = NSMakeRect(0.0, 0.0, width, height);
         let windowStyleMask = NSTitledWindowMask
-        progress = Progress(totalUnitCount: 10000)
-        progress.completedUnitCount = 0
         progressIndicator = NSProgressIndicator(frame: CGRect(x: 0.0, y: (height - pbHeight) / 2, width: width, height: pbHeight))
 
         super.init(contentRect: contentSize, styleMask: windowStyleMask, backing: NSBackingStoreType.buffered, defer: true)
@@ -39,8 +36,7 @@ class ProgressWindow : NSWindow {
     }
 
     func cancelAction(_ obj:AnyObject?) {
-        progress.cancel()
-        NSApplication.shared().abortModal()
+        cancelled = true
     }
 
     override func keyDown(with theEvent: NSEvent) {
@@ -62,18 +58,24 @@ class ProgressWindow : NSWindow {
 
         DispatchQueue.global(qos: .userInitiated).async {
             while true {
-                if self.progress.isCancelled {
+                if self.cancelled {
                     break;
                 }
                 usleep(100000)
 
-                self.progress.completedUnitCount = Int64(progressUpdater())
                 DispatchQueue.main.async {
-                    if !self.progress.isCancelled {
-                        self.progressIndicator.doubleValue = Double(self.progress.completedUnitCount)
+                    if !self.cancelled {
+                        self.progressIndicator.doubleValue = Double(progressUpdater())
                     }
                 }
             }
+
+            DispatchQueue.main.async {
+                NSApplication.shared().stopModal()
+                AppDelegate.appDelegate!.window.makeKey()
+                self.update()
+            }
+
         }
         NSApplication.shared().runModal(for: self)
     }
