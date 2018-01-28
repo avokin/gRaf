@@ -8,14 +8,14 @@ import Foundation
 
 class ProgressWindow : NSWindow {
     var progressIndicator: NSProgressIndicator
-    var cancelled: Bool = false
+    var operation: Operation?
 
     init() {
         let width: CGFloat = 400.0
         let height: CGFloat = 200.0
         let pbHeight: CGFloat = 20.0
         let contentSize = NSMakeRect(0.0, 0.0, width, height);
-        let windowStyleMask = NSTitledWindowMask
+        let windowStyleMask = NSWindowStyleMask.titled
         progressIndicator = NSProgressIndicator(frame: CGRect(x: 0.0, y: (height - pbHeight) / 2, width: width, height: pbHeight))
 
         super.init(contentRect: contentSize, styleMask: windowStyleMask, backing: NSBackingStoreType.buffered, defer: true)
@@ -28,7 +28,7 @@ class ProgressWindow : NSWindow {
         progressIndicator.style = NSProgressIndicatorStyle.barStyle
         progressIndicator.isIndeterminate = false
         progressIndicator.minValue = 0.0
-        progressIndicator.maxValue = 10000.0
+        progressIndicator.maxValue = 100.0
         progressIndicator.doubleValue = 20.0
 
         contentView!.addSubview(progressIndicator)
@@ -36,7 +36,7 @@ class ProgressWindow : NSWindow {
     }
 
     func cancelAction(_ obj:AnyObject?) {
-        cancelled = true
+        self.operation?.cancel()
     }
 
     override func keyDown(with theEvent: NSEvent) {
@@ -48,35 +48,50 @@ class ProgressWindow : NSWindow {
     }
 
     func start(_ mainAction: @escaping () -> (), progressUpdater: @escaping () -> Int) {
+        let operationQueue: OperationQueue = OperationQueue()
+
         self.progressIndicator.doubleValue = 0
 
-        DispatchQueue.global(qos: .userInitiated).async {
+        self.operation = MyOperation(action: {
             mainAction()
-
-            self.cancelAction(nil)
-        }
-
-        DispatchQueue.global(qos: .userInitiated).async {
-            while true {
-                if self.cancelled {
-                    break;
-                }
-                usleep(100000)
-
-                DispatchQueue.main.async {
-                    if !self.cancelled {
-                        self.progressIndicator.doubleValue = Double(progressUpdater())
-                    }
-                }
-            }
-
+        }, completionBlock: {
             DispatchQueue.main.async {
                 NSApplication.shared().stopModal()
+                self.close()
                 AppDelegate.appDelegate!.window.makeKey()
-                self.update()
             }
+        })
 
-        }
+        let controlOperation: Operation = MyOperation(action: {
+            while true {
+                if self.operation!.isFinished {
+                    break;
+                }
+                usleep(50000)
+
+                DispatchQueue.main.async {
+                    self.progressIndicator.doubleValue = Double(progressUpdater())
+                }
+            }
+        }, completionBlock: {})
+
+        operationQueue.addOperations([self.operation!, controlOperation], waitUntilFinished: false)
+
         NSApplication.shared().runModal(for: self)
+    }
+
+    class MyOperation: Operation {
+        let action: () -> ()
+        let myCompletionBlock: () -> ()
+
+        init(action: @escaping () -> (), completionBlock: @escaping () -> ()) {
+            self.action = action
+            self.myCompletionBlock = completionBlock
+        }
+
+        override func main() {
+            self.completionBlock = myCompletionBlock
+            action()
+        }
     }
 }

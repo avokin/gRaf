@@ -41,7 +41,7 @@ class FileActions {
                 return 0
             }
             let destSize = FSUtil.fileSize(destPath)
-            let a = 10000 * destSize
+            let a = 100 * destSize
             let b = a / sourceSize
             return Int(b + 1)
         })
