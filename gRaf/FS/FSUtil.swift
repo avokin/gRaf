@@ -7,7 +7,7 @@ import Foundation
 
 open class FSUtil {
     static func getRoot() -> File {
-        return File(name: "/", path: "/", size: UInt64.max, dateModified: Date(), isDirectory: true)
+        return File(path: "/", size: UInt64.max, dateModified: Date(), isDirectory: true)
     }
 
     static func getFilesOfDirectory(_ path: String) -> [File] {
@@ -69,7 +69,7 @@ open class FSUtil {
             if !prefix.hasSuffix("/") {
                 prefix = prefix + "/"
             }
-            let file = File(name: element, path: prefix + element, size: size, dateModified: modificationDate, isDirectory: isDirectory)
+            let file = File(path: prefix + element, size: size, dateModified: modificationDate, isDirectory: isDirectory)
 
             files.append(file)
         }

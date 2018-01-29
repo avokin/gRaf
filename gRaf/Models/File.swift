@@ -22,11 +22,18 @@ class File: NSObject{
         self.isDirectory = isDirectory
     }
 
+    init(path: String, size: UInt64, dateModified: Date?, isDirectory: Bool) {
+        self.name = NSURL(fileURLWithPath: path).lastPathComponent!
+        self.path = path
+        self.size = size
+        self.dateModified = dateModified
+        self.isDirectory = isDirectory
+    }
+
     func getParent() -> File? {
         if parent == nil && path.characters.count > 1 {
         let parentPath = NSURL(fileURLWithPath: path).deletingLastPathComponent!.path
-            let parentName = URL(fileURLWithPath: parentPath).lastPathComponent
-            parent = File(name: parentName, path: parentPath, size: UInt64.max, dateModified: Date(), isDirectory: true)
+            parent = File(path: parentPath, size: UInt64.max, dateModified: Date(), isDirectory: true)
         }
 
         return parent
