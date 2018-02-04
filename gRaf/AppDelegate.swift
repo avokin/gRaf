@@ -48,7 +48,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return appDelegate;
     }
 
-    func createFileListController(_ root: File, from: File?) -> PaneController {
+    func createFileListController(_ root: File, from: File?) -> FileListPaneController {
         let result = FileListPaneController(root: root, from: from)!
         result.window = window
 
@@ -105,9 +105,32 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func initPaneControllers() {
-        let root = FSUtil.getRoot()
-        paneController1 = createFileListController(root, from: nil)
-        paneController2 = createFileListController(root, from: nil)
+        let defaults = UserDefaults.standard
+        var leftFilePath: String? = defaults.value(forKey: "leftFilePath") as! String?
+        if leftFilePath == nil {
+           leftFilePath = "/"
+        }
+        var rightFilePath: String? = defaults.value(forKey: "rightFilePath") as! String?
+        if rightFilePath == nil {
+            rightFilePath = "/"
+        }
+
+        let root1 = File(path: leftFilePath!, size: UInt64.max, dateModified: Date(), isDirectory: true)
+        let root2 = File(path: rightFilePath!, size: UInt64.max, dateModified: Date(), isDirectory: true)
+
+        let c1 = createFileListController(root1, from: nil)
+        c1.model.addListener(listener: PaneModelListener { ec in
+            ec.rootChanged = {(newValue: String) in defaults.set(newValue, forKey: "leftFilePath")};
+            return ec
+        })
+        let c2 = createFileListController(root2, from: nil)
+        c2.model.addListener(listener: PaneModelListener { ec in
+            ec.rootChanged = {(newValue: String) in defaults.set(newValue, forKey: "rightFilePath")};
+            return ec
+        })
+
+        paneController1 = c1
+        paneController2 = c2
     }
 
     func fillMainView(_ view: NSView) {

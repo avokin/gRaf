@@ -6,6 +6,7 @@
 import Foundation
 
 class PaneModel {
+    var listeners = [PaneModelListener]()
     fileprivate var root: File
     fileprivate var rootOriginalPath: String! = nil
     fileprivate var sortDescriptor: NSSortDescriptor = NSSortDescriptor(key: "Name", ascending: true)
@@ -28,6 +29,16 @@ class PaneModel {
         }
 
         FileSystemWatcher.instance.subscribeToFsEvents(self)
+    }
+
+    func addListener(listener: PaneModelListener) {
+        listeners.append(listener)
+    }
+
+    func removeListener(listener: PaneModelListener) {
+        if let index = listeners.index(of: listener) {
+            listeners.remove(at: index)
+        }
     }
 
     func selectChild(_ name: String) {
@@ -74,6 +85,10 @@ class PaneModel {
         self.root = root;
         self.rootOriginalPath = calculateRootOriginalPath()
         refresh()
+
+        for listener in listeners {
+            listener.rootChanged(root.path)
+        }
     }
 
     func calculateCache() -> [File] {

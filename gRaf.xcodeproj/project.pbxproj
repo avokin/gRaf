@@ -8,7 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		36EBC2DB2F4766206F0AE3D1 /* KeyboardUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36EBC7137D7F55850C82CC75 /* KeyboardUtil.swift */; };
+		36EBC5FD8166A0BC49EEFAFA /* PaneModelListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36EBC6751A803DECD8A7327F /* PaneModelListener.swift */; };
 		36EBC61BA3D13E1C9CFD66BA /* KeyboardUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36EBC7137D7F55850C82CC75 /* KeyboardUtil.swift */; };
+		36EBCE9DDEEF8D15D812BADE /* PaneModelListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36EBC6751A803DECD8A7327F /* PaneModelListener.swift */; };
 		AC38F05674C1D103E576C57F /* ImageUtilTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F18124A756E607E43700 /* ImageUtilTest.swift */; };
 		AC38F0C23D515E7AD96E9143 /* FSUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38FCDA9BE999CFA76CF01C /* FSUtil.swift */; };
 		AC38F18ED5F275E2F770AAD8 /* ProgressWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F2553110E11DBAB8A0F4 /* ProgressWindow.swift */; };
@@ -72,6 +74,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		36EBC6751A803DECD8A7327F /* PaneModelListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaneModelListener.swift; sourceTree = "<group>"; };
 		36EBC7137D7F55850C82CC75 /* KeyboardUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardUtil.swift; sourceTree = "<group>"; };
 		AC38F154536A0F26957D2B3F /* gRaf.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gRaf.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC38F18124A756E607E43700 /* ImageUtilTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageUtilTest.swift; sourceTree = "<group>"; };
@@ -286,6 +289,7 @@
 			children = (
 				AC38FF4CC5D3FAFF1FEBA357 /* PaneModel.swift */,
 				AC38FEE0D27728E97CECD076 /* File.swift */,
+				36EBC6751A803DECD8A7327F /* PaneModelListener.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -419,6 +423,7 @@
 				AC38F285E59947D859B93289 /* ImageView.swift in Sources */,
 				AC38F5E1D55122A5E5654885 /* FileSystemWatcher.swift in Sources */,
 				36EBC61BA3D13E1C9CFD66BA /* KeyboardUtil.swift in Sources */,
+				36EBCE9DDEEF8D15D812BADE /* PaneModelListener.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -445,6 +450,7 @@
 				AC38FAEF5B340C06FF77A2DE /* ImageView.swift in Sources */,
 				AC38F7A5CBA0028EB617C2E9 /* FileSystemWatcher.swift in Sources */,
 				36EBC2DB2F4766206F0AE3D1 /* KeyboardUtil.swift in Sources */,
+				36EBC5FD8166A0BC49EEFAFA /* PaneModelListener.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
