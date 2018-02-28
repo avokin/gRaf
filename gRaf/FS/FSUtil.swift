@@ -34,8 +34,9 @@ open class FSUtil {
             var i = 0
             while i < 3 {
                 i += 1
-                var attributes:NSDictionary? = try! fileManager.attributesOfItem(atPath: elementPath) as NSDictionary?
-                if let _attr = attributes {
+                let attributes = try? fileManager.attributesOfItem(atPath: elementPath) as NSDictionary
+                if (attributes != nil) {
+                    let _attr = attributes!
                     size = _attr.fileSize()
                     modificationDate = _attr.fileModificationDate()
 
