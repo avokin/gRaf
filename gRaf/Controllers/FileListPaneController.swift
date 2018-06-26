@@ -114,6 +114,16 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
             otherPaneController.focus()
             return
         }
+
+        if theEvent.keyCode == 98 {
+            // F7
+            let newDirectoryName = UIUtil.getString(title: "Create New Directory")
+            if newDirectoryName != nil {
+                let newDirectoryPath = model.getRoot().path + "/" + newDirectoryName!
+                FSUtil.createFolder(newDirectoryPath)
+            }
+            return
+        }
         if (tableView.selectedRow < 0) {
             return
         }

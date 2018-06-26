@@ -79,6 +79,20 @@ open class FSUtil {
     }
 
     static func copyFile(_ from: String, to: String) {
+
+//        let clientContext: FSFileOperationClientContext = {0}; //zero out the struct to begin with
+//
+//        clientContext.info = myProgressIndicator;
+////All the other setup code
+//        status = FSCopyObjectAsync (fileOp,
+//                &source,
+//                &destination, // Full path to destination dir
+//                targetFilename,
+//                kFSFileOperationDefaultOptions,
+//                statusCallback,
+//                1.0,
+//                &clientContext);
+
         do {
             try FileManager.default.copyItem(atPath: from, toPath: to)
         } catch _ {
@@ -151,5 +165,10 @@ open class FSUtil {
            // ignore
         }
         return nil
+    }
+
+    static func createFolder(_ path: String) {
+        let url = URL(fileURLWithPath: path)
+        try! FileManager.default.createDirectory(at: url, withIntermediateDirectories: true)
     }
 }
