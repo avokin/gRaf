@@ -6,14 +6,14 @@
 import Foundation
 
 class FileActions {
-    class func copyFileAction(_ from: File, to: File) {
-        createFileFromSource(from, to: to) { (fromPath: String, destPath: String) -> Void in
+    class func copyFileAction(_ from: [File], to: File) {
+        createFilesFromSource(from, to: to) { (fromPath: String, destPath: String) -> Void in
             FSUtil.copyFile(fromPath, to: destPath)
         }
     }
 
-    class func moveFileAction(_ from: File, to: File) {
-        createFileFromSource(from, to: to) { (fromPath: String, destPath: String) -> Void in
+    class func moveFileAction(_ from: [File], to: File) {
+        createFilesFromSource(from, to: to) { (fromPath: String, destPath: String) -> Void in
             FSUtil.moveFile(fromPath, to: destPath)
         }
     }
@@ -28,21 +28,28 @@ class FileActions {
         })
     }
 
-    fileprivate class func createFileFromSource(_ from: File, to: File, action: @escaping (_ fromPath: String, _ destPath: String) -> Void) {
+    fileprivate class func createFilesFromSource(_ from: [File], to: File, action: @escaping (_ fromPath: String, _ destPath: String) -> Void) {
         let progressWindow = ProgressWindow();
-        let sourceSize = FSUtil.fileSize(from)
+        var totalSize: UInt64 = 0
+        from.forEach { file in totalSize += FSUtil.fileSize(file) }
 
-        let destPath = FSUtil.getDestinationFileName(from, to: to)
-
+        var copiedSize: UInt64 = 0;
+        var destPath = ""
+        var destSize: UInt64 = 0;
         progressWindow.start({
-            action(from.path, destPath)
+            for file in from {
+                destPath = FSUtil.getDestinationFileName(file, to: to)
+                destSize = FSUtil.fileSize(file)
+                action(file.path, destPath)
+                copiedSize += destSize
+            }
         }, progressUpdater: {
-            if sourceSize <= 0 {
+            if totalSize <= 0 {
                 return 0
             }
             let destSize = FSUtil.fileSize(destPath)
-            let a = 100 * destSize
-            let b = a / sourceSize
+            let a = 100 * (copiedSize + destSize)
+            let b = a / totalSize
             return Int(b + 1)
         })
     }

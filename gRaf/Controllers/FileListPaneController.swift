@@ -161,14 +161,15 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
             // ToDo: use model.selectedIndex
             if let fileListController = otherPaneController as? FileListPaneController {
                 let to = fileListController.model.getRoot();
-                FileActions.copyFileAction(file, to: to)
+                let selectedFiles = tableView.selectedRowIndexes.map{model.getItems()[$0]}
+                FileActions.copyFileAction(selectedFiles, to: to)
             }
         } else if theEvent.keyCode == 97 {
             if let fileListController = otherPaneController as? FileListPaneController {
                 let from = model.getItems()[tableView.selectedRow]
                 let to = fileListController.model.getRoot();
-
-                FileActions.moveFileAction(from, to: to)
+                let filesFrom = [from]
+                FileActions.moveFileAction(filesFrom, to: to)
             }
         } else if theEvent.keyCode == 100 {
             FileActions.deleteFileAction(file)
@@ -213,6 +214,7 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
         tableView.addTableColumn(createColumn(COLUMN_DATE_MODIFIED_ID))
 
         tableView.focusRingType = NSFocusRingType.none
+        tableView.allowsMultipleSelection = true
 
         tableView.dataSource = self;
         tableView.delegate = self
