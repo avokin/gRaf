@@ -121,6 +121,9 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
             if newDirectoryName != nil {
                 let newDirectoryPath = model.getRoot().path + "/" + newDirectoryName!
                 FSUtil.createFolder(newDirectoryPath)
+                model.refresh(false)
+                model.selectChild(newDirectoryName!)
+                refresh()
             }
             return
         }

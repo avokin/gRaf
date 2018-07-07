@@ -147,8 +147,12 @@ class PaneModel {
     }
 
     func refresh() {
+        refresh(true);
+    }
+
+    func refresh(_ withCallback: Bool) {
         cached = calculateCache();
-        if callback != nil {
+        if withCallback && callback != nil {
             callback!()
         }
     }
