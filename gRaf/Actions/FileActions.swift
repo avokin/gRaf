@@ -12,32 +12,34 @@ class FileActions {
         }
     }
 
-    class func moveFileAction(_ from: [File], to: File) {
-        createFilesFromSource(from, to: to) { (fromPath: String, destPath: String) -> Void in
+    class func moveFileAction(_ files: [File], to: File) {
+        createFilesFromSource(files, to: to) { (fromPath: String, destPath: String) -> Void in
             FSUtil.moveFile(fromPath, to: destPath)
         }
     }
 
-    class func deleteFileAction(_ file: File) {
+    class func deleteFileAction(_ files: [File]) {
         let progressWindow = ProgressWindow();
 
         progressWindow.start({
-            FSUtil.deleteFile(file.path)
+            for file in files {
+                FSUtil.deleteFile(file.path)
+            }
         }, progressUpdater: {
             return -1
         })
     }
 
-    fileprivate class func createFilesFromSource(_ from: [File], to: File, action: @escaping (_ fromPath: String, _ destPath: String) -> Void) {
+    fileprivate class func createFilesFromSource(_ files: [File], to: File, action: @escaping (_ fromPath: String, _ destPath: String) -> Void) {
         let progressWindow = ProgressWindow();
         var totalSize: UInt64 = 0
-        from.forEach { file in totalSize += FSUtil.fileSize(file) }
+        files.forEach { file in totalSize += FSUtil.fileSize(file) }
 
         var copiedSize: UInt64 = 0;
         var destPath = ""
         var destSize: UInt64 = 0;
         progressWindow.start({
-            for file in from {
+            for file in files {
                 destPath = FSUtil.getDestinationFileName(file, to: to)
                 destSize = FSUtil.fileSize(file)
                 action(file.path, destPath)

@@ -161,18 +161,20 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
             // ToDo: use model.selectedIndex
             if let fileListController = otherPaneController as? FileListPaneController {
                 let to = fileListController.model.getRoot();
-                let selectedFiles = tableView.selectedRowIndexes.map{model.getItems()[$0]}
+                let selectedFiles = getSelectedFiles()
                 FileActions.copyFileAction(selectedFiles, to: to)
             }
         } else if theEvent.keyCode == 97 {
+            // F6
             if let fileListController = otherPaneController as? FileListPaneController {
-                let from = model.getItems()[tableView.selectedRow]
                 let to = fileListController.model.getRoot();
-                let filesFrom = [from]
+                let filesFrom = getSelectedFiles()
                 FileActions.moveFileAction(filesFrom, to: to)
             }
         } else if theEvent.keyCode == 100 {
-            FileActions.deleteFileAction(file)
+            // Backspace
+            let selectedFiles = getSelectedFiles()
+            FileActions.deleteFileAction(selectedFiles)
         }
     }
 
@@ -225,5 +227,9 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
         
         model.setSortDescriptor(descriptors[0])
         tableView.reloadData()
+    }
+
+    private func getSelectedFiles() -> [File] {
+        return tableView.selectedRowIndexes.map{model.getItems()[$0]}
     }
 }
