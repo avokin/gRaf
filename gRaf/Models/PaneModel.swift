@@ -130,9 +130,6 @@ class PaneModel {
                 second = $0
             }
 
-            var left : String = $0.name
-            var right : String = $1.name
-
             let key: String? = self.sortDescriptor.key
             if key! == "Size" {
                 if first.size == UInt64.max {
