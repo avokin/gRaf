@@ -10,6 +10,7 @@ class PaneModel {
     fileprivate var root: File
     fileprivate var rootOriginalPath: String! = nil
     fileprivate var sortDescriptor: NSSortDescriptor = NSSortDescriptor(key: "Name", ascending: true)
+    // replace with listener
     open var callback: (() -> Void)?
     var selectedIndexSet = IndexSet()
 
@@ -92,12 +93,26 @@ class PaneModel {
     }
 
     func setRoot(_ root: File) {
+        let previousRoot = self.root
         self.root = root;
         self.rootOriginalPath = calculateRootOriginalPath()
-        refresh()
-        self.selectedIndexSet.removeAll();
-        self.selectedIndexSet.insert(0)
+        refresh(false)
 
+        self.selectedIndexSet.removeAll();
+        if FSUtil.isAncestor(root, file: previousRoot) {
+            for (index, file) in getItems().enumerated() {
+                if file.name == previousRoot.name {
+                    self.selectedIndexSet.insert(index)
+                }
+            }
+        }
+        if (self.selectedIndexSet.count == 0) {
+            self.selectedIndexSet.insert(0)
+        }
+
+        if (callback != nil) {
+            callback!()
+        }
         for listener in listeners {
             listener.rootChanged(root.path)
         }
@@ -175,6 +190,7 @@ class PaneModel {
         clearCaches()
     }
 
+    // ToDo: delete
     func refreshCallback() {
         refresh()
     }

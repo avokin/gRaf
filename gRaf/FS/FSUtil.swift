@@ -171,4 +171,9 @@ open class FSUtil {
         let url = URL(fileURLWithPath: path)
         try! FileManager.default.createDirectory(at: url, withIntermediateDirectories: true)
     }
+
+    static func isAncestor(_ ancestorCandidate: File, file: File) -> Bool {
+        let path: String = file.path + "/"
+        return path.hasPrefix(ancestorCandidate.path)
+    }
 }

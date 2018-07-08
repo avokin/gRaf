@@ -153,18 +153,14 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
             }
 
             if ("..".characters.elementsEqual(file.name.characters)) {
-                let previousRoot = model.getRoot()
-                let newRoot = previousRoot.getParent()
+                let newRoot = model.getRoot().getParent()
                 model.setRoot(newRoot!)
-                model.selectFile(previousRoot.name)
             } else {
                 var selectedFiles = model.getSelectedFiles()
                 if selectedFiles.count == 1 {
                     model.setRoot(selectedFiles[0])
                 }
             }
-
-            refresh()
         } else if theEvent.keyCode == 96 {
             // F5
             if let fileListController = otherPaneController as? FileListPaneController {
