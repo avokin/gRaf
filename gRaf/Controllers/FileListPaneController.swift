@@ -21,7 +21,7 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
         model.setRoot(root)
         self.appDelegate.updateStatus(root.path)
         if from != nil {
-            model.selectChild(from!.name)
+            model.selectFiles([from!.name])
         }
 
         createTable()
@@ -37,8 +37,8 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
     override func viewDidAppear() {
         super.viewDidAppear()
 
-        tableView.selectRowIndexes(IndexSet(integer: model.selectedIndex), byExtendingSelection: false)
-        tableView.scrollRowToVisible(model.selectedIndex)
+        tableView.selectRowIndexes(model.selectedIndexSet, byExtendingSelection: false)
+        tableView.scrollRowToVisible(model.selectedIndexSet.first!)
     }
 
     override func focus() {
@@ -92,21 +92,25 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
             let file = model.getItems()[row]
             FSUtil.rename(file, newName: "\(object!)")
             model.clearCaches()
-            model.selectChild("\(object!)")
+            model.selectFiles(["\(object!)"])
             // ToDo: make as callback of refresh()
             tableView.reloadData()
-            tableView.selectRowIndexes(IndexSet(integer: model.selectedIndex), byExtendingSelection: false)
-            tableView.scrollRowToVisible(model.selectedIndex)
+            tableView.selectRowIndexes(model.selectedIndexSet, byExtendingSelection: false)
+            tableView.scrollRowToVisible(model.selectedIndexSet.first!)
         }
     }
 
     public func tableViewSelectionDidChange(_ notification: Notification) {
-        model.selectChild(tableView.selectedRow)
+        model.selectFiles(tableView.selectedRowIndexes)
     }
 
     override func keyDown(with theEvent: NSEvent) {
         if KeyboardUtil.isCommand_C_Pressed(theEvent) {
-            KeyboardUtil.copyToClipboard(model.getSelectedFile().path)
+            var selectedFiles = model.getSelectedFiles()
+            if selectedFiles.count == 1 {
+                KeyboardUtil.copyToClipboard(selectedFiles[0].path)
+            }
+
             return
         }
         if theEvent.keyCode == 48 {
@@ -122,7 +126,7 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
                 let newDirectoryPath = model.getRoot().path + "/" + newDirectoryName!
                 FSUtil.createFolder(newDirectoryPath)
                 model.refresh(false)
-                model.selectChild(newDirectoryName!)
+                model.selectFiles([newDirectoryName!])
                 refresh()
             }
             return
@@ -152,20 +156,22 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
                 let previousRoot = model.getRoot()
                 let newRoot = previousRoot.getParent()
                 model.setRoot(newRoot!)
-                model.selectChild(previousRoot.name)
+                model.selectFile(previousRoot.name)
             } else {
-                let selectedFile = model.getSelectedFile()
-                model.setRoot(selectedFile)
-                model.selectedIndex = 0
+                var selectedFiles = model.getSelectedFiles()
+                if selectedFiles.count == 1 {
+                    model.setRoot(selectedFiles[0])
+                }
             }
 
             refresh()
         } else if theEvent.keyCode == 96 {
-            // ToDo: use model.selectedIndex
+            // F5
             if let fileListController = otherPaneController as? FileListPaneController {
                 let to = fileListController.model.getRoot();
                 let selectedFiles = getSelectedFiles()
                 FileActions.copyFileAction(selectedFiles, to: to)
+                tableView.selectRowIndexes(IndexSet(), byExtendingSelection: false)
             }
         } else if theEvent.keyCode == 97 {
             // F6
@@ -183,12 +189,12 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
 
     func refresh() {
         DispatchQueue.main.async {
-            let selectedIndex = self.model.selectedIndex
+            let selectedIndexSet = self.model.selectedIndexSet
             self.appDelegate.updateStatus(self.model.getRoot().path)
             self.tableView.reloadData()
-            self.model.selectChild(selectedIndex)
-            self.tableView.selectRowIndexes(IndexSet(integer: self.model.selectedIndex), byExtendingSelection: false)
-            self.tableView.scrollRowToVisible(self.model.selectedIndex)
+            self.model.selectFiles(selectedIndexSet)
+            self.tableView.selectRowIndexes(selectedIndexSet, byExtendingSelection: false)
+            self.tableView.scrollRowToVisible(self.model.selectedIndexSet.first!)
         }
     }
 

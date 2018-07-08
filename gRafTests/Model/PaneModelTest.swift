@@ -26,6 +26,6 @@ class PaneModelTest : XCTestCase {
 
         let model = PaneModel(root: root, from: v)
 
-        XCTAssertEqual("var", model.getItems()[model.selectedIndex].name)
+        XCTAssertEqual("var", model.getSelectedFiles()[0].name)
     }
 }

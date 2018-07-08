@@ -11,7 +11,7 @@ class PaneModel {
     fileprivate var rootOriginalPath: String! = nil
     fileprivate var sortDescriptor: NSSortDescriptor = NSSortDescriptor(key: "Name", ascending: true)
     open var callback: (() -> Void)?
-    var selectedIndex = 0
+    var selectedIndexSet = IndexSet()
 
     fileprivate var cached: [File]? = nil
 
@@ -25,7 +25,7 @@ class PaneModel {
         self.rootOriginalPath = calculateRootOriginalPath()
         clearCaches()
         if from != nil {
-            selectChild(from!.name)
+            selectFiles([from!.name])
         }
 
         FileSystemWatcher.instance.subscribeToFsEvents(self)
@@ -41,22 +41,32 @@ class PaneModel {
         }
     }
 
-    func selectChild(_ name: String) {
+    func selectFile(_ name: String) {
+        selectFiles([name])
+    }
+
+    func selectFiles(_ names: [String]) {
         var index = 0
+        var newSelectedIndexSet = IndexSet()
+
         for file: File in getItems() {
-            if name.characters.elementsEqual(file.name.characters) {
-                break
+            if names.contains(where: {$0.characters.elementsEqual(file.name.characters)}) {
+                newSelectedIndexSet.insert(index)
             }
             index += 1
         }
-        if (index >= getItems().count) {
-            index = 0
+        if (newSelectedIndexSet.count == 0) {
+            newSelectedIndexSet.insert(0)
         }
-        selectedIndex = index
+        selectedIndexSet = newSelectedIndexSet
     }
 
-    func selectChild(_ index: Int) {
-        selectedIndex = index
+    func selectFiles(_ indexSet: IndexSet) {
+        selectedIndexSet = indexSet
+    }
+
+    func getSelectedFiles() -> [File] {
+        return selectedIndexSet.map{getItems()[$0]}
     }
 
     func getPath() -> String {
@@ -85,6 +95,8 @@ class PaneModel {
         self.root = root;
         self.rootOriginalPath = calculateRootOriginalPath()
         refresh()
+        self.selectedIndexSet.removeAll();
+        self.selectedIndexSet.insert(0)
 
         for listener in listeners {
             listener.rootChanged(root.path)
@@ -168,13 +180,5 @@ class PaneModel {
 
     func refreshCallback() {
         refresh()
-    }
-
-    func getSelectedFile() -> File {
-        if (selectedIndex == 0) {
-            return root
-        }
-
-        return getItems()[selectedIndex]
     }
 }
