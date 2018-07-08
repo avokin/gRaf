@@ -27,7 +27,12 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
         createTable()
         view = tableView
 
-        model.callback = refresh
+        model.addListener(listener: PaneModelListener { ec in
+            ec.rootChanged = { (newValue: String) in self.refresh() };
+            ec.refreshed = { () in self.refresh() };
+            ec.selectedFilesChanged = { () in self.tableView.selectRowIndexes(self.model.selectedIndexSet, byExtendingSelection: false) };
+            return ec
+        })
     }
 
     required init?(coder: NSCoder) {
@@ -90,13 +95,10 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
     func tableView(_ tableView: NSTableView, setObjectValue object: Any?, for tableColumn: NSTableColumn?, row: Int) {
         if object != nil {
             let file = model.getItems()[row]
-            FSUtil.rename(file, newName: "\(object!)")
-            model.clearCaches()
-            model.selectFiles(["\(object!)"])
-            // ToDo: make as callback of refresh()
-            tableView.reloadData()
-            tableView.selectRowIndexes(model.selectedIndexSet, byExtendingSelection: false)
-            tableView.scrollRowToVisible(model.selectedIndexSet.first!)
+            let newFileName = "\(object!)"
+            FSUtil.rename(file, newName: newFileName)
+            model.refresh()
+            model.selectFile(newFileName)
         }
     }
 
@@ -125,9 +127,8 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
             if newDirectoryName != nil {
                 let newDirectoryPath = model.getRoot().path + "/" + newDirectoryName!
                 FSUtil.createFolder(newDirectoryPath)
-                model.refresh(false)
+                model.refresh()
                 model.selectFiles([newDirectoryName!])
-                refresh()
             }
             return
         }
@@ -167,7 +168,7 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
                 let to = fileListController.model.getRoot();
                 let selectedFiles = getSelectedFiles()
                 FileActions.copyFileAction(selectedFiles, to: to)
-                tableView.selectRowIndexes(IndexSet(), byExtendingSelection: false)
+                model.selectFiles([])
             }
         } else if theEvent.keyCode == 97 {
             // F6

@@ -5,14 +5,10 @@
 
 import Foundation
 
-class PaneModelListener : Equatable {
-    typealias MyCall = (String) -> ();
-
-    static func ==(lhs: PaneModelListener, rhs: PaneModelListener) -> Bool {
-        return lhs == rhs
-    }
-
-    var rootChanged: MyCall = {(newValue: String) in }
+class PaneModelListener {
+    var rootChanged: (String) -> () = {(newValue: String) in }
+    var selectedFilesChanged: () -> () = {() in }
+    var refreshed: () -> () = {() in }
 
     init(overrides: (PaneModelListener) -> PaneModelListener) {
         overrides(self)

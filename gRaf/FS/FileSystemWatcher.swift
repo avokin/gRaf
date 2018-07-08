@@ -33,7 +33,7 @@ open class FileSystemWatcher {
                 let modelPath = paneModel.getRootOriginalPath() + "/"
 
                 if paths.contains(modelPath) {
-                    paneModel.refreshCallback()
+                    paneModel.refresh()
                 }
             }
         }

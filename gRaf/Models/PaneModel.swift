@@ -10,8 +10,7 @@ class PaneModel {
     fileprivate var root: File
     fileprivate var rootOriginalPath: String! = nil
     fileprivate var sortDescriptor: NSSortDescriptor = NSSortDescriptor(key: "Name", ascending: true)
-    // replace with listener
-    open var callback: (() -> Void)?
+    // ToDo: make private
     var selectedIndexSet = IndexSet()
 
     fileprivate var cached: [File]? = nil
@@ -37,8 +36,10 @@ class PaneModel {
     }
 
     func removeListener(listener: PaneModelListener) {
-        if let index = listeners.index(of: listener) {
-            listeners.remove(at: index)
+        for (index, l) in listeners.enumerated() {
+            if l === listener {
+                listeners.remove(at: index)
+            }
         }
     }
 
@@ -60,6 +61,9 @@ class PaneModel {
             newSelectedIndexSet.insert(0)
         }
         selectedIndexSet = newSelectedIndexSet
+        for listener in listeners {
+            listener.selectedFilesChanged()
+        }
     }
 
     func selectFiles(_ indexSet: IndexSet) {
@@ -103,6 +107,7 @@ class PaneModel {
             for (index, file) in getItems().enumerated() {
                 if file.name == previousRoot.name {
                     self.selectedIndexSet.insert(index)
+                    break
                 }
             }
         }
@@ -110,9 +115,6 @@ class PaneModel {
             self.selectedIndexSet.insert(0)
         }
 
-        if (callback != nil) {
-            callback!()
-        }
         for listener in listeners {
             listener.rootChanged(root.path)
         }
@@ -176,8 +178,10 @@ class PaneModel {
 
     func refresh(_ withCallback: Bool) {
         cached = calculateCache();
-        if withCallback && callback != nil {
-            callback!()
+        if withCallback {
+            for listener in listeners {
+                listener.refreshed()
+            }
         }
     }
 
@@ -188,10 +192,5 @@ class PaneModel {
     func setSortDescriptor(_ value: NSSortDescriptor) {
         sortDescriptor = value
         clearCaches()
-    }
-
-    // ToDo: delete
-    func refreshCallback() {
-        refresh()
     }
 }
