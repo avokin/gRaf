@@ -15,10 +15,10 @@ open class FSUtil {
 
         var files = [File]()
 
-        var allFiles = try? fileManager.contentsOfDirectory(atPath: path)
+        let allFiles = try? fileManager.contentsOfDirectory(atPath: path)
 
         if !"/".characters.elementsEqual(path.characters) {
-            var linkToParent = File(name: "..", path: path, size: UInt64.max, dateModified: Date(), isDirectory: true)
+            let linkToParent = File(name: "..", path: path, size: UInt64.max, dateModified: Date(), isDirectory: true)
             files.append(linkToParent)
         }
         if allFiles == nil {
@@ -42,7 +42,7 @@ open class FSUtil {
 
                     if let fileType1 = _attr.fileType() {
                         if ("NSFileTypeSymbolicLink".characters.elementsEqual(fileType1.characters)) {
-                            var newPathElement = try? fileManager.destinationOfSymbolicLink(atPath: elementPath)
+                            let newPathElement = try? fileManager.destinationOfSymbolicLink(atPath: elementPath)
 
                             if newPathElement != nil {
                                 if newPathElement!.hasPrefix("/") {
