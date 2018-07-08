@@ -135,7 +135,7 @@ open class FSUtil {
     }
 
     static func rename(_ file: File, newName: String) {
-        let newPath = NSURL(fileURLWithPath: file.path).deletingLastPathComponent!.path
+        let newPath = getChildPath(file.getParent()!.path, childName: newName)
         do {
             try FileManager.default.moveItem(atPath: file.path, toPath: newPath)
         } catch _ {
@@ -175,5 +175,9 @@ open class FSUtil {
     static func isAncestor(_ ancestorCandidate: File, file: File) -> Bool {
         let path: String = file.path + "/"
         return path.hasPrefix(ancestorCandidate.path)
+    }
+
+    static func getChildPath(_ directoryPath: String, childName: String) -> String {
+        return directoryPath + "/" + childName
     }
 }

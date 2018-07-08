@@ -30,7 +30,10 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
         model.addListener(listener: PaneModelListener { ec in
             ec.rootChanged = { (newValue: String) in self.refresh() };
             ec.refreshed = { () in self.refresh() };
-            ec.selectedFilesChanged = { () in self.tableView.selectRowIndexes(self.model.selectedIndexSet, byExtendingSelection: false) };
+            ec.selectedFilesChanged = { () in
+                self.tableView.selectRowIndexes(self.model.selectedIndexSet, byExtendingSelection: false)
+                self.tableView.scrollRowToVisible(self.model.selectedIndexSet.first!)
+            };
             return ec
         })
     }
@@ -56,6 +59,9 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
     }
 
     func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
+        if row >= model.getItems().count {
+            return ""
+        }
         let file: File = model.getItems()[row]
         if (tableColumn!.identifier.characters.elementsEqual(COLUMN_TYPE_ID.characters)) {
             return nil
@@ -76,7 +82,8 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
     }
 
     func tableView(_ tableView: NSTableView, dataCellFor tableColumn: NSTableColumn?, row: Int) -> NSCell? {
-        if tableColumn != nil && tableColumn!.identifier.characters.elementsEqual(COLUMN_TYPE_ID.characters) {
+        if tableColumn != nil && tableColumn!.identifier.characters.elementsEqual(COLUMN_TYPE_ID.characters)
+                   && model.getItems().count > row {
             let file: File = model.getItems()[row]
             var image = NSImage(named: "file")
             if file.isDirectory {
@@ -125,7 +132,7 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
             // F7
             let newDirectoryName = UIUtil.getString(title: "Create New Directory")
             if newDirectoryName != nil {
-                let newDirectoryPath = model.getRoot().path + "/" + newDirectoryName!
+                let newDirectoryPath = FSUtil.getChildPath(model.getRoot().path, childName: newDirectoryName!)
                 FSUtil.createFolder(newDirectoryPath)
                 model.refresh()
                 model.selectFiles([newDirectoryName!])
@@ -168,7 +175,6 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
                 let to = fileListController.model.getRoot();
                 let selectedFiles = getSelectedFiles()
                 FileActions.copyFileAction(selectedFiles, to: to)
-                model.selectFiles([])
             }
         } else if theEvent.keyCode == 97 {
             // F6
@@ -176,11 +182,13 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
                 let to = fileListController.model.getRoot();
                 let filesFrom = getSelectedFiles()
                 FileActions.moveFileAction(filesFrom, to: to)
+                model.refresh()
             }
         } else if theEvent.keyCode == 100 {
             // Backspace
             let selectedFiles = getSelectedFiles()
             FileActions.deleteFileAction(selectedFiles)
+            model.refresh()
         }
     }
 
