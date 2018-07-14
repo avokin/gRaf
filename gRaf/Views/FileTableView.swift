@@ -17,4 +17,11 @@ class FileTableView: NSTableView {
         }
         super.keyDown(with: theEvent)
     }
+
+    override func becomeFirstResponder() -> Bool {
+        if let responder = delegate as? NSResponder {
+            responder.becomeFirstResponder()
+        }
+        return super.becomeFirstResponder()
+    }
 }

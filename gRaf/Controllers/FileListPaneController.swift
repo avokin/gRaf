@@ -52,7 +52,7 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
     override func focus() {
         super.focus()
         window!.makeFirstResponder(tableView)
-        self.appDelegate.updateStatus(self.model.getRoot().path)
+        updateStatusBar()
     }
 
     func numberOfRows(in tableView: NSTableView) -> Int {
@@ -244,7 +244,16 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
         tableView.reloadData()
     }
 
+    override func becomeFirstResponder() -> Bool {
+        updateStatusBar()
+        return true
+    }
+
     private func getSelectedFiles() -> [File] {
         return tableView.selectedRowIndexes.map{model.getItems()[$0]}
+    }
+
+    func updateStatusBar() {
+        self.appDelegate.updateStatus(self.model.getRoot().path)
     }
 }
