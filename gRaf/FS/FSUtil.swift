@@ -161,8 +161,7 @@ open class FSUtil {
                 let originalURL = try URL(resolvingAliasFileAt: url)
                 return originalURL.path
             }
-        } catch  {
-           // ignore
+        } catch _ {
         }
         return nil
     }
