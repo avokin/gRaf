@@ -195,6 +195,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         setupLeftAndRight()
         initUI()
         initWindowController()
+        paneController1.focus()
     }
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {

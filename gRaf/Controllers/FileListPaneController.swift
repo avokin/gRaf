@@ -52,6 +52,7 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
     override func focus() {
         super.focus()
         window!.makeFirstResponder(tableView)
+        self.appDelegate.updateStatus(self.model.getRoot().path)
     }
 
     func numberOfRows(in tableView: NSTableView) -> Int {
