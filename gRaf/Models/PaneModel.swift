@@ -122,7 +122,43 @@ class PaneModel {
 
     func calculateCache() -> [File] {
         var result = FSUtil.getFilesOfDirectory(root.path)
-        result.sort(by: {
+        result.sort(by: compareFiles())
+
+        return result;
+    }
+
+    func getItems() -> [File] {
+        if (cached == nil) {
+            cached = calculateCache()
+        }
+
+        return cached!
+    }
+
+    func refresh() {
+        refresh(true);
+    }
+
+    func refresh(_ withCallback: Bool) {
+        cached = calculateCache();
+        if withCallback {
+            for listener in listeners {
+                listener.refreshed()
+            }
+        }
+    }
+
+    func clearCaches() {
+        cached = nil
+    }
+
+    func setSortDescriptor(_ value: NSSortDescriptor) {
+        sortDescriptor = value
+        clearCaches()
+    }
+
+    private func compareFiles() -> (File, File) -> Bool {
+        return {
             if "..".characters.elementsEqual($0.name.characters) {
                 return true
             }
@@ -157,40 +193,17 @@ class PaneModel {
                 }
 
                 return first.size > second.size
+            } else if key! == "Date modified" {
+                if first.dateModified == nil {
+                    return false
+                }
+                if second.dateModified == nil {
+                    return true
+                }
+
+                return first.dateModified! < second.dateModified!
             }
             return first.name.localizedCompare(second.name) == ComparisonResult.orderedAscending
-        })
-
-        return result;
-    }
-
-    func getItems() -> [File] {
-        if (cached == nil) {
-            cached = calculateCache()
         }
-
-        return cached!
-    }
-
-    func refresh() {
-        refresh(true);
-    }
-
-    func refresh(_ withCallback: Bool) {
-        cached = calculateCache();
-        if withCallback {
-            for listener in listeners {
-                listener.refreshed()
-            }
-        }
-    }
-
-    func clearCaches() {
-        cached = nil
-    }
-
-    func setSortDescriptor(_ value: NSSortDescriptor) {
-        sortDescriptor = value
-        clearCaches()
     }
 }
