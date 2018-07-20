@@ -54,8 +54,8 @@ class ImageViewController: FileViewController {
     }
 
     override func keyDown(with theEvent: NSEvent) {
-        if theEvent.keyCode == 117 {
-            // del
+        if theEvent.keyCode == 51 || theEvent.keyCode == 100 {
+            // del and F8
             FSUtil.deleteFile(file.path)
             openNextImage()
         }
