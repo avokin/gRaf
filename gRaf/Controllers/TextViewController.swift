@@ -21,6 +21,7 @@ class TextViewController: FileViewController {
 
     func createView() {
         textView = TextView.create(NSMakeRect(0, 0, 1000, 1000))
+        textView.font = NSFont(name: "Monaco", size: 12);
         textView.myDelegate = self
         var content = FSUtil.getFileContent(file)
         if content == nil {
