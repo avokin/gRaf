@@ -123,6 +123,18 @@ class FileListPaneController : PaneController, NSTableViewDataSource, NSTableVie
 
             return
         }
+        if KeyboardUtil.isCommandShiftPressed(theEvent) && theEvent.characters != nil {
+            UserDefaults.standard.set(model.getRootOriginalPath(), forKey: "hotKeyMap_" + theEvent.characters!)
+            return
+        }
+        if KeyboardUtil.isCommandPressed(theEvent) && theEvent.characters != nil {
+            let newRootPath = UserDefaults.standard.value(forKey: "hotKeyMap_" + theEvent.characters!)
+            if newRootPath is String {
+                let root = File(path: newRootPath as! String, size: UInt64.max, dateModified: Date(), isDirectory: true)
+                model.setRoot(root)
+            }
+            return
+        }
         if theEvent.keyCode == 48 {
             // Tab
             otherPaneController.focus()

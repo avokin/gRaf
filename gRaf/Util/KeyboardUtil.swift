@@ -12,7 +12,15 @@ class KeyboardUtil {
         pasteboard.setString(text, forType: NSPasteboardTypeString)
     }
 
+    static func isCommandPressed(_ theEvent: NSEvent) -> Bool {
+        return theEvent.modifierFlags.contains(.command)
+    }
+
     static func isCommand_C_Pressed(_ theEvent: NSEvent) -> Bool {
-        return theEvent.modifierFlags.contains(.command) && theEvent.keyCode == 8;
+        return isCommandPressed(theEvent) && theEvent.keyCode == 8;
+    }
+
+    static func isCommandShiftPressed(_ theEvent: NSEvent) -> Bool {
+        return isCommandPressed(theEvent) && theEvent.modifierFlags.contains(.shift);
     }
 }
